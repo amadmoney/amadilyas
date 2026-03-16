@@ -13,6 +13,7 @@ body {
   --player-width: 760px;
   --player-left: 61%;
   --player-overlap: 90px;
+  --player-scale: clamp(0.78, 0.9vw, 0.85);
 
   --screen-color: #ff4fd8;
   --screen-text: #2d1030;
@@ -145,7 +146,8 @@ body {
   position: absolute;
   top: calc(100vh - var(--player-overlap));
   left: var(--player-left);
-  transform: translateX(-50%) rotate(-2deg);
+  transform: translateX(-50%) rotate(-2deg) scale(var(--player-scale));
+  transform-origin: center top;
   width: min(var(--player-width), calc(100vw - 32px));
   z-index: 1000;
   pointer-events: auto;
@@ -749,6 +751,7 @@ audio {
     --player-width: 360px;
     --player-left: 50%;
     --player-overlap: 92px;
+    --player-scale: 0.92;
     --hero-pad-x: 24px;
   }
 
@@ -776,7 +779,7 @@ audio {
   }
 
   .floating-player {
-    transform: translateX(-50%) rotate(-1deg);
+    transform: translateX(-50%) rotate(-1deg) scale(var(--player-scale));
   }
 
   .lcd-track {
@@ -834,6 +837,7 @@ audio {
   :root {
     --player-width: 305px;
     --player-overlap: 82px;
+    --player-scale: 0.96;
   }
 
   .top-nav {
