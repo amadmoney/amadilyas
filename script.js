@@ -15,9 +15,27 @@ const progressThumb = document.getElementById("progressThumb");
 const currentTime = document.getElementById("currentTime");
 const duration = document.getElementById("duration");
 
+const playIcon = playBtn.querySelector("img");
+const muteIcon = muteBtn.querySelector("img");
+
+const PLAY_ICON_SRC =
+  "https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/play-solid-full.svg";
+
+const PAUSE_ICON_SRC =
+  "https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/pause-solid-full.svg";
+
+const MUTE_ICON_SRC =
+  "https://raw.githubusercontent.com/amadmoney/amadilyas/934d11b9a53b22a6d5b25fe4d6f1947c28e0bd2c/icons/mute-solid-full.svg";
+
+/* optional: swap this if you have a sound/unmute icon */
+const SOUND_ICON_SRC =
+  "https://raw.githubusercontent.com/amadmoney/amadilyas/934d11b9a53b22a6d5b25fe4d6f1947c28e0bd2c/icons/mute-solid-full.svg";
+
 let playlist = [];
 let currentTrackIndex = 0;
 let isScrubbing = false;
+let lastVolumeBeforeMute = 0.7;
+
 audio.volume = 0.7;
 
 function formatTime(time) {
@@ -28,13 +46,21 @@ function formatTime(time) {
 }
 
 function updatePlayButton() {
-  const icon = playBtn.querySelector("i");
-  if (!icon) return;
-  icon.className = audio.paused ? "fa-solid fa-play" : "fa-solid fa-pause";
+  if (!playIcon) return;
+
+  playIcon.src = audio.paused ? PLAY_ICON_SRC : PAUSE_ICON_SRC;
+  playBtn.setAttribute("aria-label", audio.paused ? "Play" : "Pause");
 }
 
 function updateMuteButton() {
-  muteBtn.textContent = audio.muted ? "sound" : "mute";
+  if (muteIcon) {
+    muteIcon.src = audio.muted || audio.volume === 0 ? MUTE_ICON_SRC : SOUND_ICON_SRC;
+  }
+
+  muteBtn.setAttribute(
+    "aria-label",
+    audio.muted || audio.volume === 0 ? "Unmute" : "Mute"
+  );
 }
 
 function updateProgressUI(current, total) {
@@ -126,18 +152,35 @@ nextBtn.addEventListener("click", () => {
 
 volUpBtn.addEventListener("click", () => {
   audio.volume = Math.min(1, +(audio.volume + 0.1).toFixed(2));
-  if (audio.volume > 0) audio.muted = false;
+
+  if (audio.volume > 0) {
+    audio.muted = false;
+    lastVolumeBeforeMute = audio.volume;
+  }
+
   updateMuteButton();
 });
 
 volDownBtn.addEventListener("click", () => {
   audio.volume = Math.max(0, +(audio.volume - 0.1).toFixed(2));
-  if (audio.volume > 0) audio.muted = false;
+
+  if (audio.volume > 0) {
+    audio.muted = false;
+    lastVolumeBeforeMute = audio.volume;
+  }
+
   updateMuteButton();
 });
 
 muteBtn.addEventListener("click", () => {
-  audio.muted = !audio.muted;
+  if (audio.muted || audio.volume === 0) {
+    audio.muted = false;
+    audio.volume = lastVolumeBeforeMute > 0 ? lastVolumeBeforeMute : 0.7;
+  } else {
+    lastVolumeBeforeMute = audio.volume > 0 ? audio.volume : 0.7;
+    audio.muted = true;
+  }
+
   updateMuteButton();
 });
 
@@ -153,6 +196,7 @@ audio.addEventListener("timeupdate", () => {
 
 audio.addEventListener("play", updatePlayButton);
 audio.addEventListener("pause", updatePlayButton);
+audio.addEventListener("volumechange", updateMuteButton);
 
 audio.addEventListener("ended", () => {
   if (!playlist.length) return;
@@ -203,5 +247,6 @@ progressBar.addEventListener("keydown", (event) => {
   updateProgressUI(audio.currentTime, audio.duration);
 });
 
+updatePlayButton();
 updateMuteButton();
 fetchPlaylist();
