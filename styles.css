@@ -13,7 +13,7 @@ body {
   --player-width: 760px;
   --player-left: 61%;
   --player-overlap: 120px;
-  --player-scale: clamp(0.72, 0.82vw, 0.8);
+  --player-scale: clamp(0.72, 0.7vw, 0.8);
 
   --screen-color: #ff4fd8;
   --screen-text: #2d1030;
@@ -393,23 +393,46 @@ body {
 .lcd-sun,
 .lcd-moon {
   position: absolute;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  top: 12px;
+  width: 6px;
+  height: 6px;
+  top: 34px;
   right: 18px;
   will-change: transform, opacity;
+  image-rendering: pixelated;
+}
+
+.lcd-sun::before,
+.lcd-moon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #000;
+}
+
+.lcd-sun::before {
+  box-shadow:
+    3px 0 #000,
+    0 3px #000,
+    3px 3px #000,
+    6px 3px #000,
+    3px 6px #000;
+}
+
+.lcd-moon::before {
+  box-shadow:
+    3px 0 #000,
+    6px 0 #000,
+    0 3px #000,
+    3px 3px #000,
+    6px 3px #000,
+    3px 6px #000;
 }
 
 .lcd-sun {
-  background: #fff27a;
-  box-shadow: 0 0 10px rgba(255, 242, 122, 0.7);
   animation: lcdSunCycle 26s linear infinite;
 }
 
 .lcd-moon {
-  background: #f3f7ff;
-  box-shadow: 0 0 10px rgba(243, 247, 255, 0.5);
   opacity: 0;
   animation: lcdMoonCycle 26s linear infinite;
 }
@@ -451,19 +474,22 @@ body {
   position: absolute;
   width: 2px;
   height: 2px;
-  background: #f8fbff;
-  box-shadow: 0 0 4px rgba(255,255,255,0.7);
+  background: #000;
+  box-shadow:
+    2px 0 #000,
+    0 2px #000,
+    2px 2px #000;
   animation: lcdTwinkle 2s steps(2) infinite;
 }
 
-.lcd-stars span:nth-child(1) { top: 14px; left: 18px; animation-delay: 0s; }
-.lcd-stars span:nth-child(2) { top: 22px; left: 42px; animation-delay: 0.4s; }
-.lcd-stars span:nth-child(3) { top: 10px; left: 66px; animation-delay: 0.8s; }
-.lcd-stars span:nth-child(4) { top: 27px; left: 96px; animation-delay: 1.2s; }
-.lcd-stars span:nth-child(5) { top: 17px; right: 46px; animation-delay: 0.2s; }
-.lcd-stars span:nth-child(6) { top: 32px; right: 70px; animation-delay: 0.9s; }
-.lcd-stars span:nth-child(7) { top: 19px; right: 24px; animation-delay: 0.6s; }
-.lcd-stars span:nth-child(8) { top: 10px; right: 88px; animation-delay: 1.4s; }
+.lcd-stars span:nth-child(1) { top: 34px; left: 18px; animation-delay: 0s; }
+.lcd-stars span:nth-child(2) { top: 42px; left: 42px; animation-delay: 0.4s; }
+.lcd-stars span:nth-child(3) { top: 30px; left: 66px; animation-delay: 0.8s; }
+.lcd-stars span:nth-child(4) { top: 47px; left: 96px; animation-delay: 1.2s; }
+.lcd-stars span:nth-child(5) { top: 37px; right: 46px; animation-delay: 0.2s; }
+.lcd-stars span:nth-child(6) { top: 52px; right: 70px; animation-delay: 0.9s; }
+.lcd-stars span:nth-child(7) { top: 39px; right: 24px; animation-delay: 0.6s; }
+.lcd-stars span:nth-child(8) { top: 30px; right: 88px; animation-delay: 1.4s; }
 
 @keyframes lcdStarsCycle {
   0%, 48% { opacity: 0; }
@@ -506,13 +532,13 @@ body {
 }
 
 .cloud-1 {
-  top: 14px;
+  top: 42px;
   left: -30px;
   animation: lcdCloudDrift1 17s linear infinite;
 }
 
 .cloud-2 {
-  top: 34px;
+  top: 58px;
   left: -45px;
   transform: scale(0.82);
   animation: lcdCloudDrift2 23s linear infinite;
@@ -520,7 +546,7 @@ body {
 }
 
 .cloud-3 {
-  top: 22px;
+  top: 50px;
   left: -38px;
   transform: scale(0.62);
   animation: lcdCloudDrift3 14s linear infinite;
@@ -627,7 +653,7 @@ body {
 
 .lcd-pet {
   position: absolute;
-  left: 10px;
+  left: 8px;
   bottom: 10px;
   width: 44px;
   height: 44px;
@@ -647,7 +673,7 @@ body {
 
 .lcd-pet-shadow {
   position: absolute;
-  left: 18px;
+  left: 16px;
   bottom: 4px;
   width: 18px;
   height: 5px;
@@ -673,30 +699,23 @@ body {
     left: -22%;
     transform: scaleX(1);
   }
-  48% {
-    left: 74%;
-    transform: scaleX(1);
-  }
-  50% {
-    left: 74%;
-    transform: scaleX(-1);
-  }
-  98% {
-    left: -12%;
-    transform: scaleX(-1);
-  }
   100% {
-    left: -22%;
+    left: 108%;
     transform: scaleX(1);
   }
 }
 
 @keyframes petShadowFollow {
-  0% { left: -2%; opacity: 0.16; transform: scaleX(1); }
-  48% { left: 77%; opacity: 0.16; transform: scaleX(1); }
-  50% { left: 77%; opacity: 0.16; transform: scaleX(1); }
-  98% { left: 0%; opacity: 0.16; transform: scaleX(1); }
-  100% { left: -2%; opacity: 0.16; transform: scaleX(1); }
+  0% {
+    left: -2%;
+    opacity: 0.16;
+    transform: scaleX(1);
+  }
+  100% {
+    left: 108%;
+    opacity: 0.16;
+    transform: scaleX(1);
+  }
 }
 
 @keyframes petIdle {
