@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Device Player Test</title>
+  <title>Device Player Inline Test</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,8 @@
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       margin: 0;
       padding: 0;
       min-height: 100%;
@@ -32,7 +33,6 @@
       --screen-color: #ff4fd8;
       --screen-text: #2d1030;
 
-      --shell-bg: #f3f2f6;
       --shell-border: #d9d7dc;
       --shell-radius: 28px;
 
@@ -145,7 +145,6 @@
       color: rgba(255,255,255,.9);
     }
 
-    /* floating player */
     .floating-player {
       position: absolute;
       top: calc(100vh - var(--player-overlap));
@@ -210,7 +209,6 @@
       100% { transform: translateX(120%); }
     }
 
-    /* sticker art frame */
     .art-frame {
       position: absolute;
       left: 14px;
@@ -232,7 +230,6 @@
       pointer-events: none;
     }
 
-    /* lcd */
     .lcd-wrap {
       position: absolute;
       left: 9.4%;
@@ -386,31 +383,28 @@
       line-height: 1;
     }
 
-    /* exact-ish control silhouette */
-    .control-pod {
+    /* NEW POD SHAPE */
+    .control-pod-wrap {
       position: absolute;
       right: 15.5%;
       top: 22.8%;
       width: 31%;
       aspect-ratio: 1 / 1;
+      z-index: 5;
+    }
+
+    .control-pod {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
       background: linear-gradient(180deg, var(--pod-fill-top) 0%, var(--pod-fill-bottom) 100%);
       border: 3px solid var(--pod-border);
+      border-radius: 12px;
       box-shadow:
         inset 0 2px 3px rgba(255,255,255,.92),
         0 5px 10px rgba(0,0,0,.10);
-      z-index: 5;
-
-      clip-path: path("M 91 6
-        C 126 6, 157 31, 165 63
-        C 176 63, 186 71, 186 86
-        C 186 102, 176 111, 164 111
-        C 164 141, 146 162, 116 171
-        C 108 189, 94 199, 73 199
-        C 51 199, 38 188, 31 171
-        C 12 165, 0 148, 0 126
-        C 0 108, 8 94, 20 85
-        C 8 68, 6 50, 16 31
-        C 29 13, 51 6, 91 6 Z");
     }
 
     .control-pod::before {
@@ -422,7 +416,7 @@
       aspect-ratio: 1 / 1;
       transform: translate(-50%, -50%);
       border-radius: 50%;
-      border: 2px solid rgba(169, 214, 250, 0.52);
+      border: 2px solid rgba(169,214,250,.52);
       pointer-events: none;
     }
 
@@ -430,8 +424,27 @@
       content: "";
       position: absolute;
       inset: 0;
+      border-radius: 12px;
       background: linear-gradient(to bottom, rgba(255,255,255,.22), rgba(255,255,255,0) 35%);
       pointer-events: none;
+    }
+
+    .control-pod-bump {
+      position: absolute;
+      left: 50%;
+      bottom: -15%;
+      width: 42%;
+      aspect-ratio: 1 / 1;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, var(--pod-fill-top) 0%, var(--pod-fill-bottom) 100%);
+      border: 3px solid var(--pod-border);
+      border-radius: 50%;
+      box-shadow:
+        inset 0 2px 3px rgba(255,255,255,.92),
+        0 5px 10px rgba(0,0,0,.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .side-wheel {
@@ -484,8 +497,8 @@
     }
 
     .btn-plus {
-      left: 34%;
-      top: 31%;
+      left: 32%;
+      top: 28%;
       font-size: 16px;
     }
 
@@ -523,14 +536,13 @@
 
     .btn-minus {
       left: 68%;
-      top: 69%;
+      top: 68%;
       font-size: 18px;
     }
 
     .btn-mute {
-      left: 49%;
-      top: 84%;
-      transform: translate(-50%, -50%) rotate(-34deg);
+      position: static;
+      transform: rotate(-34deg);
       font-size: 11px;
       font-weight: 700;
       color: #6876a1;
@@ -539,11 +551,11 @@
     }
 
     .btn-mute:hover {
-      transform: translate(-50%, -50%) rotate(-34deg) scale(1.04);
+      transform: rotate(-34deg) scale(1.04);
     }
 
     .btn-mute:active {
-      transform: translate(-50%, -50%) rotate(-34deg) scale(.96);
+      transform: rotate(-34deg) scale(.96);
     }
 
     audio {
@@ -680,7 +692,6 @@
       <div class="player-tilt" id="playerTilt">
         <div class="player-device">
           <div class="art-frame">
-            <!-- swap this image path for your own sticker art -->
             <img
               class="art-image"
               src="images/sticker-frame.png"
@@ -719,30 +730,34 @@
             </div>
           </div>
 
-          <div class="control-pod">
-            <button class="control-btn btn-plus" id="volUpBtn" type="button" aria-label="Volume up">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
+          <div class="control-pod-wrap">
+            <div class="control-pod">
+              <button class="control-btn btn-plus" id="volUpBtn" type="button" aria-label="Volume up">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
 
-            <button class="control-btn btn-next" id="nextBtn" type="button" aria-label="Next track">
-              <i class="fa-solid fa-forward-step"></i>
-            </button>
+              <button class="control-btn btn-next" id="nextBtn" type="button" aria-label="Next track">
+                <i class="fa-solid fa-forward-step"></i>
+              </button>
 
-            <button class="control-btn btn-play" id="playBtn" type="button" aria-label="Play or pause">
-              <i class="fa-solid fa-play"></i>
-            </button>
+              <button class="control-btn btn-play" id="playBtn" type="button" aria-label="Play or pause">
+                <i class="fa-solid fa-play"></i>
+              </button>
 
-            <button class="control-btn btn-prev" id="prevBtn" type="button" aria-label="Previous track">
-              <i class="fa-solid fa-backward-step"></i>
-            </button>
+              <button class="control-btn btn-prev" id="prevBtn" type="button" aria-label="Previous track">
+                <i class="fa-solid fa-backward-step"></i>
+              </button>
 
-            <button class="control-btn btn-minus" id="volDownBtn" type="button" aria-label="Volume down">
-              <i class="fa-solid fa-minus"></i>
-            </button>
+              <button class="control-btn btn-minus" id="volDownBtn" type="button" aria-label="Volume down">
+                <i class="fa-solid fa-minus"></i>
+              </button>
+            </div>
 
-            <button class="control-btn btn-mute" id="muteBtn" type="button" aria-label="Mute">
-              mute
-            </button>
+            <div class="control-pod-bump">
+              <button class="control-btn btn-mute" id="muteBtn" type="button" aria-label="Mute">
+                mute
+              </button>
+            </div>
           </div>
 
           <div class="side-wheel"></div>
