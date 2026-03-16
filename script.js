@@ -96,11 +96,12 @@ function updateProgressUI(current, total) {
 }
 
 function clearPetStates() {
-  if (!lcdPet || !lcdPetWrap || !lcdPetShadow) return;
+  if (!lcdPet || !lcdPetWrap || !lcdPetShadow || !lcdPetImg) return;
 
   lcdPet.classList.remove("pet-idle", "pet-dance", "pet-jump", "pet-sleep");
   lcdPetWrap.classList.remove("is-sleeping", "is-chasing");
   lcdPetShadow.classList.remove("pet-shadow-bounce", "pet-shadow-dance", "is-sleeping");
+  lcdPetImg.classList.remove("pet-blink");
 }
 
 function startPetIdle() {
@@ -295,7 +296,7 @@ function stopChaseStar() {
 }
 
 function triggerChaseStar() {
-  if (!lcdChaseStar || !lcdPetWrap || audio.paused) return;
+  if (!lcdChaseStar || !lcdPetWrap || !lcdPet || audio.paused) return;
   if (lcdPetWrap.classList.contains("is-sleeping")) return;
 
   lcdPetWrap.classList.add("is-chasing");
@@ -304,14 +305,16 @@ function triggerChaseStar() {
   void lcdChaseStar.offsetWidth;
   lcdChaseStar.classList.add("is-active");
 
-  if (lcdPet) {
-    lcdPet.classList.remove("pet-idle");
-    lcdPet.classList.add("pet-dance");
-  }
+  lcdPet.classList.remove("pet-idle");
+  lcdPet.classList.add("pet-dance");
 
   chaseCleanupTimer = setTimeout(() => {
     if (lcdPetWrap) lcdPetWrap.classList.remove("is-chasing");
     if (lcdChaseStar) lcdChaseStar.classList.remove("is-active");
+
+    if (!audio.paused) {
+      startPetDance();
+    }
   }, 2500);
 }
 
@@ -361,6 +364,7 @@ function loadTrack(index, autoplay = false) {
 
   if (autoplay) {
     const playPromise = audio.play();
+
     if (playPromise) {
       playPromise
         .then(() => {
