@@ -15,19 +15,12 @@ const progressThumb = document.getElementById("progressThumb");
 const currentTime = document.getElementById("currentTime");
 const duration = document.getElementById("duration");
 
-const playIcon = playBtn.querySelector("img");
 const muteIcon = muteBtn.querySelector("img");
-
-const PLAY_ICON_SRC =
-  "https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/play-solid-full.svg";
-
-const PAUSE_ICON_SRC =
-  "https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/pause-solid-full.svg";
 
 const MUTE_ICON_SRC =
   "https://raw.githubusercontent.com/amadmoney/amadilyas/934d11b9a53b22a6d5b25fe4d6f1947c28e0bd2c/icons/mute-solid-full.svg";
 
-/* optional: swap this if you have a sound/unmute icon */
+/* swap this later if you make a separate unmuted/sound icon */
 const SOUND_ICON_SRC =
   "https://raw.githubusercontent.com/amadmoney/amadilyas/934d11b9a53b22a6d5b25fe4d6f1947c28e0bd2c/icons/mute-solid-full.svg";
 
@@ -46,10 +39,8 @@ function formatTime(time) {
 }
 
 function updatePlayButton() {
-  if (!playIcon) return;
-
-  playIcon.src = audio.paused ? PLAY_ICON_SRC : PAUSE_ICON_SRC;
   playBtn.setAttribute("aria-label", audio.paused ? "Play" : "Pause");
+  playBtn.setAttribute("aria-pressed", String(!audio.paused));
 }
 
 function updateMuteButton() {
@@ -60,6 +51,11 @@ function updateMuteButton() {
   muteBtn.setAttribute(
     "aria-label",
     audio.muted || audio.volume === 0 ? "Unmute" : "Mute"
+  );
+
+  muteBtn.setAttribute(
+    "aria-pressed",
+    String(audio.muted || audio.volume === 0)
   );
 }
 
@@ -167,6 +163,10 @@ volDownBtn.addEventListener("click", () => {
   if (audio.volume > 0) {
     audio.muted = false;
     lastVolumeBeforeMute = audio.volume;
+  }
+
+  if (audio.volume === 0) {
+    audio.muted = true;
   }
 
   updateMuteButton();
