@@ -15,12 +15,14 @@ const progressThumb = document.getElementById("progressThumb");
 const currentTime = document.getElementById("currentTime");
 const duration = document.getElementById("duration");
 
-const muteIcon = muteBtn.querySelector("img");
+const muteIcon = muteBtn?.querySelector("img");
 
 const lcdPet = document.getElementById("lcdPet");
 const lcdPetImg = document.getElementById("lcdPetImg");
 const lcdPetWrap = document.querySelector(".lcd-pet-wrap");
 const lcdPetShadow = document.querySelector(".lcd-pet-shadow");
+const lcdIdleEvents = document.getElementById("lcdIdleEvents");
+const lcdWorld = document.querySelector(".lcd-world");
 
 const MUTE_ICON_SRC =
   "https://raw.githubusercontent.com/amadmoney/amadilyas/934d11b9a53b22a6d5b25fe4d6f1947c28e0bd2c/icons/mute-solid-full.svg";
@@ -33,10 +35,24 @@ let playlist = [];
 let currentTrackIndex = 0;
 let isScrubbing = false;
 let lastVolumeBeforeMute = 0.7;
+
 let sleepTimer = null;
 let blinkTimer = null;
+let idleEventTimer = null;
+let chaseStarTimer = null;
+let chaseCleanupTimer = null;
+let petActionTimer = null;
 
 audio.volume = 0.7;
+
+/* create chase star automatically if it's not in the HTML */
+let lcdChaseStar = document.querySelector(".lcd-chase-star");
+if (!lcdChaseStar && lcdWorld) {
+  lcdChaseStar = document.createElement("span");
+  lcdChaseStar.className = "lcd-chase-star";
+  lcdChaseStar.setAttribute("aria-hidden", "true");
+  lcdWorld.appendChild(lcdChaseStar);
+}
 
 function formatTime(time) {
   if (!isFinite(time)) return "0:00";
@@ -46,6 +62,7 @@ function formatTime(time) {
 }
 
 function updatePlayButton() {
+  if (!playBtn) return;
   playBtn.setAttribute("aria-label", audio.paused ? "Play" : "Pause");
   playBtn.setAttribute("aria-pressed", String(!audio.paused));
 }
@@ -54,6 +71,8 @@ function updateMuteButton() {
   if (muteIcon) {
     muteIcon.src = audio.muted || audio.volume === 0 ? MUTE_ICON_SRC : SOUND_ICON_SRC;
   }
+
+  if (!muteBtn) return;
 
   muteBtn.setAttribute(
     "aria-label",
@@ -68,40 +87,42 @@ function updateMuteButton() {
 
 function updateProgressUI(current, total) {
   const percent = total ? (current / total) * 100 : 0;
-  progressFill.style.width = `${percent}%`;
-  progressThumb.style.left = `${percent}%`;
-  progressBar.setAttribute("aria-valuenow", Math.round(percent));
-  currentTime.textContent = formatTime(current);
-  duration.textContent = formatTime(total);
+
+  if (progressFill) progressFill.style.width = `${percent}%`;
+  if (progressThumb) progressThumb.style.left = `${percent}%`;
+  if (progressBar) progressBar.setAttribute("aria-valuenow", Math.round(percent));
+  if (currentTime) currentTime.textContent = formatTime(current);
+  if (duration) duration.textContent = formatTime(total);
 }
 
 function clearPetStates() {
   if (!lcdPet || !lcdPetWrap || !lcdPetShadow) return;
 
   lcdPet.classList.remove("pet-idle", "pet-dance", "pet-jump", "pet-sleep");
-  lcdPetWrap.classList.remove("is-sleeping");
-  lcdPetShadow.classList.remove("pet-shadow-bounce", "pet-shadow-dance");
+  lcdPetWrap.classList.remove("is-sleeping", "is-chasing");
+  lcdPetShadow.classList.remove("pet-shadow-bounce", "pet-shadow-dance", "is-sleeping");
 }
 
 function startPetIdle() {
-  if (!lcdPet || !lcdPetShadow) return;
+  if (!lcdPet || !lcdPetShadow || !lcdPetWrap) return;
   clearPetStates();
   lcdPet.classList.add("pet-idle");
   lcdPetShadow.classList.add("pet-shadow-bounce");
 }
 
 function startPetDance() {
-  if (!lcdPet || !lcdPetShadow) return;
+  if (!lcdPet || !lcdPetShadow || !lcdPetWrap) return;
   clearPetStates();
   lcdPet.classList.add("pet-dance");
   lcdPetShadow.classList.add("pet-shadow-dance");
 }
 
 function startPetSleep() {
-  if (!lcdPet || !lcdPetWrap) return;
+  if (!lcdPet || !lcdPetWrap || !lcdPetShadow) return;
   clearPetStates();
   lcdPet.classList.add("pet-sleep");
   lcdPetWrap.classList.add("is-sleeping");
+  lcdPetShadow.classList.add("is-sleeping");
 }
 
 function clearSleepTimer() {
@@ -123,13 +144,21 @@ function startSleepTimer() {
   }, 30000);
 }
 
+function clearPetActionTimer() {
+  if (petActionTimer) {
+    clearTimeout(petActionTimer);
+    petActionTimer = null;
+  }
+}
+
 function petJump() {
   if (!lcdPet) return;
 
+  clearPetActionTimer();
   clearPetStates();
   lcdPet.classList.add("pet-jump");
 
-  setTimeout(() => {
+  petActionTimer = setTimeout(() => {
     lcdPet.classList.remove("pet-jump");
 
     if (audio.paused) {
@@ -159,6 +188,7 @@ function scheduleBlink() {
 function initBlinking() {
   if (blinkTimer) {
     clearTimeout(blinkTimer);
+    blinkTimer = null;
   }
   scheduleBlink();
 }
@@ -174,36 +204,188 @@ function reactPetToVolume() {
   lcdPet.style.filter = glow;
 }
 
+/* =========================
+   IDLE EVENTS
+========================= */
+
+function spawnIdleEvent(typeOverride = null) {
+  if (!lcdIdleEvents) return;
+
+  const types = ["heart", "star", "bubble"];
+  const type = typeOverride || types[Math.floor(Math.random() * types.length)];
+
+  const event = document.createElement("span");
+  event.className = `lcd-idle-event ${type}`;
+
+  const x = Math.random() * 70 + 12;
+  const y = Math.random() * 42 + 14;
+
+  event.style.left = `${x}%`;
+  event.style.top = `${y}%`;
+
+  lcdIdleEvents.appendChild(event);
+
+  setTimeout(() => {
+    event.remove();
+  }, 1600);
+}
+
+function clearIdleEventLoop() {
+  if (idleEventTimer) {
+    clearTimeout(idleEventTimer);
+    idleEventTimer = null;
+  }
+}
+
+function scheduleIdleEventLoop() {
+  clearIdleEventLoop();
+
+  const delay = audio.paused
+    ? 1800 + Math.random() * 3200
+    : 2800 + Math.random() * 5200;
+
+  idleEventTimer = setTimeout(() => {
+    const pausedTypes = ["bubble", "star", "heart"];
+    const playingTypes = ["star", "heart", "bubble"];
+    const pool = audio.paused ? pausedTypes : playingTypes;
+    const type = pool[Math.floor(Math.random() * pool.length)];
+
+    spawnIdleEvent(type);
+    scheduleIdleEventLoop();
+  }, delay);
+}
+
+function restartIdleEventLoop() {
+  clearIdleEventLoop();
+  scheduleIdleEventLoop();
+}
+
+function burstIdleEvents(count = 3) {
+  for (let i = 0; i < count; i += 1) {
+    setTimeout(() => {
+      spawnIdleEvent();
+    }, i * 140);
+  }
+}
+
+/* =========================
+   CHASE STAR
+========================= */
+
+function clearChaseTimers() {
+  if (chaseStarTimer) {
+    clearTimeout(chaseStarTimer);
+    chaseStarTimer = null;
+  }
+  if (chaseCleanupTimer) {
+    clearTimeout(chaseCleanupTimer);
+    chaseCleanupTimer = null;
+  }
+}
+
+function stopChaseStar() {
+  if (lcdPetWrap) {
+    lcdPetWrap.classList.remove("is-chasing");
+  }
+
+  if (lcdChaseStar) {
+    lcdChaseStar.classList.remove("is-active");
+    void lcdChaseStar.offsetWidth;
+  }
+}
+
+function triggerChaseStar() {
+  if (!lcdChaseStar || !lcdPetWrap || audio.paused) return;
+  if (lcdPetWrap.classList.contains("is-sleeping")) return;
+
+  lcdPetWrap.classList.add("is-chasing");
+
+  lcdChaseStar.classList.remove("is-active");
+  void lcdChaseStar.offsetWidth;
+  lcdChaseStar.classList.add("is-active");
+
+  if (lcdPet) {
+    lcdPet.classList.remove("pet-idle");
+    lcdPet.classList.add("pet-dance");
+  }
+
+  chaseCleanupTimer = setTimeout(() => {
+    if (lcdPetWrap) lcdPetWrap.classList.remove("is-chasing");
+    if (lcdChaseStar) lcdChaseStar.classList.remove("is-active");
+  }, 2500);
+}
+
+function scheduleChaseStar() {
+  clearChaseTimers();
+
+  if (audio.paused) return;
+
+  const delay = 7000 + Math.random() * 12000;
+
+  chaseStarTimer = setTimeout(() => {
+    if (!audio.paused) {
+      triggerChaseStar();
+    }
+    scheduleChaseStar();
+  }, delay);
+}
+
+function restartChaseStarLoop() {
+  clearChaseTimers();
+  if (!audio.paused) {
+    scheduleChaseStar();
+  }
+}
+
+/* =========================
+   TRACK / AUDIO
+========================= */
+
 function loadTrack(index, autoplay = false) {
   if (!playlist.length) return;
 
   currentTrackIndex = index;
   const track = playlist[currentTrackIndex];
 
-  trackTitle.textContent = track.title;
-  trackArtist.textContent = track.artist;
-  trackCount.textContent = `${currentTrackIndex + 1}/${playlist.length}`;
+  if (trackTitle) trackTitle.textContent = track.title;
+  if (trackArtist) trackArtist.textContent = track.artist;
+  if (trackCount) trackCount.textContent = `${currentTrackIndex + 1}/${playlist.length}`;
 
   audio.src = track.audio;
   audio.load();
 
   updateProgressUI(0, 0);
   petJump();
+  burstIdleEvents(2);
+  stopChaseStar();
 
   if (autoplay) {
     const playPromise = audio.play();
     if (playPromise) {
-      playPromise.then(updatePlayButton).catch(updatePlayButton);
+      playPromise
+        .then(() => {
+          updatePlayButton();
+          startPetDance();
+          restartChaseStarLoop();
+        })
+        .catch(() => {
+          updatePlayButton();
+          startPetIdle();
+          startSleepTimer();
+        });
     }
   } else {
     updatePlayButton();
     startPetIdle();
     startSleepTimer();
   }
+
+  restartIdleEventLoop();
 }
 
 function scrubToClientX(clientX) {
-  if (!audio.duration) return;
+  if (!audio.duration || !progressBar) return;
+
   const rect = progressBar.getBoundingClientRect();
   const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
   audio.currentTime = ratio * audio.duration;
@@ -227,12 +409,17 @@ async function fetchPlaylist() {
   loadTrack(0, false);
 }
 
-playBtn.addEventListener("click", async () => {
+/* =========================
+   BUTTONS
+========================= */
+
+playBtn?.addEventListener("click", async () => {
   if (!audio.src) return;
 
   try {
     if (audio.paused) {
       await audio.play();
+      burstIdleEvents(3);
     } else {
       audio.pause();
     }
@@ -243,19 +430,19 @@ playBtn.addEventListener("click", async () => {
   updatePlayButton();
 });
 
-prevBtn.addEventListener("click", () => {
+prevBtn?.addEventListener("click", () => {
   if (!playlist.length) return;
   currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
   loadTrack(currentTrackIndex, true);
 });
 
-nextBtn.addEventListener("click", () => {
+nextBtn?.addEventListener("click", () => {
   if (!playlist.length) return;
   currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
   loadTrack(currentTrackIndex, true);
 });
 
-volUpBtn.addEventListener("click", () => {
+volUpBtn?.addEventListener("click", () => {
   audio.volume = Math.min(1, +(audio.volume + 0.1).toFixed(2));
 
   if (audio.volume > 0) {
@@ -265,9 +452,13 @@ volUpBtn.addEventListener("click", () => {
 
   updateMuteButton();
   reactPetToVolume();
+
+  if (!audio.paused) {
+    burstIdleEvents(1);
+  }
 });
 
-volDownBtn.addEventListener("click", () => {
+volDownBtn?.addEventListener("click", () => {
   audio.volume = Math.max(0, +(audio.volume - 0.1).toFixed(2));
 
   if (audio.volume > 0) {
@@ -283,7 +474,7 @@ volDownBtn.addEventListener("click", () => {
   reactPetToVolume();
 });
 
-muteBtn.addEventListener("click", () => {
+muteBtn?.addEventListener("click", () => {
   if (audio.muted || audio.volume === 0) {
     audio.muted = false;
     audio.volume = lastVolumeBeforeMute > 0 ? lastVolumeBeforeMute : 0.7;
@@ -295,6 +486,10 @@ muteBtn.addEventListener("click", () => {
   updateMuteButton();
   reactPetToVolume();
 });
+
+/* =========================
+   AUDIO EVENTS
+========================= */
 
 audio.addEventListener("loadedmetadata", () => {
   updateProgressUI(audio.currentTime, audio.duration);
@@ -309,13 +504,19 @@ audio.addEventListener("timeupdate", () => {
 audio.addEventListener("play", () => {
   updatePlayButton();
   clearSleepTimer();
+  if (lcdPetShadow) lcdPetShadow.classList.remove("is-sleeping");
   startPetDance();
+  restartIdleEventLoop();
+  restartChaseStarLoop();
 });
 
 audio.addEventListener("pause", () => {
   updatePlayButton();
+  stopChaseStar();
+  clearChaseTimers();
   startPetIdle();
   startSleepTimer();
+  restartIdleEventLoop();
 });
 
 audio.addEventListener("volumechange", () => {
@@ -329,32 +530,38 @@ audio.addEventListener("ended", () => {
   loadTrack(currentTrackIndex, true);
 });
 
-progressBar.addEventListener("pointerdown", (event) => {
+/* =========================
+   PROGRESS BAR
+========================= */
+
+progressBar?.addEventListener("pointerdown", (event) => {
   isScrubbing = true;
   progressBar.setPointerCapture(event.pointerId);
   scrubToClientX(event.clientX);
 });
 
-progressBar.addEventListener("pointermove", (event) => {
+progressBar?.addEventListener("pointermove", (event) => {
   if (!isScrubbing) return;
   scrubToClientX(event.clientX);
 });
 
-progressBar.addEventListener("pointerup", (event) => {
+progressBar?.addEventListener("pointerup", (event) => {
   if (!isScrubbing) return;
   scrubToClientX(event.clientX);
   isScrubbing = false;
   progressBar.releasePointerCapture(event.pointerId);
 });
 
-progressBar.addEventListener("pointercancel", (event) => {
+progressBar?.addEventListener("pointercancel", (event) => {
   isScrubbing = false;
   try {
     progressBar.releasePointerCapture(event.pointerId);
-  } catch (err) {}
+  } catch (err) {
+    console.error(err);
+  }
 });
 
-progressBar.addEventListener("keydown", (event) => {
+progressBar?.addEventListener("keydown", (event) => {
   if (!audio.duration) return;
 
   const step = Math.max(5, audio.duration * 0.02);
@@ -372,10 +579,15 @@ progressBar.addEventListener("keydown", (event) => {
   updateProgressUI(audio.currentTime, audio.duration);
 });
 
+/* =========================
+   INIT
+========================= */
+
 updatePlayButton();
 updateMuteButton();
 startPetIdle();
 startSleepTimer();
 initBlinking();
 reactPetToVolume();
+restartIdleEventLoop();
 fetchPlaylist();
