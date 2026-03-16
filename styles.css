@@ -12,8 +12,8 @@ body {
 :root {
   --player-width: 760px;
   --player-left: 61%;
-  --player-overlap: 90px;
-  --player-scale: clamp(0.78, 0.9vw, 0.85);
+  --player-overlap: 120px;
+  --player-scale: clamp(0.72, 0.82vw, 0.8);
 
   --screen-color: #ff4fd8;
   --screen-text: #2d1030;
@@ -258,7 +258,7 @@ body {
   overflow: hidden;
   background:
     url("images/lcd-bg.png") repeat,
-    linear-gradient(rgba(255,255,255,.05), rgba(255,255,255,0)),
+    linear-gradient(rgba(255,255,255,.04), rgba(255,255,255,0)),
     var(--screen-color);
   background-size: 64px 64px, auto, auto;
   background-position: 0 0, 0 0, 0 0;
@@ -266,28 +266,8 @@ body {
   font-family: "Press Start 2P", monospace;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
-  box-shadow:
-    inset 0 0 24px rgba(255,255,255,.18),
-    inset 0 0 28px rgba(255,0,180,.18),
-    0 0 18px rgba(255,70,210,.26);
-  animation:
-    screenPulse 3.6s ease-in-out infinite,
-    lcdScroll 18s linear infinite;
-}
-
-@keyframes screenPulse {
-  0%, 100% {
-    box-shadow:
-      inset 0 0 24px rgba(255,255,255,.18),
-      inset 0 0 28px rgba(255,0,180,.18),
-      0 0 18px rgba(255,70,210,.22);
-  }
-  50% {
-    box-shadow:
-      inset 0 0 28px rgba(255,255,255,.22),
-      inset 0 0 34px rgba(255,0,180,.24),
-      0 0 28px rgba(255,70,210,.34);
-  }
+  box-shadow: none;
+  animation: lcdScroll 18s linear infinite;
 }
 
 @keyframes lcdScroll {
@@ -304,22 +284,49 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to bottom, rgba(255,255,255,.14), rgba(255,255,255,0) 26%),
+    linear-gradient(to bottom, rgba(255,255,255,.1), rgba(255,255,255,0) 24%),
     repeating-linear-gradient(
       to bottom,
-      rgba(0,0,0,.08) 0px,
-      rgba(0,0,0,.08) 1px,
-      rgba(255,255,255,.04) 2px,
-      rgba(255,255,255,.04) 3px
+      rgba(0,0,0,.1) 0px,
+      rgba(0,0,0,.1) 1px,
+      rgba(255,255,255,.03) 2px,
+      rgba(255,255,255,.03) 3px
     );
-  opacity: .6;
+  opacity: 0.5;
   pointer-events: none;
   z-index: 2;
 }
 
+.lcd::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.08) 45%,
+      rgba(255,255,255,0) 100%
+    );
+  background-size: 100% 18px;
+  animation: lcdShimmer 5.5s linear infinite;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes lcdShimmer {
+  from {
+    background-position: 0 -18px;
+  }
+  to {
+    background-position: 0 18px;
+  }
+}
+
 .lcd-content {
   position: relative;
-  z-index: 3;
+  z-index: 4;
   width: 100%;
   height: 100%;
   padding: 7px 8px 6px;
@@ -622,8 +629,8 @@ body {
   position: absolute;
   left: 10px;
   bottom: 10px;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   transform-origin: bottom center;
   transition: filter 180ms ease;
   will-change: transform, filter;
@@ -1179,8 +1186,8 @@ audio {
   :root {
     --player-width: min(360px, calc(100vw - 32px));
     --player-left: 50%;
-    --player-overlap: 92px;
-    --player-scale: 0.92;
+    --player-overlap: 102px;
+    --player-scale: 0.88;
     --hero-pad-x: 24px;
   }
 
@@ -1235,8 +1242,8 @@ audio {
 @media (max-width: 480px) {
   :root {
     --player-width: min(305px, calc(100vw - 24px));
-    --player-overlap: 82px;
-    --player-scale: 0.96;
+    --player-overlap: 92px;
+    --player-scale: 0.92;
   }
 
   .top-nav {
