@@ -312,6 +312,137 @@ body {
   gap: 4px;
 }
 
+.lcd-pet-wrap {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  width: 54px;
+  height: 54px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.lcd-pet {
+  position: absolute;
+  right: 2px;
+  bottom: 8px;
+  width: 40px;
+  height: 40px;
+  transform-origin: bottom center;
+  transition: filter 160ms ease, transform 160ms ease;
+}
+
+.lcd-pet img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  transform-origin: center;
+}
+
+.lcd-pet-shadow {
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  width: 28px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(45, 16, 48, 0.18);
+  filter: blur(1px);
+  transform-origin: center;
+}
+
+.lcd-pet-ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4px;
+  height: 1px;
+  background: rgba(45, 16, 48, 0.18);
+}
+
+@keyframes petIdle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes petDance {
+  0% { transform: translateY(0) rotate(-5deg) scale(1); }
+  25% { transform: translateY(-3px) rotate(4deg) scale(1.02); }
+  50% { transform: translateY(0) rotate(-4deg) scale(1); }
+  75% { transform: translateY(-3px) rotate(5deg) scale(1.02); }
+  100% { transform: translateY(0) rotate(-5deg) scale(1); }
+}
+
+@keyframes petJump {
+  0% { transform: translateY(0) scale(1, 1); }
+  20% { transform: translateY(1px) scale(1.04, 0.96); }
+  45% { transform: translateY(-10px) scale(0.98, 1.03); }
+  70% { transform: translateY(0) scale(1, 1); }
+  100% { transform: translateY(0) scale(1, 1); }
+}
+
+@keyframes petSleep {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(1px) rotate(-2deg); }
+}
+
+@keyframes petBlink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  94%, 96% { transform: scaleY(0.08); }
+}
+
+@keyframes petShadowBounce {
+  0%, 100% { transform: scaleX(1); opacity: 0.2; }
+  50% { transform: scaleX(0.88); opacity: 0.14; }
+}
+
+.pet-idle {
+  animation: petIdle 1.8s ease-in-out infinite;
+}
+
+.pet-dance {
+  animation: petDance 0.55s ease-in-out infinite;
+}
+
+.pet-jump {
+  animation: petJump 0.55s ease-out 1;
+}
+
+.pet-sleep {
+  animation: petSleep 2.4s ease-in-out infinite;
+  opacity: 0.9;
+}
+
+.pet-blink {
+  animation: petBlink 4.4s linear infinite;
+}
+
+.pet-shadow-bounce {
+  animation: petShadowBounce 1.8s ease-in-out infinite;
+}
+
+.pet-shadow-dance {
+  animation: petShadowBounce 0.55s ease-in-out infinite;
+}
+
+.lcd-pet-wrap.is-sleeping::after {
+  content: "zZ";
+  position: absolute;
+  right: -4px;
+  top: -2px;
+  font-size: 7px;
+  color: rgba(45, 16, 48, 0.7);
+  animation: sleepFloat 1.8s ease-in-out infinite;
+}
+
+@keyframes sleepFloat {
+  0% { transform: translateY(0); opacity: 0.65; }
+  50% { transform: translateY(-3px); opacity: 1; }
+  100% { transform: translateY(-6px); opacity: 0; }
+}
+
 .lcd-top {
   display: flex;
   justify-content: space-between;
@@ -431,6 +562,8 @@ body {
   line-height: 1;
   transition: transform .14s ease, opacity .14s ease;
   z-index: 2;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .pod-btn:hover {
@@ -448,6 +581,7 @@ body {
   object-fit: contain;
   pointer-events: none;
   user-select: none;
+  filter: drop-shadow(0 1px 0 rgba(255,255,255,.25));
 }
 
 .pod-icon-flip {
@@ -481,7 +615,7 @@ body {
 }
 
 .pod-play:active {
-  transform: translate(-50%, -50%) scale(.95);
+  transform: translate(-50%, -50%) scale(.92);
 }
 
 .pod-prev {
@@ -749,6 +883,18 @@ audio {
 
   .lcd-eq span {
     width: 4px;
+  }
+
+  .lcd-pet-wrap {
+    right: 8px;
+    bottom: 8px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .lcd-pet {
+    width: 32px;
+    height: 32px;
   }
 
   .pod-plus,
