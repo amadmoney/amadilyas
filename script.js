@@ -17,6 +17,11 @@ const duration = document.getElementById("duration");
 
 const muteIcon = muteBtn.querySelector("img");
 
+const lcdPet = document.getElementById("lcdPet");
+const lcdPetImg = document.getElementById("lcdPetImg");
+const lcdPetWrap = document.querySelector(".lcd-pet-wrap");
+const lcdPetShadow = document.querySelector(".lcd-pet-shadow");
+
 const MUTE_ICON_SRC =
   "https://raw.githubusercontent.com/amadmoney/amadilyas/934d11b9a53b22a6d5b25fe4d6f1947c28e0bd2c/icons/mute-solid-full.svg";
 
@@ -28,6 +33,8 @@ let playlist = [];
 let currentTrackIndex = 0;
 let isScrubbing = false;
 let lastVolumeBeforeMute = 0.7;
+let sleepTimer = null;
+let blinkTimer = null;
 
 audio.volume = 0.7;
 
@@ -68,6 +75,105 @@ function updateProgressUI(current, total) {
   duration.textContent = formatTime(total);
 }
 
+function clearPetStates() {
+  if (!lcdPet || !lcdPetWrap || !lcdPetShadow) return;
+
+  lcdPet.classList.remove("pet-idle", "pet-dance", "pet-jump", "pet-sleep");
+  lcdPetWrap.classList.remove("is-sleeping");
+  lcdPetShadow.classList.remove("pet-shadow-bounce", "pet-shadow-dance");
+}
+
+function startPetIdle() {
+  if (!lcdPet || !lcdPetShadow) return;
+  clearPetStates();
+  lcdPet.classList.add("pet-idle");
+  lcdPetShadow.classList.add("pet-shadow-bounce");
+}
+
+function startPetDance() {
+  if (!lcdPet || !lcdPetShadow) return;
+  clearPetStates();
+  lcdPet.classList.add("pet-dance");
+  lcdPetShadow.classList.add("pet-shadow-dance");
+}
+
+function startPetSleep() {
+  if (!lcdPet || !lcdPetWrap) return;
+  clearPetStates();
+  lcdPet.classList.add("pet-sleep");
+  lcdPetWrap.classList.add("is-sleeping");
+}
+
+function clearSleepTimer() {
+  if (sleepTimer) {
+    clearTimeout(sleepTimer);
+    sleepTimer = null;
+  }
+}
+
+function startSleepTimer() {
+  clearSleepTimer();
+
+  if (!audio.paused) return;
+
+  sleepTimer = setTimeout(() => {
+    if (audio.paused) {
+      startPetSleep();
+    }
+  }, 30000);
+}
+
+function petJump() {
+  if (!lcdPet) return;
+
+  clearPetStates();
+  lcdPet.classList.add("pet-jump");
+
+  setTimeout(() => {
+    lcdPet.classList.remove("pet-jump");
+
+    if (audio.paused) {
+      startPetIdle();
+      startSleepTimer();
+    } else {
+      startPetDance();
+    }
+  }, 560);
+}
+
+function scheduleBlink() {
+  if (!lcdPetImg) return;
+
+  const delay = 2200 + Math.random() * 2800;
+
+  blinkTimer = setTimeout(() => {
+    lcdPetImg.classList.add("pet-blink");
+
+    setTimeout(() => {
+      lcdPetImg.classList.remove("pet-blink");
+      scheduleBlink();
+    }, 450);
+  }, delay);
+}
+
+function initBlinking() {
+  if (blinkTimer) {
+    clearTimeout(blinkTimer);
+  }
+  scheduleBlink();
+}
+
+function reactPetToVolume() {
+  if (!lcdPet) return;
+
+  const effectiveVolume = audio.muted ? 0 : audio.volume;
+  const glow = effectiveVolume > 0
+    ? `drop-shadow(0 0 ${2 + effectiveVolume * 4}px rgba(255,255,255,0.16))`
+    : "none";
+
+  lcdPet.style.filter = glow;
+}
+
 function loadTrack(index, autoplay = false) {
   if (!playlist.length) return;
 
@@ -82,6 +188,7 @@ function loadTrack(index, autoplay = false) {
   audio.load();
 
   updateProgressUI(0, 0);
+  petJump();
 
   if (autoplay) {
     const playPromise = audio.play();
@@ -90,6 +197,8 @@ function loadTrack(index, autoplay = false) {
     }
   } else {
     updatePlayButton();
+    startPetIdle();
+    startSleepTimer();
   }
 }
 
@@ -155,6 +264,7 @@ volUpBtn.addEventListener("click", () => {
   }
 
   updateMuteButton();
+  reactPetToVolume();
 });
 
 volDownBtn.addEventListener("click", () => {
@@ -170,6 +280,7 @@ volDownBtn.addEventListener("click", () => {
   }
 
   updateMuteButton();
+  reactPetToVolume();
 });
 
 muteBtn.addEventListener("click", () => {
@@ -182,6 +293,7 @@ muteBtn.addEventListener("click", () => {
   }
 
   updateMuteButton();
+  reactPetToVolume();
 });
 
 audio.addEventListener("loadedmetadata", () => {
@@ -194,9 +306,22 @@ audio.addEventListener("timeupdate", () => {
   }
 });
 
-audio.addEventListener("play", updatePlayButton);
-audio.addEventListener("pause", updatePlayButton);
-audio.addEventListener("volumechange", updateMuteButton);
+audio.addEventListener("play", () => {
+  updatePlayButton();
+  clearSleepTimer();
+  startPetDance();
+});
+
+audio.addEventListener("pause", () => {
+  updatePlayButton();
+  startPetIdle();
+  startSleepTimer();
+});
+
+audio.addEventListener("volumechange", () => {
+  updateMuteButton();
+  reactPetToVolume();
+});
 
 audio.addEventListener("ended", () => {
   if (!playlist.length) return;
@@ -249,4 +374,8 @@ progressBar.addEventListener("keydown", (event) => {
 
 updatePlayButton();
 updateMuteButton();
+startPetIdle();
+startSleepTimer();
+initBlinking();
+reactPetToVolume();
 fetchPlaylist();
