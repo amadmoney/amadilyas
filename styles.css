@@ -481,22 +481,21 @@ body {
   display: block;
   width: 18px;
   height: 6px;
-  background: rgba(255,255,255,0.95);
+  background: #000;
   image-rendering: pixelated;
   box-shadow:
-    3px 0 rgba(255,255,255,0.95),
-    6px 0 rgba(255,255,255,0.95),
-    9px 0 rgba(255,255,255,0.95),
-    12px 0 rgba(255,255,255,0.95),
-    2px -3px rgba(255,255,255,0.95),
-    5px -3px rgba(255,255,255,0.95),
-    8px -3px rgba(255,255,255,0.95),
-    11px -3px rgba(255,255,255,0.95),
-    4px 3px rgba(255,255,255,0.95),
-    7px 3px rgba(255,255,255,0.95),
-    10px 3px rgba(255,255,255,0.95);
-  opacity: 0.78;
-  will-change: transform;
+    3px 0 #000,
+    6px 0 #000,
+    9px 0 #000,
+    12px 0 #000,
+    2px -3px #000,
+    5px -3px #000,
+    8px -3px #000,
+    11px -3px #000,
+    4px 3px #000,
+    7px 3px #000,
+    10px 3px #000;
+  opacity: 0.8;
 }
 
 .cloud-1 {
@@ -611,8 +610,8 @@ body {
   position: absolute;
   left: -22%;
   bottom: 8px;
-  width: 64px;
-  height: 64px;
+  width: 88px;
+  height: 88px;
   z-index: 3;
   pointer-events: none;
   animation: petWalkAcross 18s linear infinite;
