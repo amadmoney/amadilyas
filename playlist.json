@@ -1,0 +1,17 @@
+[
+  {
+    "title": "TRACK ONE",
+    "artist": "ARTIST ONE",
+    "audio": "music/track-01.mp3"
+  },
+  {
+    "title": "TRACK TWO",
+    "artist": "ARTIST TWO",
+    "audio": "music/track-02.mp3"
+  },
+  {
+    "title": "TRACK THREE",
+    "artist": "ARTIST THREE",
+    "audio": "music/track-03.mp3"
+  }
+]
