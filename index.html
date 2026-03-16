@@ -8,10 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-  />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -63,7 +59,16 @@
                 <span></span>
               </div>
 
-              <div class="lcd-bar" id="progressBar" aria-label="Track progress" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <div
+                class="lcd-bar"
+                id="progressBar"
+                aria-label="Track progress"
+                role="slider"
+                tabindex="0"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+              >
                 <div class="lcd-bar-fill" id="progressFill"></div>
                 <div class="lcd-bar-thumb" id="progressThumb"></div>
               </div>
@@ -79,23 +84,23 @@
         <div class="control-pod-wrap">
           <div class="control-pod">
             <button class="control-btn btn-plus" id="volUpBtn" type="button" aria-label="Volume up">
-              <i class="fa-solid fa-xmark"></i>
+              <img src="icons/plus.svg" class="control-icon" alt="" aria-hidden="true" />
             </button>
 
             <button class="control-btn btn-next" id="nextBtn" type="button" aria-label="Next track">
-              <i class="fa-solid fa-forward-step"></i>
+              <img src="icons/forward.svg" class="control-icon" alt="" aria-hidden="true" />
             </button>
 
             <button class="control-btn btn-play" id="playBtn" type="button" aria-label="Play or pause">
-              <i class="fa-solid fa-play"></i>
+              <img src="icons/play.svg" class="control-icon control-icon--play" alt="" aria-hidden="true" />
             </button>
 
             <button class="control-btn btn-prev" id="prevBtn" type="button" aria-label="Previous track">
-              <i class="fa-solid fa-backward-step"></i>
+              <img src="icons/forward.svg" class="control-icon control-icon--prev" alt="" aria-hidden="true" />
             </button>
 
             <button class="control-btn btn-minus" id="volDownBtn" type="button" aria-label="Volume down">
-              <i class="fa-solid fa-minus"></i>
+              <img src="icons/minus.svg" class="control-icon" alt="" aria-hidden="true" />
             </button>
           </div>
 
@@ -111,7 +116,6 @@
         <audio id="audio" preload="metadata"></audio>
       </div>
     </div>
-
 
     <section class="studio-info">
       <div class="studio-info__inner">
@@ -195,12 +199,7 @@
           </div>
         </aside>
       </div>
-
-      <div class="studio-info__marquee">
-        <span>(｡•◡•｡) ✧ AMAD.STUDIO IS NOW CLOSED (｡•◡•｡) ✧</span>
-      </div>
     </section>
-
 
     <section class="gradient">
       <h2>Gradient/archive section goes here next</h2>
