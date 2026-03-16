@@ -257,15 +257,22 @@ body {
   border-radius: 6px;
   overflow: hidden;
   background:
+    url("images/lcd-bg.png") repeat,
     linear-gradient(rgba(255,255,255,.05), rgba(255,255,255,0)),
     var(--screen-color);
+  background-size: 64px 64px, auto, auto;
+  background-position: 0 0, 0 0, 0 0;
   color: var(--screen-text);
   font-family: "Press Start 2P", monospace;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
   box-shadow:
     inset 0 0 24px rgba(255,255,255,.18),
     inset 0 0 28px rgba(255,0,180,.18),
     0 0 18px rgba(255,70,210,.26);
-  animation: screenPulse 3.4s ease-in-out infinite;
+  animation:
+    screenPulse 3.4s ease-in-out infinite,
+    lcdScroll 18s linear infinite;
 }
 
 @keyframes screenPulse {
@@ -280,6 +287,15 @@ body {
       inset 0 0 28px rgba(255,255,255,.22),
       inset 0 0 34px rgba(255,0,180,.24),
       0 0 28px rgba(255,70,210,.34);
+  }
+}
+
+@keyframes lcdScroll {
+  from {
+    background-position: 0 0, 0 0, 0 0;
+  }
+  to {
+    background-position: -256px 0, 0 0, 0 0;
   }
 }
 
