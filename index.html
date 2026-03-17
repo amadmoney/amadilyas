@@ -43,15 +43,7 @@
         <div class="lcd-wrap">
           <div class="lcd">
             <div class="lcd-content">
-              <div class="lcd-world" aria-hidden="true">
-                <div class="lcd-clouds">
-                  <span class="lcd-cloud cloud-1"></span>
-                  <span class="lcd-cloud cloud-2"></span>
-                  <span class="lcd-cloud cloud-3"></span>
-                </div>
-
-                <div class="lcd-idle-events" id="lcdIdleEvents"></div>
-              </div>
+              <div class="lcd-world" aria-hidden="true"></div>
 
               <div class="lcd-pet-wrap" aria-hidden="true">
                 <div class="lcd-pet" id="lcdPet">
@@ -72,7 +64,10 @@
                   <span id="trackCount">1/3</span>
                 </div>
 
-                <div class="lcd-track" id="trackTitle">TRACK ONE</div>
+                <div class="lcd-track" id="trackTitle">
+                  <span class="lcd-track-text" id="trackTitleText">TRACK ONE</span>
+                </div>
+
                 <div class="lcd-artist" id="trackArtist">ARTIST ONE</div>
 
                 <div class="lcd-eq" aria-hidden="true">
