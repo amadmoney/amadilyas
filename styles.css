@@ -10,12 +10,12 @@ body {
 }
 
 :root {
-  --player-width: 760px;
+  --player-width: 500px;
   --player-left: 56%;
-  --player-overlap: 145px;
-  --player-scale: clamp(0.68, 0.66vw, 0.76);
+  --player-overlap: 110px;
+  --player-scale: 1;
 
-  --screen-color: #ff4fd8;
+  --screen-color: #19ff00;
   --screen-text: #2d1030;
 
   --shell-border: #d9d7dc;
@@ -258,7 +258,7 @@ body {
   overflow: hidden;
   background:
     url("images/lcd-bg.png") repeat,
-    linear-gradient(rgba(255,255,255,.04), rgba(255,255,255,0)),
+    linear-gradient(rgba(255,255,255,.05), rgba(255,255,255,0)),
     var(--screen-color);
   background-size: 64px 64px, auto, auto;
   background-position: 0 0, 0 0, 0 0;
@@ -266,7 +266,9 @@ body {
   font-family: "Press Start 2P", monospace;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
-  box-shadow: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(0,0,0,.12),
+    inset 0 0 18px rgba(255,255,255,.08);
   animation: lcdScroll 18s linear infinite;
 }
 
@@ -349,157 +351,6 @@ body {
   position: relative;
   z-index: 5;
   display: contents;
-}
-
-/* DAY / NIGHT */
-
-.lcd-sky {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, #8fe7ff 0%, #c9f5ff 58%, #f4fdff 100%);
-  animation: lcdSkyCycle 26s linear infinite;
-  opacity: 0.5;
-  will-change: opacity, filter;
-}
-
-@keyframes lcdSkyCycle {
-  0% {
-    background: linear-gradient(to bottom, #8fe7ff 0%, #c9f5ff 58%, #f4fdff 100%);
-    opacity: 0.52;
-    filter: brightness(1);
-  }
-  22% {
-    background: linear-gradient(to bottom, #a2ebff 0%, #ddf8ff 58%, #fbfeff 100%);
-    opacity: 0.45;
-    filter: brightness(1.02);
-  }
-  50% {
-    background: linear-gradient(to bottom, #ff9fd9 0%, #9e84ff 62%, #564992 100%);
-    opacity: 0.36;
-    filter: brightness(0.84);
-  }
-  75% {
-    background: linear-gradient(to bottom, #1d2550 0%, #253463 60%, #3a4a87 100%);
-    opacity: 0.32;
-    filter: brightness(0.68);
-  }
-  100% {
-    background: linear-gradient(to bottom, #8fe7ff 0%, #c9f5ff 58%, #f4fdff 100%);
-    opacity: 0.52;
-    filter: brightness(1);
-  }
-}
-
-.lcd-sun,
-.lcd-moon {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  top: 34px;
-  right: 18px;
-  will-change: transform, opacity;
-  image-rendering: pixelated;
-}
-
-.lcd-sun::before,
-.lcd-moon::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: #000;
-}
-
-.lcd-sun::before {
-  box-shadow:
-    3px 0 #000,
-    0 3px #000,
-    3px 3px #000,
-    6px 3px #000,
-    3px 6px #000;
-}
-
-.lcd-moon::before {
-  box-shadow:
-    3px 0 #000,
-    6px 0 #000,
-    0 3px #000,
-    3px 3px #000,
-    6px 3px #000,
-    3px 6px #000;
-}
-
-.lcd-sun {
-  animation: lcdSunCycle 26s linear infinite;
-}
-
-.lcd-moon {
-  opacity: 0;
-  animation: lcdMoonCycle 26s linear infinite;
-}
-
-@keyframes lcdSunCycle {
-  0%, 40% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-  50%, 100% {
-    opacity: 0;
-    transform: translateY(-4px) scale(0.85);
-  }
-}
-
-@keyframes lcdMoonCycle {
-  0%, 45% {
-    opacity: 0;
-    transform: translateY(4px) scale(0.8);
-  }
-  55%, 90% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(4px) scale(0.8);
-  }
-}
-
-.lcd-stars {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  animation: lcdStarsCycle 26s linear infinite;
-}
-
-.lcd-stars span {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: #000;
-  box-shadow:
-    2px 0 #000,
-    0 2px #000,
-    2px 2px #000;
-  animation: lcdTwinkle 2s steps(2) infinite;
-}
-
-.lcd-stars span:nth-child(1) { top: 34px; left: 18px; animation-delay: 0s; }
-.lcd-stars span:nth-child(2) { top: 42px; left: 42px; animation-delay: 0.4s; }
-.lcd-stars span:nth-child(3) { top: 30px; left: 66px; animation-delay: 0.8s; }
-.lcd-stars span:nth-child(4) { top: 47px; left: 96px; animation-delay: 1.2s; }
-.lcd-stars span:nth-child(5) { top: 37px; right: 46px; animation-delay: 0.2s; }
-.lcd-stars span:nth-child(6) { top: 52px; right: 70px; animation-delay: 0.9s; }
-.lcd-stars span:nth-child(7) { top: 39px; right: 24px; animation-delay: 0.6s; }
-.lcd-stars span:nth-child(8) { top: 30px; right: 88px; animation-delay: 1.4s; }
-
-@keyframes lcdStarsCycle {
-  0%, 48% { opacity: 0; }
-  58%, 88% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-@keyframes lcdTwinkle {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.3); }
 }
 
 /* PIXEL CLOUDS */
