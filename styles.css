@@ -15,7 +15,7 @@ body {
 
 :root {
   --player-width: 700px;
-  --player-scale: 1;
+  --player-scale: 0.7;
 
   --screen-color: #19ff00;
   --screen-text: #2d1030;
