@@ -10,9 +10,9 @@ body {
 }
 
 :root {
-  --player-width: 500px;
+  --player-width: 680px;
   --player-left: 56%;
-  --player-overlap: 110px;
+  --player-overlap: 130px;
   --player-scale: 1;
 
   --screen-color: #19ff00;
