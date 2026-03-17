@@ -15,7 +15,9 @@ body {
 
 :root {
   --player-width: 700px;
-  --player-scale: 0.7;
+  --player-left: 56%;
+  --player-overlap: 138px;
+  --player-scale: 1;
 
   --screen-color: #19ff00;
   --screen-text: #2d1030;
@@ -27,7 +29,7 @@ body {
   --hero-pad-x: 72px;
 
   /* sticker art swap */
- --sticker-image: url("https://raw.githubusercontent.com/amadmoney/amadilyas/refs/heads/main/images/STICKER_ART_FRAME.png");
+  --sticker-image: url("images/sticker-frame.png");
   --sticker-size: cover;
   --sticker-position: center;
 
@@ -56,7 +58,7 @@ body {
 
 .hero {
   min-height: 100vh;
-  padding: 56px var(--hero-pad-x) 96px;
+  padding: 56px var(--hero-pad-x) 160px;
   background: #000;
   position: relative;
   z-index: 1;
@@ -66,7 +68,7 @@ body {
   display: flex;
   gap: 48px;
   flex-wrap: wrap;
-  margin-bottom: 72px;
+  margin-bottom: 160px;
 }
 
 .top-nav a {
@@ -76,23 +78,15 @@ body {
   font-weight: 700;
 }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(520px, 700px);
-  gap: 40px;
-  align-items: start;
-}
-
 .hero-copy {
-  min-width: 0;
-  max-width: 760px;
+  max-width: 920px;
 }
 
 .hero-copy p {
   margin: 0;
   font-size: 50px;
-  line-height: 1.04;
-  letter-spacing: -0.04em;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
 }
 
 .line {
@@ -123,21 +117,24 @@ body {
   font-weight: 400;
 }
 
-.hero-player {
-  min-width: 0;
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  padding-top: 32px;
-}
-
 /* ==================================================
-   3. PLAYER
+   3. FLOATING PLAYER
 ================================================== */
+
+.floating-player {
+  position: absolute;
+  top: calc(100vh - var(--player-overlap));
+  left: var(--player-left);
+  transform: translateX(-50%) rotate(-2deg) scale(var(--player-scale));
+  transform-origin: center top;
+  width: min(var(--player-width), calc(100vw - 32px));
+  z-index: 1000;
+  pointer-events: auto;
+}
 
 .player-device {
   position: relative;
-  width: min(100%, var(--player-width));
+  width: 100%;
   aspect-ratio: 1.88 / 1;
   background: linear-gradient(180deg, #f7f6f8 0%, #edeaf0 100%);
   border: 2px solid var(--shell-border);
@@ -146,8 +143,6 @@ body {
     0 22px 40px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
   overflow: hidden;
-  transform: rotate(-2deg) scale(var(--player-scale));
-  transform-origin: center center;
 }
 
 .player-device::before {
@@ -867,7 +862,7 @@ body {
 
 .pod-mute {
   left: 50%;
-  bottom: -2%;
+  bottom: -4.5%;
   width: 16%;
   aspect-ratio: 1 / 1;
   transform: translateX(-50%);
@@ -927,7 +922,7 @@ audio {
   position: relative;
   background: #19ff00;
   color: #000;
-  padding: 80px 72px 80px;
+  padding: 180px 72px 80px;
   overflow: hidden;
   z-index: 1;
 }
@@ -1269,17 +1264,20 @@ audio {
 ================================================== */
 
 @media (max-width: 1100px) {
-  .hero-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(420px, 560px);
-    gap: 32px;
-  }
-
   .hero-copy p {
     font-size: 52px;
   }
 
+  .top-nav {
+    margin-bottom: 130px;
+  }
+
+  .floating-player {
+    left: 58%;
+  }
+
   .studio-info {
-    padding: 72px 32px 64px;
+    padding: 150px 32px 64px;
   }
 
   .studio-info__inner {
@@ -1297,21 +1295,6 @@ audio {
 }
 
 @media (max-width: 900px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 36px;
-  }
-
-  .hero-player {
-    justify-content: flex-start;
-    padding-top: 0;
-  }
-
-  .player-device {
-    width: min(100%, 620px);
-    transform: rotate(-1deg) scale(1);
-  }
-
   .wii-channels {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -1324,45 +1307,39 @@ audio {
 
 @media (max-width: 768px) {
   :root {
-    --player-width: 360px;
-    --player-scale: 0.94;
+    --player-width: 420px;
+    --player-left: 50%;
+    --player-overlap: 110px;
+    --player-scale: 1;
     --hero-pad-x: 24px;
   }
 
   .hero {
     padding-top: 32px;
-    padding-bottom: 64px;
+    padding-bottom: 150px;
   }
 
   .top-nav {
     gap: 24px;
-    margin-bottom: 56px;
+    margin-bottom: 90px;
   }
 
   .top-nav a {
     font-size: 22px;
   }
 
-  .hero-copy {
-    max-width: none;
-  }
-
   .hero-copy p {
     font-size: 38px;
-    line-height: 1.12;
+    line-height: 1.16;
   }
 
-  .hero-player {
-    justify-content: center;
-  }
-
-  .player-device {
-    width: min(100%, 360px);
-    transform: rotate(-1deg) scale(var(--player-scale));
+  .floating-player {
+    width: min(var(--player-width), calc(100vw - 24px));
+    transform: translateX(-50%) rotate(-1deg);
   }
 
   .studio-info {
-    padding: 56px 20px 52px;
+    padding: 136px 20px 52px;
   }
 
   .studio-info__lead,
@@ -1436,13 +1413,19 @@ audio {
 
 @media (max-width: 480px) {
   :root {
-    --player-width: 305px;
-    --player-scale: 0.92;
+    --player-width: 340px;
+    --player-overlap: 98px;
+    --player-scale: 1;
+  }
+
+  .floating-player {
+    width: min(var(--player-width), calc(100vw - 20px));
+    transform: translateX(-50%) rotate(-1deg);
   }
 
   .top-nav {
     gap: 18px 20px;
-    margin-bottom: 48px;
+    margin-bottom: 72px;
   }
 
   .top-nav a {
@@ -1453,16 +1436,8 @@ audio {
     font-size: 30px;
   }
 
-  .hero-player {
-    justify-content: center;
-  }
-
-  .player-device {
-    width: min(100%, 305px);
-  }
-
   .studio-info {
-    padding: 44px 16px;
+    padding: 124px 16px 44px;
   }
 
   .info-block {
