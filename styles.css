@@ -27,7 +27,7 @@ body {
   --hero-pad-x: 72px;
 
   /* sticker art swap */
-  --sticker-image: url("images/sticker-frame.png");
+  --sticker-image: url("https://raw.githubusercontent.com/amadmoney/amadilyas/refs/heads/main/images/STICKER_ART.png");
   --sticker-size: cover;
   --sticker-position: center;
 
