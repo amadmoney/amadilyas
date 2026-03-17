@@ -357,7 +357,7 @@ body {
 .lcd-pet {
   position: absolute;
   left: 8px;
-  bottom: 10px;
+  bottom: 16px;
   width: 42px;
   height: 42px;
   transform-origin: bottom center;
