@@ -10,9 +10,9 @@ body {
 }
 
 :root {
-  --player-width: 680px;
+  --player-width: 700px;
   --player-left: 56%;
-  --player-overlap: 130px;
+  --player-overlap: 138px;
   --player-scale: 1;
 
   --screen-color: #19ff00;
@@ -256,29 +256,14 @@ body {
   height: 100%;
   border-radius: 6px;
   overflow: hidden;
-  background:
-    url("images/lcd-bg.png") repeat,
-    linear-gradient(rgba(255,255,255,.05), rgba(255,255,255,0)),
-    var(--screen-color);
-  background-size: 64px 64px, auto, auto;
-  background-position: 0 0, 0 0, 0 0;
+  background: var(--screen-color);
   color: var(--screen-text);
   font-family: "Press Start 2P", monospace;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
   box-shadow:
     inset 0 0 0 1px rgba(0,0,0,.12),
-    inset 0 0 18px rgba(255,255,255,.08);
-  animation: lcdScroll 18s linear infinite;
-}
-
-@keyframes lcdScroll {
-  from {
-    background-position: 0 0, 0 0, 0 0;
-  }
-  to {
-    background-position: -256px 0, 0 0, 0 0;
-  }
+    inset 0 0 12px rgba(255,255,255,.06);
 }
 
 .lcd::before {
@@ -286,15 +271,14 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to bottom, rgba(255,255,255,.1), rgba(255,255,255,0) 24%),
     repeating-linear-gradient(
       to bottom,
-      rgba(0,0,0,.1) 0px,
-      rgba(0,0,0,.1) 1px,
-      rgba(255,255,255,.03) 2px,
-      rgba(255,255,255,.03) 3px
+      rgba(0,0,0,.08) 0px,
+      rgba(0,0,0,.08) 1px,
+      rgba(255,255,255,.02) 2px,
+      rgba(255,255,255,.02) 3px
     );
-  opacity: 0.5;
+  opacity: 0.4;
   pointer-events: none;
   z-index: 2;
 }
@@ -307,12 +291,12 @@ body {
     linear-gradient(
       180deg,
       rgba(255,255,255,0) 0%,
-      rgba(255,255,255,0.08) 45%,
+      rgba(255,255,255,0.06) 45%,
       rgba(255,255,255,0) 100%
     );
   background-size: 100% 18px;
   animation: lcdShimmer 5.5s linear infinite;
-  opacity: 0.18;
+  opacity: 0.16;
   pointer-events: none;
   z-index: 3;
 }
@@ -351,72 +335,6 @@ body {
   position: relative;
   z-index: 5;
   display: contents;
-}
-
-/* PIXEL CLOUDS */
-
-.lcd-clouds {
-  position: absolute;
-  inset: 0;
-}
-
-.lcd-cloud {
-  position: absolute;
-  display: block;
-  width: 18px;
-  height: 6px;
-  background: #000;
-  image-rendering: pixelated;
-  box-shadow:
-    3px 0 #000,
-    6px 0 #000,
-    9px 0 #000,
-    12px 0 #000,
-    2px -3px #000,
-    5px -3px #000,
-    8px -3px #000,
-    11px -3px #000,
-    4px 3px #000,
-    7px 3px #000,
-    10px 3px #000;
-  opacity: 0.8;
-}
-
-.cloud-1 {
-  top: 42px;
-  left: -30px;
-  animation: lcdCloudDrift1 17s linear infinite;
-}
-
-.cloud-2 {
-  top: 58px;
-  left: -45px;
-  transform: scale(0.82);
-  animation: lcdCloudDrift2 23s linear infinite;
-  animation-delay: -6s;
-}
-
-.cloud-3 {
-  top: 50px;
-  left: -38px;
-  transform: scale(0.62);
-  animation: lcdCloudDrift3 14s linear infinite;
-  animation-delay: -3s;
-}
-
-@keyframes lcdCloudDrift1 {
-  from { transform: translate3d(0, 0, 0) scale(1); }
-  to { transform: translate3d(240px, 0, 0) scale(1); }
-}
-
-@keyframes lcdCloudDrift2 {
-  from { transform: translate3d(0, 0, 0) scale(0.82); }
-  to { transform: translate3d(260px, 0, 0) scale(0.82); }
-}
-
-@keyframes lcdCloudDrift3 {
-  from { transform: translate3d(0, 0, 0) scale(0.62); }
-  to { transform: translate3d(230px, 0, 0) scale(0.62); }
 }
 
 /* IDLE EVENTS */
@@ -506,8 +424,8 @@ body {
   position: absolute;
   left: 8px;
   bottom: 10px;
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   transform-origin: bottom center;
   transition: filter 180ms ease;
   will-change: transform, filter;
