@@ -1307,16 +1307,16 @@ audio {
 
 @media (max-width: 768px) {
   :root {
-    --player-width: 420px;
+    --player-width: 320px;
     --player-left: 50%;
-    --player-overlap: 110px;
+    --player-overlap: 92px;
     --player-scale: 1;
     --hero-pad-x: 24px;
   }
 
   .hero {
     padding-top: 32px;
-    padding-bottom: 150px;
+    padding-bottom: 118px;
   }
 
   .top-nav {
@@ -1334,12 +1334,12 @@ audio {
   }
 
   .floating-player {
-    width: min(var(--player-width), calc(100vw - 24px));
+    width: min(var(--player-width), calc(100vw - 28px));
     transform: translateX(-50%) rotate(-1deg);
   }
 
   .studio-info {
-    padding: 136px 20px 52px;
+    padding: 112px 20px 52px;
   }
 
   .studio-info__lead,
@@ -1413,13 +1413,13 @@ audio {
 
 @media (max-width: 480px) {
   :root {
-    --player-width: 340px;
-    --player-overlap: 98px;
+    --player-width: 290px;
+    --player-overlap: 84px;
     --player-scale: 1;
   }
 
   .floating-player {
-    width: min(var(--player-width), calc(100vw - 20px));
+    width: min(var(--player-width), calc(100vw - 24px));
     transform: translateX(-50%) rotate(-1deg);
   }
 
@@ -1437,7 +1437,7 @@ audio {
   }
 
   .studio-info {
-    padding: 124px 16px 44px;
+    padding: 100px 16px 44px;
   }
 
   .info-block {
