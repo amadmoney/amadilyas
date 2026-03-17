@@ -867,7 +867,7 @@ body {
 
 .pod-mute {
   left: 50%;
-  bottom: -4.5%;
+  bottom: -2%;
   width: 16%;
   aspect-ratio: 1 / 1;
   transform: translateX(-50%);
