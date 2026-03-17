@@ -11,9 +11,9 @@ body {
 
 :root {
   --player-width: 760px;
-  --player-left: 61%;
-  --player-overlap: 120px;
-  --player-scale: clamp(0.72, 0.7vw, 0.8);
+  --player-left: 56%;
+  --player-overlap: 145px;
+  --player-scale: clamp(0.68, 0.66vw, 0.76);
 
   --screen-color: #ff4fd8;
   --screen-text: #2d1030;
