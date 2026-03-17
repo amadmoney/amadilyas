@@ -20,157 +20,159 @@
         <a href="#">Contact</a>
       </nav>
 
-      <div class="hero-copy">
-        <p>
-          <span class="line white-line">hello this is</span>
-          <span class="line rainbow">the mind and work of</span>
-          <span class="line rainbow">amad ilyas</span>
-          <span class="line white-line">
-            a creative director and multidisciplinary mixed media artist who creates
-            work where imagination, curiousity, and nostalgia collide in a hyperspace
-            blender with some unexpected results.
-          </span>
-        </p>
-      </div>
-    </section>
-
-    <div class="floating-player" id="floatingPlayer">
-      <div class="player-device">
-        <div class="art-frame">
-          <div class="art-image" aria-hidden="true"></div>
-          <div class="art-bubble-overlay" aria-hidden="true"></div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p>
+            <span class="line white-line">hello this is</span>
+            <span class="line rainbow">the mind and work of</span>
+            <span class="line rainbow">amad ilyas</span>
+            <span class="line white-line">
+              a creative director and multidisciplinary mixed media artist who creates
+              work where imagination, curiousity, and nostalgia collide in a hyperspace
+              blender with some unexpected results.
+            </span>
+          </p>
         </div>
 
-        <div class="lcd-wrap">
-          <div class="lcd">
-            <div class="lcd-content">
-              <div class="lcd-world" aria-hidden="true"></div>
+        <div class="hero-player">
+          <div class="player-device">
+            <div class="art-frame">
+              <div class="art-image" aria-hidden="true"></div>
+              <div class="art-bubble-overlay" aria-hidden="true"></div>
+            </div>
 
-              <div class="lcd-pet-wrap" aria-hidden="true">
-                <div class="lcd-pet" id="lcdPet">
-                  <img
-                    src="https://raw.githubusercontent.com/amadmoney/amadilyas/79338268cda6cd8c6879210a455b33b21f1c0ab6/images/MAMETCHI_SPRITE.svg"
-                    id="lcdPetImg"
-                    alt=""
-                    aria-hidden="true"
-                  />
-                </div>
-                <div class="lcd-pet-shadow"></div>
-                <div class="lcd-pet-ground"></div>
-              </div>
+            <div class="lcd-wrap">
+              <div class="lcd">
+                <div class="lcd-content">
+                  <div class="lcd-world" aria-hidden="true"></div>
 
-              <div class="lcd-ui">
-                <div class="lcd-top">
-                  <span>MP3</span>
-                  <span id="trackCount">1/3</span>
-                </div>
+                  <div class="lcd-pet-wrap" aria-hidden="true">
+                    <div class="lcd-pet" id="lcdPet">
+                      <img
+                        src="https://raw.githubusercontent.com/amadmoney/amadilyas/79338268cda6cd8c6879210a455b33b21f1c0ab6/images/MAMETCHI_SPRITE.svg"
+                        id="lcdPetImg"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <div class="lcd-pet-shadow"></div>
+                    <div class="lcd-pet-ground"></div>
+                  </div>
 
-                <div class="lcd-track" id="trackTitle">
-                  <span class="lcd-track-text" id="trackTitleText">TRACK ONE</span>
-                </div>
+                  <div class="lcd-ui">
+                    <div class="lcd-top">
+                      <span>MP3</span>
+                      <span id="trackCount">1/3</span>
+                    </div>
 
-                <div class="lcd-artist" id="trackArtist">ARTIST ONE</div>
+                    <div class="lcd-track" id="trackTitle">
+                      <span class="lcd-track-text" id="trackTitleText">TRACK ONE</span>
+                    </div>
 
-                <div class="lcd-eq" aria-hidden="true">
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                  <span></span>
-                </div>
+                    <div class="lcd-artist" id="trackArtist">ARTIST ONE</div>
 
-                <div
-                  class="lcd-bar"
-                  id="progressBar"
-                  aria-label="Track progress"
-                  role="slider"
-                  tabindex="0"
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                  aria-valuenow="0"
-                >
-                  <div class="lcd-bar-fill" id="progressFill"></div>
-                  <div class="lcd-bar-thumb" id="progressThumb"></div>
-                </div>
+                    <div class="lcd-eq" aria-hidden="true">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
 
-                <div class="lcd-time">
-                  <span id="currentTime">0:00</span>
-                  <span id="duration">0:00</span>
+                    <div
+                      class="lcd-bar"
+                      id="progressBar"
+                      aria-label="Track progress"
+                      role="slider"
+                      tabindex="0"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                      aria-valuenow="0"
+                    >
+                      <div class="lcd-bar-fill" id="progressFill"></div>
+                      <div class="lcd-bar-thumb" id="progressThumb"></div>
+                    </div>
+
+                    <div class="lcd-time">
+                      <span id="currentTime">0:00</span>
+                      <span id="duration">0:00</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <div class="control-pod-wrap">
+              <div class="pod-lip" aria-hidden="true"></div>
+              <div class="pod-well pod-well-plus" aria-hidden="true"></div>
+              <div class="pod-well pod-well-next" aria-hidden="true"></div>
+              <div class="pod-well pod-well-play" aria-hidden="true"></div>
+              <div class="pod-well pod-well-prev" aria-hidden="true"></div>
+              <div class="pod-well pod-well-minus" aria-hidden="true"></div>
+              <div class="pod-well pod-well-mute" aria-hidden="true"></div>
+
+              <button class="pod-btn pod-plus" id="volUpBtn" type="button" aria-label="Volume up">
+                <img
+                  src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/plus-solid-full.svg"
+                  class="pod-icon"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </button>
+
+              <button class="pod-btn pod-next" id="nextBtn" type="button" aria-label="Next track">
+                <img
+                  src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/forward-solid-full.svg"
+                  class="pod-icon"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </button>
+
+              <button class="pod-btn pod-play" id="playBtn" type="button" aria-label="Play or pause">
+                <img
+                  src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/play-solid-full.svg"
+                  class="pod-icon pod-icon-play"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </button>
+
+              <button class="pod-btn pod-prev" id="prevBtn" type="button" aria-label="Previous track">
+                <img
+                  src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/forward-solid-full.svg"
+                  class="pod-icon pod-icon-flip"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </button>
+
+              <button class="pod-btn pod-minus" id="volDownBtn" type="button" aria-label="Volume down">
+                <img
+                  src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/minus-solid-full.svg"
+                  class="pod-icon"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </button>
+
+              <button class="pod-btn pod-mute" id="muteBtn" type="button" aria-label="Mute">
+                <img
+                  src="https://raw.githubusercontent.com/amadmoney/amadilyas/934d11b9a53b22a6d5b25fe4d6f1947c28e0bd2c/icons/mute-solid-full.svg"
+                  class="pod-icon pod-icon-mute"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </button>
+            </div>
+
+            <div class="side-wheel"></div>
+
+            <audio id="audio" preload="metadata"></audio>
           </div>
         </div>
-
-        <div class="control-pod-wrap">
-          <div class="pod-lip" aria-hidden="true"></div>
-          <div class="pod-well pod-well-plus" aria-hidden="true"></div>
-          <div class="pod-well pod-well-next" aria-hidden="true"></div>
-          <div class="pod-well pod-well-play" aria-hidden="true"></div>
-          <div class="pod-well pod-well-prev" aria-hidden="true"></div>
-          <div class="pod-well pod-well-minus" aria-hidden="true"></div>
-          <div class="pod-well pod-well-mute" aria-hidden="true"></div>
-
-          <button class="pod-btn pod-plus" id="volUpBtn" type="button" aria-label="Volume up">
-            <img
-              src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/plus-solid-full.svg"
-              class="pod-icon"
-              alt=""
-              aria-hidden="true"
-            />
-          </button>
-
-          <button class="pod-btn pod-next" id="nextBtn" type="button" aria-label="Next track">
-            <img
-              src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/forward-solid-full.svg"
-              class="pod-icon"
-              alt=""
-              aria-hidden="true"
-            />
-          </button>
-
-          <button class="pod-btn pod-play" id="playBtn" type="button" aria-label="Play or pause">
-            <img
-              src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/play-solid-full.svg"
-              class="pod-icon pod-icon-play"
-              alt=""
-              aria-hidden="true"
-            />
-          </button>
-
-          <button class="pod-btn pod-prev" id="prevBtn" type="button" aria-label="Previous track">
-            <img
-              src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/forward-solid-full.svg"
-              class="pod-icon pod-icon-flip"
-              alt=""
-              aria-hidden="true"
-            />
-          </button>
-
-          <button class="pod-btn pod-minus" id="volDownBtn" type="button" aria-label="Volume down">
-            <img
-              src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/minus-solid-full.svg"
-              class="pod-icon"
-              alt=""
-              aria-hidden="true"
-            />
-          </button>
-
-          <button class="pod-btn pod-mute" id="muteBtn" type="button" aria-label="Mute">
-            <img
-              src="https://raw.githubusercontent.com/amadmoney/amadilyas/934d11b9a53b22a6d5b25fe4d6f1947c28e0bd2c/icons/mute-solid-full.svg"
-              class="pod-icon pod-icon-mute"
-              alt=""
-              aria-hidden="true"
-            />
-          </button>
-        </div>
-
-        <div class="side-wheel"></div>
-
-        <audio id="audio" preload="metadata"></audio>
       </div>
-    </div>
+    </section>
 
     <section class="studio-info">
       <div class="studio-info__inner">
@@ -250,42 +252,40 @@
     </section>
 
     <section class="wii-menu-section">
-  <div class="wii-menu-shell">
+      <div class="wii-menu-shell">
+        <div class="wii-channels">
+          <a href="#" class="wii-tile is-empty"><span class="tile-name"></span></a>
+          <a href="#" class="wii-tile is-image" style="--tile-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop');"><span class="tile-name">PROJECT ONE</span></a>
+          <a href="#" class="wii-tile is-image" style="--tile-image:url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1200&auto=format&fit=crop');"><span class="tile-name">PROJECT TWO</span></a>
+          <a href="#" class="wii-tile is-empty"><span class="tile-name"></span></a>
 
-    <div class="wii-channels">
-      <a href="#" class="wii-tile is-empty"><span class="tile-name"></span></a>
-      <a href="#" class="wii-tile is-image" style="--tile-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop');"><span class="tile-name">PROJECT ONE</span></a>
-      <a href="#" class="wii-tile is-image" style="--tile-image:url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1200&auto=format&fit=crop');"><span class="tile-name">PROJECT TWO</span></a>
-      <a href="#" class="wii-tile is-empty"><span class="tile-name"></span></a>
+          <a href="#" class="wii-tile is-image" style="--tile-image:url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200&auto=format&fit=crop');"><span class="tile-name">PROJECT THREE</span></a>
+          <a href="#" class="wii-tile is-empty"><span class="tile-name"></span></a>
+          <a href="#" class="wii-tile is-image" style="--tile-image:url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop');"><span class="tile-name">PROJECT FOUR</span></a>
+          <a href="#" class="wii-tile is-empty"><span class="tile-name"></span></a>
 
-      <a href="#" class="wii-tile is-image" style="--tile-image:url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200&auto=format&fit=crop');"><span class="tile-name">PROJECT THREE</span></a>
-      <a href="#" class="wii-tile is-empty"><span class="tile-name"></span></a>
-      <a href="#" class="wii-tile is-image" style="--tile-image:url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop');"><span class="tile-name">PROJECT FOUR</span></a>
-      <a href="#" class="wii-tile is-empty"><span class="tile-name"></span></a>
+          <a href="#" class="wii-tile is-empty"><span class="tile-name"></span></a>
+          <a href="#" class="wii-tile is-empty"><span class="tile-name"></span></a>
+          <a href="#" class="wii-tile is-empty"><span class="tile-name"></span></a>
+          <a href="#" class="wii-tile is-empty"><span class="tile-name"></span></a>
+        </div>
 
-      <a href="#" class="wii-tile is-empty"><span class="tile-name"></span></a>
-      <a href="#" class="wii-tile is-empty"><span class="tile-name"></span></a>
-      <a href="#" class="wii-tile is-empty"><span class="tile-name"></span></a>
-      <a href="#" class="wii-tile is-empty"><span class="tile-name"></span></a>
-    </div>
+        <div class="wii-footer">
+          <button class="wii-footer-button left" type="button">
+            <span>Wii</span>
+          </button>
 
-    <div class="wii-footer">
-      <button class="wii-footer-button left" type="button">
-        <span>Wii</span>
-      </button>
+          <div class="wii-status">
+            <div class="wii-time">19:52</div>
+            <div class="wii-date">Sat 23/02</div>
+          </div>
 
-      <div class="wii-status">
-        <div class="wii-time">19:52</div>
-        <div class="wii-date">Sat 23/02</div>
+          <button class="wii-footer-button right" type="button" aria-label="Mail">
+            <span class="mail-icon"></span>
+          </button>
+        </div>
       </div>
-
-      <button class="wii-footer-button right" type="button" aria-label="Mail">
-        <span class="mail-icon"></span>
-      </button>
-    </div>
-
-  </div>
-</section>
+    </section>
 
     <section class="gradient">
       <h2>Gradient/archive section goes here next</h2>
