@@ -404,12 +404,15 @@ body {
 .lcd-pet-wrap {
   position: absolute;
   left: 10px;
-  bottom: 8px;
+  bottom: 28px;
   width: 56px;
   height: 56px;
   z-index: 3;
   pointer-events: none;
   will-change: transform;
+  
+  transform: scale(1.1) translateY(-2px);
+  transform-origin: bottom left;
 }
 
 .lcd-pet {
@@ -418,11 +421,13 @@ body {
   bottom: 0;
   width: 28px;
   height: 28px;
+  transform: translateY(0) scale(1.35);
   transform-origin: center bottom;
   transition: none;
   will-change: transform;
   box-shadow: none !important;
   filter: none !important;
+  animation: mametchiIdle 1.4s ease-in-out infinite;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 }
@@ -446,6 +451,16 @@ body {
 
 .lcd-pet-wrap.is-sleeping::after {
   content: none;
+}
+
+@keyframes mametchiIdle {
+  0%,
+  100% {
+    transform: translateY(0) scale(1.35);
+  }
+  50% {
+    transform: translateY(-2px) scale(1.35);
+  }
 }
 
 @keyframes petWalkAcross {
@@ -483,36 +498,17 @@ body {
 }
 
 @keyframes petDance {
-  0% {
-    transform: translateY(0) rotate(-5deg) scale(1.35);
-  }
-  25% {
-    transform: translateY(-3px) rotate(4deg) scale(1.38);
+  0%,
+  100% {
+    transform: translateY(0) scale(1.35);
   }
   50% {
-    transform: translateY(0) rotate(-4deg) scale(1.35);
-  }
-  75% {
-    transform: translateY(-3px) rotate(5deg) scale(1.38);
-  }
-  100% {
-    transform: translateY(0) rotate(-5deg) scale(1.35);
+    transform: translateY(-2px) scale(1.35);
   }
 }
 
 @keyframes petJump {
-  0% {
-    transform: translateY(0) scale(1.35);
-  }
-  20% {
-    transform: translateY(1px) scale(1.42, 1.28);
-  }
-  45% {
-    transform: translateY(-10px) scale(1.3, 1.4);
-  }
-  70% {
-    transform: translateY(0) scale(1.35);
-  }
+  0%,
   100% {
     transform: translateY(0) scale(1.35);
   }
@@ -530,13 +526,8 @@ body {
 
 @keyframes petBlink {
   0%,
-  92%,
   100% {
-    transform: scaleY(1);
-  }
-  94%,
-  96% {
-    transform: scaleY(0.08);
+    transform: translateY(0) scale(1.35);
   }
 }
 
@@ -548,32 +539,14 @@ body {
   }
 }
 
-.pet-idle {
-  animation: petIdle 1.8s ease-in-out infinite !important;
-}
-
-.pet-dance {
-  animation: petDance 0.55s ease-in-out infinite !important;
-}
-
-.pet-jump {
-  animation: petJump 0.55s ease-out 1 !important;
-}
-
-.pet-sleep {
-  animation: petSleep 2.4s ease-in-out infinite !important;
-}
-
-.pet-blink {
-  animation: petBlink 0.45s linear 1 !important;
-}
-
-.pet-shadow-bounce {
-  animation: petShadowBounce 1.8s ease-in-out infinite !important;
-}
-
+.pet-idle,
+.pet-dance,
+.pet-jump,
+.pet-sleep,
+.pet-blink,
+.pet-shadow-bounce,
 .pet-shadow-dance {
-  animation: petShadowBounce 0.55s ease-in-out infinite !important;
+  animation: inherit;
 }
 
 /* ==================================================
