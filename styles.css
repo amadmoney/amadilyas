@@ -18,6 +18,9 @@ body {
   --player-scale: 1;
 
   --screen-color: #19ff00;
+  --lcd-bg-image: url("https://raw.githubusercontent.com/amadmoney/amadilyas/refs/heads/main/images/LCD_BG_NEW.png");
+  --lcd-bg-size: cover;
+  --lcd-bg-position: center;
   --screen-text: #2d1030;
 
   --shell-border: #d9d7dc;
@@ -339,7 +342,11 @@ body {
   height: 100%;
   border-radius: 6px;
   overflow: visible;
-  background: var(--screen-color);
+  background-color: var(--screen-color);
+  background-image: var(--lcd-bg-image);
+  background-size: var(--lcd-bg-size);
+  background-position: var(--lcd-bg-position);
+  background-repeat: no-repeat;
   color: var(--screen-text);
   font-family: "Press Start 2P", monospace;
   image-rendering: pixelated;
@@ -410,7 +417,6 @@ body {
   z-index: 3;
   pointer-events: none;
   will-change: transform;
-  
   transform: scale(1.1) translateY(-2px);
   transform-origin: bottom left;
 }
