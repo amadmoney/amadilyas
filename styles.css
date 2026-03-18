@@ -506,10 +506,16 @@ body {
 @keyframes petDance {
   0%,
   100% {
-    transform: translateY(0) scale(1.35);
+    transform: translateY(0) translateX(0) scale(1.35);
+  }
+  25% {
+    transform: translateY(-2px) translateX(-1px) scale(1.35);
   }
   50% {
-    transform: translateY(-2px) scale(1.35);
+    transform: translateY(0) translateX(1px) scale(1.35);
+  }
+  75% {
+    transform: translateY(-2px) translateX(-1px) scale(1.35);
   }
 }
 
@@ -518,15 +524,20 @@ body {
   100% {
     transform: translateY(0) scale(1.35);
   }
+  50% {
+    transform: translateY(-8px) scale(1.35);
+  }
 }
 
 @keyframes petSleep {
   0%,
   100% {
     transform: translateY(0) scale(1.35);
+    opacity: 1;
   }
   50% {
     transform: translateY(-1px) scale(1.35);
+    opacity: 0.92;
   }
 }
 
@@ -534,25 +545,52 @@ body {
   0%,
   100% {
     transform: translateY(0) scale(1.35);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(0) scale(1.35, 0.92);
+    opacity: 0.95;
   }
 }
 
 @keyframes petShadowBounce {
   0%,
   100% {
-    transform: none;
-    opacity: 0;
+    transform: scaleX(1);
+    opacity: 0.18;
+  }
+  50% {
+    transform: scaleX(0.82);
+    opacity: 0.1;
   }
 }
 
-.pet-idle,
-.pet-dance,
-.pet-jump,
-.pet-sleep,
-.pet-blink,
-.pet-shadow-bounce,
-.pet-shadow-dance {
-  animation: inherit;
+.lcd-pet.pet-idle {
+  animation: petIdle 1.4s ease-in-out infinite;
+}
+
+.lcd-pet.pet-dance {
+  animation: petDance 0.6s ease-in-out infinite;
+}
+
+.lcd-pet.pet-jump {
+  animation: petJump 0.75s ease-in-out infinite;
+}
+
+.lcd-pet.pet-sleep {
+  animation: petSleep 1.8s ease-in-out infinite;
+}
+
+.lcd-pet.pet-blink {
+  animation: petBlink 0.25s steps(2, end) 2;
+}
+
+.lcd-pet-shadow.pet-shadow-bounce {
+  animation: petShadowBounce 0.75s ease-in-out infinite;
+}
+
+.lcd-pet-shadow.pet-shadow-dance {
+  animation: petShadowBounce 0.6s ease-in-out infinite;
 }
 
 /* ==================================================
