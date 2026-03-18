@@ -26,12 +26,12 @@ body {
 
   --hero-pad-x: 72px;
 
-  /* sticker art swap */
-  --sticker-image: url("https://raw.githubusercontent.com/amadmoney/amadilyas/refs/heads/main/images/STICKER_ART_FRAME.png");
+  /* sticker art */
+  --sticker-image: url("https://github.com/amadmoney/amadilyas/blob/main/images/sticker_art_new.png?raw=true");
   --sticker-size: cover;
   --sticker-position: center;
 
-  /* bubble overlay controls */
+  /* bubble overlay */
   --bubble-opacity: 0.42;
   --bubble-highlight-opacity: 0.68;
   --bubble-shadow-opacity: 0.16;
@@ -51,7 +51,7 @@ body {
 }
 
 /* ==================================================
-   2. HERO
+   2. HERO LAYOUT
 ================================================== */
 
 .hero {
@@ -151,14 +151,14 @@ body {
 }
 
 /* ==================================================
-   3. HERO PLAYER
+   3. HERO PLAYER POSITIONING
 ================================================== */
 
 .hero-player {
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  padding-top: 12px;
+  padding-top: 220px;
 }
 
 .hero-player .player-device {
@@ -170,7 +170,7 @@ body {
 }
 
 /* ==================================================
-   4. PLAYER DEVICE
+   4. PLAYER SHELL
 ================================================== */
 
 .player-device {
@@ -244,7 +244,7 @@ body {
 }
 
 /* ==================================================
-   STICKER FRAME (UPDATED — TOY PLASTIC STYLE)
+   5. STICKER FRAME / ART PANEL
 ================================================== */
 
 .art-frame {
@@ -256,8 +256,6 @@ body {
   border-radius: 18px;
   overflow: hidden;
   z-index: 2;
-
-  /* plastic shell */
   background: linear-gradient(
     180deg,
     #ffffff 0%,
@@ -265,10 +263,7 @@ body {
     #efeff3 62%,
     #e5e5ea 100%
   );
-
-  /* outer molded border (matches pod + wheel) */
   border: 4px solid #d7d6dc;
-
   box-shadow:
     inset 0 2px 3px rgba(255, 255, 255, 0.98),
     inset 0 -2px 4px rgba(0, 0, 0, 0.07),
@@ -276,7 +271,6 @@ body {
     0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* inner molded lip */
 .art-frame::before {
   content: "";
   position: absolute;
@@ -284,13 +278,11 @@ body {
   border-radius: 14px;
   pointer-events: none;
   z-index: 1;
-
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.45),
     inset 0 -1px 0 rgba(0, 0, 0, 0.08);
 }
 
-/* artwork layer */
 .art-image {
   position: relative;
   z-index: 0;
@@ -321,6 +313,10 @@ body {
     inset 0 1px 2px rgba(255, 255, 255, 0.65),
     inset 0 -1px 3px rgba(0, 0, 0, 0.08);
 }
+
+/* ==================================================
+   6. LCD SCREEN
+================================================== */
 
 .lcd-wrap {
   position: absolute;
@@ -401,31 +397,34 @@ body {
   display: none;
 }
 
-/* PET */
+/* ==================================================
+   7. LCD PET
+================================================== */
 
 .lcd-pet-wrap {
   position: absolute;
-  left: -22%;
+  left: 10px;
   bottom: 8px;
-  width: 88px;
-  height: 88px;
+  width: 56px;
+  height: 56px;
   z-index: 3;
   pointer-events: none;
-  animation: petWalkAcross 18s linear infinite;
-  will-change: left, transform;
+  will-change: auto;
+  animation: none !important;
 }
 
 .lcd-pet {
   position: absolute;
-  left: 8px;
-  bottom: 16px;
-  width: 42px;
-  height: 42px;
+  left: 0;
+  bottom: 0;
+  width: 28px;
+  height: 28px;
   transform-origin: bottom center;
-  transition: filter 180ms ease;
-  will-change: transform, filter;
+  transition: none;
+  will-change: auto;
   box-shadow: none !important;
   filter: none !important;
+  animation: none !important;
 }
 
 .lcd-pet img {
@@ -445,165 +444,99 @@ body {
   display: none;
 }
 
+.lcd-pet-wrap.is-sleeping::after {
+  content: none;
+}
+
 @keyframes petWalkAcross {
   0% {
-    left: -22%;
-    transform: scaleX(1);
+    left: 10px;
+    transform: none;
   }
   100% {
-    left: 108%;
-    transform: scaleX(1);
+    left: 10px;
+    transform: none;
   }
 }
 
 @keyframes petShadowFollow {
   0% {
-    left: -2%;
-    opacity: 0.16;
-    transform: scaleX(1);
+    left: 0;
+    opacity: 0;
+    transform: none;
   }
   100% {
-    left: 108%;
-    opacity: 0.16;
-    transform: scaleX(1);
+    left: 0;
+    opacity: 0;
+    transform: none;
   }
 }
 
 @keyframes petIdle {
   0%,
   100% {
-    transform: translateY(0);
+    transform: none;
   }
   50% {
-    transform: translateY(-2px);
+    transform: none;
   }
 }
 
 @keyframes petDance {
-  0% {
-    transform: translateY(0) rotate(-5deg) scale(1);
-  }
-  25% {
-    transform: translateY(-3px) rotate(4deg) scale(1.02);
+  0%,
+  100% {
+    transform: none;
   }
   50% {
-    transform: translateY(0) rotate(-4deg) scale(1);
-  }
-  75% {
-    transform: translateY(-3px) rotate(5deg) scale(1.02);
-  }
-  100% {
-    transform: translateY(0) rotate(-5deg) scale(1);
+    transform: none;
   }
 }
 
 @keyframes petJump {
-  0% {
-    transform: translateY(0) scale(1, 1);
-  }
-  20% {
-    transform: translateY(1px) scale(1.04, 0.96);
-  }
-  45% {
-    transform: translateY(-10px) scale(0.98, 1.03);
-  }
-  70% {
-    transform: translateY(0) scale(1, 1);
-  }
+  0%,
   100% {
-    transform: translateY(0) scale(1, 1);
+    transform: none;
   }
 }
 
 @keyframes petSleep {
   0%,
   100% {
-    transform: translateY(0) rotate(0deg);
+    transform: none;
   }
   50% {
-    transform: translateY(1px) rotate(-2deg);
+    transform: none;
   }
 }
 
 @keyframes petBlink {
   0%,
-  92%,
   100% {
-    transform: scaleY(1);
-  }
-  94%,
-  96% {
-    transform: scaleY(0.08);
+    transform: none;
   }
 }
 
 @keyframes petShadowBounce {
   0%,
   100% {
-    transform: scaleX(1);
-    opacity: 0.2;
-  }
-  50% {
-    transform: scaleX(0.88);
-    opacity: 0.14;
-  }
-}
-
-.pet-idle {
-  animation: petIdle 1.8s ease-in-out infinite !important;
-}
-
-.pet-dance {
-  animation: petDance 0.55s ease-in-out infinite !important;
-}
-
-.pet-jump {
-  animation: petJump 0.55s ease-out 1 !important;
-}
-
-.pet-sleep {
-  animation: petSleep 2.4s ease-in-out infinite !important;
-  opacity: 0.9;
-}
-
-.pet-blink {
-  animation: petBlink 4.4s linear infinite !important;
-}
-
-.pet-shadow-bounce {
-  animation: petShadowBounce 1.8s ease-in-out infinite !important;
-}
-
-.pet-shadow-dance {
-  animation: petShadowBounce 0.55s ease-in-out infinite !important;
-}
-
-.lcd-pet-wrap.is-sleeping::after {
-  content: "zZ";
-  position: absolute;
-  right: 8px;
-  top: 2px;
-  font-size: 7px;
-  color: rgba(45, 16, 48, 0.7);
-  animation: sleepFloat 1.8s ease-in-out infinite;
-}
-
-@keyframes sleepFloat {
-  0% {
-    transform: translateY(0);
-    opacity: 0.65;
-  }
-  50% {
-    transform: translateY(-3px);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-6px);
+    transform: none;
     opacity: 0;
   }
 }
 
-/* UI */
+.pet-idle,
+.pet-dance,
+.pet-jump,
+.pet-sleep,
+.pet-blink,
+.pet-shadow-bounce,
+.pet-shadow-dance {
+  animation: none !important;
+}
+
+/* ==================================================
+   8. LCD UI
+================================================== */
 
 .lcd-top,
 .lcd-track,
@@ -641,21 +574,6 @@ body {
 
 .lcd-track.is-marquee .lcd-track-text {
   animation: lcdMarquee 7s linear infinite;
-}
-
-@keyframes lcdMarquee {
-  0% {
-    transform: translateX(0);
-  }
-  12% {
-    transform: translateX(0);
-  }
-  88% {
-    transform: translateX(calc(-1 * var(--marquee-distance, 0px)));
-  }
-  100% {
-    transform: translateX(calc(-1 * var(--marquee-distance, 0px)));
-  }
 }
 
 .lcd-artist {
@@ -708,16 +626,6 @@ body {
   animation-delay: 480ms;
 }
 
-@keyframes eqBounce {
-  0%,
-  100% {
-    transform: scaleY(0.45);
-  }
-  50% {
-    transform: scaleY(1);
-  }
-}
-
 .lcd-bar {
   position: relative;
   height: 8px;
@@ -754,6 +662,35 @@ body {
   font-size: 7px;
   line-height: 1;
 }
+
+@keyframes lcdMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  12% {
+    transform: translateX(0);
+  }
+  88% {
+    transform: translateX(calc(-1 * var(--marquee-distance, 0px)));
+  }
+  100% {
+    transform: translateX(calc(-1 * var(--marquee-distance, 0px)));
+  }
+}
+
+@keyframes eqBounce {
+  0%,
+  100% {
+    transform: scaleY(0.45);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+/* ==================================================
+   9. CONTROL POD
+================================================== */
 
 .control-pod-wrap {
   position: absolute;
@@ -807,16 +744,20 @@ body {
   opacity: 0.95;
 }
 
+/* ==================================================
+   10. CONTROL WELLS
+================================================== */
+
 .pod-well {
   position: absolute;
-  z-index: 1;
+  z-index: 3;
   border-radius: 999px;
   pointer-events: none;
   background:
-    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.32) 0%, rgba(0, 0, 0, 0.04) 44%, rgba(0, 0, 0, 0.08) 100%);
+    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.12) 0%, rgba(0, 0, 0, 0.08) 44%, rgba(0, 0, 0, 0.14) 100%);
   box-shadow:
-    inset 0 1px 1px rgba(0, 0, 0, 0.08),
-    inset 0 -1px 1px rgba(255, 255, 255, 0.3);
+    inset 0 1px 2px rgba(0, 0, 0, 0.14),
+    inset 0 -1px 1px rgba(255, 255, 255, 0.2);
 }
 
 .pod-well-plus {
@@ -842,7 +783,7 @@ body {
   border-radius: 50%;
   background: linear-gradient(180deg, #ffffff 0%, #f1f1f5 58%, #e4e4ea 100%);
   border: 3px solid #d7d6dc;
-  z-index: 3;
+  z-index: 4;
   box-shadow:
     inset 0 2px 3px rgba(255, 255, 255, 0.9),
     inset 0 -2px 4px rgba(0, 0, 0, 0.06),
@@ -871,6 +812,10 @@ body {
   transform: translateX(-50%);
 }
 
+/* ==================================================
+   11. CONTROL BUTTONS / ICONS
+================================================== */
+
 .pod-btn {
   position: absolute;
   border: none;
@@ -882,7 +827,7 @@ body {
   place-items: center;
   line-height: 1;
   transition: transform 0.14s ease, opacity 0.14s ease, filter 0.14s ease;
-  z-index: 2;
+  z-index: 5;
   appearance: none;
   -webkit-appearance: none;
   filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.18));
@@ -984,6 +929,10 @@ body {
   height: 88%;
 }
 
+/* ==================================================
+   12. SIDE WHEEL
+================================================== */
+
 .side-wheel {
   position: absolute;
   right: 3.55%;
@@ -1025,7 +974,7 @@ audio {
 }
 
 /* ==================================================
-   5. STUDIO INFO
+   13. STUDIO INFO
 ================================================== */
 
 .studio-info {
@@ -1122,255 +1071,243 @@ audio {
 }
 
 /* ==================================================
-   6. WII MENU SECTION
+   14. ARCHIVE WALL
 ================================================== */
 
-.wii-menu-section {
+.archive-wall-section {
   position: relative;
   width: 100%;
-  padding: 34px 18px 42px;
-  overflow: hidden;
-  background: linear-gradient(180deg, #ececec 0%, #f3f3f3 35%, #ececec 100%);
-  font-family: Arial, Helvetica, sans-serif;
-  color: #000;
+  min-height: 100vh;
+  background: #000;
 }
 
-.wii-menu-section::before {
-  content: "";
+.archive-wall {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  filter: contrast(1.08) saturate(0.92);
+}
+
+.archive-bg-image {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.18) 0px,
-      rgba(255, 255, 255, 0.18) 1px,
-      rgba(0, 0, 0, 0.018) 2px,
-      rgba(255, 255, 255, 0.035) 4px
-    );
-  opacity: 0.9;
-}
-
-.wii-menu-shell {
-  width: min(1045px, 100%);
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-}
-
-.wii-channels {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  align-items: stretch;
-}
-
-.wii-tile {
-  position: relative;
-  display: block;
-  height: 82px;
-  border-radius: 11px;
-  overflow: hidden;
-  text-decoration: none;
-  border: 1px solid #bcc1c5;
-  background: linear-gradient(180deg, #f8f8f8 0%, #ececec 100%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.92),
-    inset 0 -7px 10px rgba(0, 0, 0, 0.02),
-    0 1px 0 rgba(255, 255, 255, 0.7);
-  transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
-}
-
-.wii-tile::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: var(--tile-image);
+  background-image: url("https://raw.githubusercontent.com/amadmoney/amadilyas/refs/heads/main/images/BACKGROUND.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   z-index: 0;
 }
 
-.wii-tile::after {
-  content: "";
+.archive-bg-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+  z-index: 0;
+}
+
+.archive-bg-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
-  pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.07) 52%, rgba(255, 255, 255, 0.1) 100%),
-    radial-gradient(circle at 28% 18%, rgba(255, 255, 255, 0.35), transparent 24%);
+    radial-gradient(circle at center, rgba(255,255,255,0.04), rgba(0,0,0,0.28)),
+    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.24));
+  pointer-events: none;
 }
 
-.wii-tile:hover {
-  transform: scale(1.012);
-  border-color: #97d7ef;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    inset 0 -7px 10px rgba(0, 0, 0, 0.02),
-    0 0 0 1px rgba(126, 210, 240, 0.38);
+.archive-stage {
+  position: relative;
+  width: 1600px;
+  height: 980px;
+  transform: scale(calc(min(100vw / 1600, 100vh / 980)));
+  transform-origin: center center;
+  z-index: 3;
 }
 
-.wii-tile.is-empty::before {
-  display: none;
-}
+.archive-tile {
+  --tile-w: 190px;
+  --tile-h: 128px;
+  --label-w: 170px;
+  --label-x: -30px;
+  --label-y: -46px;
 
-.wii-tile.is-empty .tile-name {
-  color: transparent;
-  text-shadow: none;
-}
-
-.wii-tile.is-empty .tile-name:empty::before {
-  content: "Wii";
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -52%);
-  color: rgba(192, 192, 192, 0.26);
-  font-size: 28px;
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: -0.05em;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
-}
-
-.tile-name {
-  position: absolute;
-  left: 11px;
-  bottom: 10px;
+  width: var(--tile-w);
   z-index: 2;
-  display: inline-block;
-  max-width: calc(100% - 22px);
-  font-size: 12px;
-  line-height: 1;
-  font-weight: 400;
-  letter-spacing: 0;
-  color: #ffffff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.58);
-  white-space: nowrap;
+}
+
+.archive-tile-card {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: var(--tile-h);
+  border-radius: 14px;
   overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.wii-footer {
-  position: relative;
-  margin-top: 18px;
-  min-height: 112px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-
-.wii-footer::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 6px;
-  transform: translateX(-50%);
-  width: calc(100% + 120px);
-  height: 62px;
-  border-top: 3px solid #7fd2ee;
-  border-radius: 0 0 150px 150px / 0 0 62px 62px;
-  pointer-events: none;
-}
-
-.wii-footer::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 5px;
-  transform: translateX(-50%);
-  width: calc(100% + 120px);
-  height: 62px;
-  border-top: 1px solid rgba(255, 255, 255, 0.9);
-  border-radius: 0 0 150px 150px / 0 0 62px 62px;
-  pointer-events: none;
-}
-
-.wii-status {
-  flex: 1;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-
-.wii-time {
-  font-size: 45px;
-  line-height: 1;
-  font-weight: 400;
-  color: #94999e;
-  letter-spacing: 0.06em;
-}
-
-.wii-date {
-  margin-top: 6px;
-  font-size: 20px;
-  line-height: 1;
-  font-weight: 700;
-  color: #8a8f94;
-}
-
-.wii-footer-button {
-  position: relative;
-  z-index: 2;
-  width: 76px;
-  height: 76px;
-  flex: 0 0 76px;
-  border: 2px solid #8fd7f0;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 30% 24%, #ffffff 0%, #f3f3f3 58%, #dcdcdc 100%);
+  text-decoration: none;
+  transform: scale(1);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    filter 180ms ease;
+  background: linear-gradient(180deg, #ffffff 0%, #f7f8fb 18%, #eceff5 62%, #dde3ee 100%);
+  border: 4px solid #e1e3ea;
   box-shadow:
-    inset 0 2px 3px rgba(255, 255, 255, 0.95),
-    0 1px 2px rgba(0, 0, 0, 0.07);
-  color: #8f9499;
-  font-size: 19px;
-  font-weight: 700;
-  cursor: pointer;
+    inset 0 2px 3px rgba(255,255,255,0.95),
+    inset 0 -2px 4px rgba(0,0,0,0.08),
+    0 10px 20px rgba(0,0,0,0.25);
 }
 
-.wii-footer-button.left {
-  margin-left: -3px;
-}
-
-.wii-footer-button.right {
-  margin-right: -3px;
-}
-
-.mail-icon {
-  position: relative;
-  display: inline-block;
-  width: 32px;
-  height: 22px;
-  background: #aeb4b9;
-  border-radius: 3px;
-  margin-top: 3px;
-}
-
-.mail-icon::before,
-.mail-icon::after {
+.archive-tile-card::before {
   content: "";
   position: absolute;
-  top: 2px;
-  width: 50%;
-  border-top: 2px solid #f5f5f5;
+  inset: 4px;
+  border-radius: 10px;
+  background-image: var(--tile-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.mail-icon::before {
-  left: 0;
-  transform: skewY(24deg);
-  transform-origin: left top;
+.archive-tile-card::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(255,255,255,0.4), transparent 40%),
+    linear-gradient(180deg, rgba(255,255,255,0.18), rgba(0,0,0,0.10));
 }
 
-.mail-icon::after {
-  right: 0;
-  transform: skewY(-24deg);
-  transform-origin: right top;
+.archive-tile-shine {
+  position: absolute;
+  inset: 4px;
+  border-radius: 10px;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255,255,255,0.35) 40%,
+    transparent 60%
+  );
+  transform: translateX(-130%);
+  transition: transform 380ms ease;
+  pointer-events: none;
+}
+
+.archive-tile-label {
+  position: absolute;
+  left: var(--label-x);
+  top: var(--label-y);
+  width: var(--label-w);
+  aspect-ratio: 2.4 / 1;
+  background-image: var(--label-image);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left top;
+  z-index: 5;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 2px 0 rgba(255,255,255,0.15))
+    drop-shadow(0 6px 10px rgba(0,0,0,0.16));
+}
+
+.archive-tile:hover .archive-tile-card {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,0.98),
+    inset 0 -2px 4px rgba(0,0,0,0.08),
+    0 16px 30px rgba(0,0,0,0.30);
+  filter: saturate(1.04);
+}
+
+.archive-tile:hover .archive-tile-shine {
+  transform: translateX(130%);
+}
+
+/* archive positions */
+
+.tile-l1 { left: 60px; top: 60px; }
+.tile-l2 { left: 60px; top: 250px; }
+.tile-l3 { left: 60px; top: 440px; }
+
+.tile-r1 { left: 1350px; top: 60px; }
+.tile-r2 { left: 1350px; top: 250px; }
+.tile-r3 { left: 1350px; top: 440px; }
+
+.tile-b1 { left: 210px; top: 640px; }
+.tile-b2 { left: 430px; top: 640px; }
+.tile-b3 { left: 650px; top: 640px; }
+.tile-b4 { left: 870px; top: 640px; }
+.tile-b5 { left: 1090px; top: 640px; }
+
+.tile-b6  { left: 210px; top: 800px; }
+.tile-b7  { left: 430px; top: 800px; }
+.tile-b8  { left: 650px; top: 800px; }
+.tile-b9  { left: 870px; top: 800px; }
+.tile-b10 { left: 1090px; top: 800px; }
+
+.archive-crt-lines,
+.archive-crt-glow,
+.archive-crt-vignette,
+.archive-crt-noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.archive-crt-lines {
+  opacity: 0.42;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.06) 0px,
+      rgba(255,255,255,0.06) 1px,
+      rgba(0,0,0,0.34) 2px,
+      rgba(0,0,0,0.34) 4px
+    );
+  mix-blend-mode: overlay;
+}
+
+.archive-crt-glow {
+  background:
+    radial-gradient(circle at 50% 45%, rgba(120,190,255,0.20), transparent 58%),
+    linear-gradient(
+      90deg,
+      rgba(255,0,80,0.08),
+      rgba(0,0,0,0) 22%,
+      rgba(0,255,255,0.08)
+    );
+  mix-blend-mode: screen;
+}
+
+.archive-crt-vignette {
+  background:
+    radial-gradient(circle at center,
+      rgba(0,0,0,0) 40%,
+      rgba(0,0,0,0.28) 68%,
+      rgba(0,0,0,0.58) 100%);
+}
+
+.archive-crt-noise {
+  opacity: 0.12;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.22) 0 0.6px, transparent 1px),
+    radial-gradient(circle at 80% 60%, rgba(255,255,255,0.16) 0 0.5px, transparent 1px),
+    radial-gradient(circle at 60% 20%, rgba(0,0,0,0.2) 0 0.6px, transparent 1px);
+  background-size: 5px 5px, 7px 7px, 9px 9px;
+  mix-blend-mode: soft-light;
 }
 
 /* ==================================================
-   7. RESPONSIVE
+   15. RESPONSIVE
 ================================================== */
 
 @media (max-width: 1100px) {
@@ -1410,19 +1347,36 @@ audio {
 }
 
 @media (max-width: 900px) {
-  .wii-channels {
-    grid-template-columns: repeat(3, 1fr);
+  .archive-wall {
+    display: block;
+    padding: 24px 12px 32px;
   }
 
-  .wii-footer::before,
-  .wii-footer::after {
-    width: calc(100% + 70px);
+  .archive-stage {
+    transform: none;
+    width: 100%;
+    height: auto;
+    display: grid;
+    gap: 18px;
+  }
+
+  .archive-tile {
+    position: relative;
+    left: auto;
+    top: auto;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 420px;
+
+    --tile-h: 220px;
+    --label-x: 12px;
+    --label-y: -28px;
   }
 }
 
 @media (max-width: 768px) {
   :root {
-    --player-width: 320px;
+    --player-width: 560px;
     --player-scale: 1;
     --hero-pad-x: 24px;
   }
@@ -1466,65 +1420,11 @@ audio {
   }
 
   .hero-player .player-device {
-    width: min(100%, var(--player-width));
-    max-width: 320px;
+    width: var(--player-width);
+    max-width: none;
     margin-top: 24px;
-    transform: rotate(-1deg);
-  }
-
-  .lcd-content {
-    padding: 8px 9px 7px;
-    gap: 5px;
-  }
-
-  .lcd-top {
-    font-size: 9px;
-  }
-
-  .lcd-track {
-    font-size: 12px;
-    line-height: 1.2;
-  }
-
-  .lcd-artist {
-    font-size: 9px;
-    line-height: 1.2;
-  }
-
-  .lcd-time {
-    font-size: 9px;
-  }
-
-  .lcd-eq {
-    height: 16px;
-    gap: 2px;
-  }
-
-  .lcd-eq span {
-    width: 5px;
-  }
-
-  .lcd-bar {
-    height: 7px;
-  }
-
-  .lcd-bar-thumb {
-    width: 7px;
-    height: 7px;
-  }
-
-  .lcd-pet-wrap {
-    width: 72px;
-    height: 72px;
-    left: -18%;
-    bottom: 6px;
-  }
-
-  .lcd-pet {
-    width: 34px;
-    height: 34px;
-    left: 6px;
-    bottom: 14px;
+    transform: rotate(-1deg) scale(0.6);
+    transform-origin: top center;
   }
 
   .studio-info {
@@ -1543,66 +1443,14 @@ audio {
 }
 
 @media (max-width: 640px) {
-  .wii-menu-section {
-    padding: 16px 10px 34px;
-  }
-
-  .wii-channels {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 7px;
-  }
-
-  .wii-tile {
-    height: 74px;
-    border-radius: 10px;
-  }
-
-  .tile-name {
-    left: 10px;
-    bottom: 8px;
-    font-size: 11px;
-  }
-
-  .wii-tile.is-empty .tile-name:empty::before {
-    font-size: 24px;
-  }
-
-  .wii-footer {
-    margin-top: 16px;
-    min-height: 92px;
-  }
-
-  .wii-footer::before,
-  .wii-footer::after {
-    width: calc(100% + 36px);
-    height: 48px;
-    border-radius: 0 0 120px 120px / 0 0 48px 48px;
-  }
-
-  .wii-time {
-    font-size: 31px;
-  }
-
-  .wii-date {
-    font-size: 16px;
-  }
-
-  .wii-footer-button {
-    width: 60px;
-    height: 60px;
-    flex-basis: 60px;
-    font-size: 16px;
-  }
-
-  .mail-icon {
-    width: 26px;
-    height: 18px;
+  .archive-wall {
+    padding: 18px 10px 28px;
   }
 }
 
 @media (max-width: 480px) {
   :root {
-    --player-width: 290px;
+    --player-width: 560px;
     --player-scale: 1;
   }
 
@@ -1620,10 +1468,11 @@ audio {
   }
 
   .hero-player .player-device {
-    width: min(100%, var(--player-width));
-    max-width: 290px;
+    width: var(--player-width);
+    max-width: none;
     margin-top: 20px;
-    transform: rotate(-1deg);
+    transform: rotate(-1deg) scale(0.52);
+    transform-origin: top center;
   }
 
   .studio-info {
@@ -1638,3 +1487,4 @@ audio {
     margin-bottom: 8px;
   }
 }
+
