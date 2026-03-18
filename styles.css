@@ -1488,3 +1488,27 @@ audio {
   }
 }
 
+/* ==================================================
+   LCD PET (MAMETCHI)
+================================================== */
+
+@keyframes mametchiIdle {
+  0%, 100% {
+    transform: translateY(0) scale(1.35);
+  }
+  50% {
+    transform: translateY(-2px) scale(1.35);
+  }
+}
+
+/* merge-safe enhancement */
+.lcd-pet {
+  animation: mametchiIdle 1.4s ease-in-out infinite;
+  transform-origin: center bottom;
+  image-rendering: pixelated;
+}
+
+/* prevent clipping if screen is tight */
+.lcd-screen {
+  overflow: visible;
+}
