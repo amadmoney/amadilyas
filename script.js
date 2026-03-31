@@ -450,6 +450,23 @@ window.addEventListener("resize", () => {
 });
 
 /* =========================
+   HERO ORBIT LABELS
+========================= */
+
+function initArchiveHeroLabels() {
+  const archiveLabels = document.querySelectorAll(".archive-label");
+
+  archiveLabels.forEach((label) => {
+    const ball = label.querySelector(".archive-ball");
+    if (!ball) return;
+
+    ball.addEventListener("click", () => {
+      label.classList.toggle("is-active");
+    });
+  });
+}
+
+/* =========================
    INIT
 ========================= */
 
@@ -461,3 +478,4 @@ startSleepTimer();
 initBlinking();
 reactPetToVolume();
 fetchPlaylist();
+initArchiveHeroLabels();
