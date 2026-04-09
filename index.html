@@ -30,8 +30,8 @@
 		  <div class="screen">
 			<div class="transition-wipe" id="transitionWipe"></div>
 
-			<!-- ARCHIVE PANEL -->
-			<section class="screen-panel archive-panel active" data-panel="archive">
+			<!-- HOME PANEL -->
+			<section class="screen-panel home-panel active" data-panel="home">
 			  <div class="screen-layout">
 				<div class="screen-left">
 				  <div class="archive-player-slot">
@@ -127,7 +127,7 @@
 						  <button class="pod-btn pod-play" id="playBtn" type="button" aria-label="Play or pause">
 							<img
 							  id="playIcon"
-							  src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/play-solid-full.svg"
+							  src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a6a72'><path d='M8 5.14v13.72c0 .72.78 1.17 1.4.8l10.2-6.86a.93.93 0 0 0 0-1.6L9.4 4.34A.93.93 0 0 0 8 5.14z'/></svg>"
 							  class="pod-icon pod-icon-play"
 							  alt=""
 							  aria-hidden="true"
@@ -190,18 +190,43 @@
 				</div>
 			  </div>
 
-			  <div class="flash-note">display mode / archive</div>
+			  <div class="flash-note">display mode / home</div>
 			</section>
 
-			<!-- THOUGHTS PANEL -->
-			<section class="screen-panel thoughts-panel" data-panel="thoughts">
+			<!-- AMAD PANEL -->
+			<section class="screen-panel amad-panel" data-panel="amad">
+			  <div class="amad-grid">
+				<div class="amad-visual">
+				  <div class="amad-orbit">
+					<div class="amad-core"></div>
+					<div class="amad-node n1"></div>
+					<div class="amad-node n2"></div>
+					<div class="amad-node n3"></div>
+					<div class="amad-node n4"></div>
+				  </div>
+				</div>
+
+				<div class="amad-copy">
+				  <h2>Amad</h2>
+				  <p>
+					This can become the more personal profile layer, more like your operating
+					system than a standard bio.
+				  </p>
+				</div>
+			  </div>
+
+			  <div class="flash-note">display mode / amad</div>
+			</section>
+
+			<!-- WORK PANEL -->
+			<section class="screen-panel work-panel" data-panel="work">
 			  <div class="thoughts-grid">
 				<div class="thoughts-main">
 				  <div>
-					<h2>Thoughts</h2>
+					<h2>Work</h2>
 					<p>
-					  A notebook section for reviews, fragments, captions, little essays,
-					  and whatever is orbiting in your head that week.
+					  A landing area for the archive of work, which can later split into
+					  campaigns, projects, moving image, and whatever else needs its own page.
 					</p>
 					<div class="thought-lines">
 					  <div class="thought-line long"></div>
@@ -215,21 +240,43 @@
 
 				<div class="thoughts-side">
 				  <div class="thoughts-side-card">
-					<strong>FILE 01</strong>
-					<span>Movie notes, messy feelings, and a line you want to keep.</span>
+					<strong>PROJECTS</strong>
+					<span>A future section for campaigns, decks, treatments, and client work.</span>
 				  </div>
 				  <div class="thoughts-side-card">
-					<strong>FILE 02</strong>
-					<span>A thought that started with a song and ended somewhere stranger.</span>
+					<strong>MOTION</strong>
+					<span>A place for film, trailers, social worlds, and moving-image pieces.</span>
 				  </div>
 				  <div class="thoughts-side-card">
-					<strong>FILE 03</strong>
-					<span>An imageboard style pull quote, screenshot, or tiny visual essay.</span>
+					<strong>ARCHIVE</strong>
+					<span>A working shelf for past eras, references, and other saved material.</span>
 				  </div>
 				</div>
 			  </div>
 
-			  <div class="flash-note">display mode / thoughts</div>
+			  <div class="flash-note">display mode / work</div>
+			</section>
+
+			<!-- EPHEMERA PANEL -->
+			<section class="screen-panel ephemera-panel" data-panel="ephemera">
+			  <div class="contact-grid">
+				<div class="contact-card">
+				  <span class="contact-pill">Ephemera Signal</span>
+				  <h2 style="margin: 0; font-size: 34px;">Ephemera</h2>
+				  <p style="margin: 0; color: #66707b; line-height: 1.55;">
+					Temporary objects, references, internet scraps, visual notes, and in-progress fragments.
+				  </p>
+				</div>
+
+				<div class="contact-copy">
+				  <h2>Ephemera</h2>
+				  <p>
+					This can become the catch-all page for references, links, images, scraps, and odd little finds.
+				  </p>
+				</div>
+			  </div>
+
+			  <div class="flash-note">display mode / ephemera</div>
 			</section>
 
 			<!-- CONTACT PANEL -->
@@ -259,41 +306,38 @@
 			  <div class="flash-note">display mode / contact</div>
 			</section>
 
-			<!-- AMAD PANEL -->
-			<section class="screen-panel amad-panel" data-panel="amad">
-			  <div class="amad-grid">
-				<div class="amad-visual">
-				  <div class="amad-orbit">
-					<div class="amad-core"></div>
-					<div class="amad-node n1"></div>
-					<div class="amad-node n2"></div>
-					<div class="amad-node n3"></div>
-					<div class="amad-node n4"></div>
-				  </div>
+			<!-- FUN PANEL -->
+			<section class="screen-panel fun-panel" data-panel="fun">
+			  <div class="contact-grid">
+				<div class="contact-card">
+				  <span class="contact-pill">Fun Signal</span>
+				  <h2 style="margin: 0; font-size: 34px;">Fun</h2>
+				  <p style="margin: 0; color: #66707b; line-height: 1.55;">
+					Side quests, jokes, experiments, weird links, bonus material, and whatever else does not need to behave.
+				  </p>
 				</div>
 
-				<div class="amad-copy">
-				  <h2>Amad</h2>
+				<div class="contact-copy">
+				  <h2>Fun</h2>
 				  <p>
-					This can become the more personal profile layer, more like your operating
-					system than a standard bio.
+					This can hold extras, oddities, games, scraps, references, and things that just feel good to keep around.
 				  </p>
 				</div>
 			  </div>
 
-			  <div class="flash-note">display mode / amad</div>
+			  <div class="flash-note">display mode / fun</div>
 			</section>
 		  </div>
 		</div>
 
 		<!-- TABS -->
 		<nav class="tab-row" aria-label="Archive tabs">
-		  <button class="tab-btn active" data-target="archive" type="button">ARCHIVE</button>
-		  <button class="tab-btn" data-target="thoughts" type="button">THOUGHTS</button>
-		  <button class="tab-btn" data-target="words" type="button">WORDS</button>
+		  <button class="tab-btn active" data-target="home" type="button">HOME</button>
+		  <button class="tab-btn" data-target="amad" type="button">AMAD</button>
+		  <button class="tab-btn" data-target="work" type="button">WORK</button>
 		  <button class="tab-btn" data-target="ephemera" type="button">EPHEMERA</button>
 		  <button class="tab-btn" data-target="contact" type="button">CONTACT</button>
-		  <button class="tab-btn" data-target="amad" type="button">AMAD</button>
+		  <button class="tab-btn" data-target="fun" type="button">FUN</button>
 		</nav>
 
 		<!-- LOWER RAIL -->
@@ -310,14 +354,13 @@
 			<div class="news-scroll-box">
 			  <div class="news-copy" id="newsCopy">
 				<div class="news-copy-entry">
-				  Archive selected. Real player shell swapped into the main display.
+				  Home selected. Hero player is active in the main display.
 				</div>
 				<div class="news-copy-entry">
-				  Mini player module moved into the lower right rail with a cheeky little
-				  download button.
+				  The mini player stays tucked away while the main player is on screen.
 				</div>
 				<div class="news-copy-entry">
-				  Use this box for current status notes, updates, now-playing blurbs, or site logs.
+				  Use this area for intro notes, current status, or now-playing blurbs.
 				</div>
 			  </div>
 			</div>
@@ -325,6 +368,14 @@
 
 		  <div class="news-side">
 			<div class="mini-simple-wrap">
+			  <div class="mini-placeholder" aria-hidden="true">
+				<img
+				  class="mini-placeholder-image"
+				  src="https://raw.githubusercontent.com/ephemeraonline/site/refs/heads/main/IMAGES/WELCOME_STARS.gif"
+				  alt=""
+				/>
+			  </div>
+
 			  <div class="mini-simple-player">
 				<div class="mini-simple-top">
 				  <span>MP3</span>
@@ -363,7 +414,7 @@
 					>
 					  <img
 						id="miniPlayIcon"
-						src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/play-solid-full.svg"
+						src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a6a72'><path d='M8 5.14v13.72c0 .72.78 1.17 1.4.8l10.2-6.86a.93.93 0 0 0 0-1.6L9.4 4.34A.93.93 0 0 0 8 5.14z'/></svg>"
 						class="mini-pod-icon mini-pod-icon-play"
 						alt=""
 						aria-hidden="true"
