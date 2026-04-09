@@ -1,3 +1,7 @@
+/* ==================================================
+   01. RESET / ROOT / GLOBAL
+================================================== */
+
 * {
   box-sizing: border-box;
 }
@@ -15,7 +19,7 @@ body {
   --wheel-border: #d7d6dc;
 
   --device-width: min(1040px, 94vw);
-  --device-aspect: 1.20;
+  --device-aspect: 1.10;
   --tab-height: 58px;
 
   --screen-color: #19ff00;
@@ -34,6 +38,11 @@ body {
   --bubble-blur: 0px;
   --bubble-tint: rgba(255, 255, 255, 0.08);
 }
+
+
+/* ==================================================
+   02. PAGE STAGE / OUTER SHELL
+================================================== */
 
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -95,14 +104,9 @@ body {
 	inset 0 -1px 0 rgba(255,255,255,0.08);
 }
 
-@keyframes shellShine {
-  0% { transform: translateX(-120%); }
-  100% { transform: translateX(120%); }
-}
-
 .utility-row {
   position: absolute;
-  top: 22px;
+  top: 42px;
   right: 34px;
   z-index: 15;
   display: flex;
@@ -149,11 +153,16 @@ body {
   transform: scaleX(0.85);
 }
 
+
+/* ==================================================
+   03. INNER DEVICE LAYOUT
+================================================== */
+
 .device-inner {
   position: absolute;
   inset: 22px 18px 18px;
   display: grid;
-  grid-template-rows: 1fr var(--tab-height) 252px;
+  grid-template-rows: 1fr var(--tab-height) 286px;
   gap: 10px;
   z-index: 5;
 }
@@ -255,6 +264,11 @@ body {
   }
 }
 
+
+/* ==================================================
+   04. TAB BAR
+================================================== */
+
 .tab-row {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -342,6 +356,11 @@ body {
   background: linear-gradient(180deg, #f57a8d 0%, #f14b67 42%, #ed1a3a 100%);
 }
 
+
+/* ==================================================
+   05. BOTTOM NEWS + MINI PLAYER RAIL
+================================================== */
+
 .news-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 248px;
@@ -372,7 +391,7 @@ body {
 }
 
 .news-side {
-  padding: 12px;
+  padding: 10px;
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -453,6 +472,7 @@ body {
 .mini-simple-wrap {
   width: 100%;
   height: 100%;
+  min-height: 0;
   display: grid;
   grid-template-rows: minmax(0, 1fr) auto;
   gap: 8px;
@@ -500,6 +520,11 @@ body {
   max-height: 220px;
 }
 
+
+/* ==================================================
+   05B. MINI PLAYER RAIL STATE
+================================================== */
+
 .news-row.mini-hidden .mini-simple-player {
   transform: translateY(-120%);
   opacity: 0;
@@ -522,42 +547,150 @@ body {
 }
 
 .mini-simple-body {
-  padding: 10px 10px 12px;
+  padding: 8px 8px 10px;
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .mini-simple-screen {
-  min-height: 58px;
+  min-height: 88px;
   border-radius: 10px;
-  border: 1px solid #d8d8dc;
-  background: linear-gradient(180deg, #ffffff 0%, #f4f4f6 100%);
-  padding: 9px 10px;
+  border: 1px solid rgba(45, 16, 48, 0.24);
+  background-color: var(--screen-color);
+  background-image: var(--lcd-bg-image);
+  background-size: var(--lcd-bg-size);
+  background-position: var(--lcd-bg-position);
+  background-repeat: no-repeat;
+  color: var(--screen-text);
+  font-family: "Press Start 2P", monospace;
+  padding: 10px;
   box-shadow:
-	inset 0 1px 1px rgba(255,255,255,0.95),
-	inset 0 -1px 1px rgba(0,0,0,0.04);
+	inset 0 0 0 1px rgba(0, 0, 0, 0.12),
+	inset 0 0 8px rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  position: relative;
+}
+
+.mini-simple-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+	repeating-linear-gradient(
+	  to bottom,
+	  rgba(0, 0, 0, 0.06) 0px,
+	  rgba(0, 0, 0, 0.06) 1px,
+	  rgba(255, 255, 255, 0.015) 2px,
+	  rgba(255, 255, 255, 0.015) 3px
+	);
+  opacity: 0.32;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mini-screen-ui {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto auto auto auto auto auto;
+  gap: 5px;
+  position: relative;
+  z-index: 2;
 }
 
 .mini-simple-status {
-  font-size: 10px;
+  font-size: 8px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  color: #8b8b93;
-  margin-bottom: 4px;
+  letter-spacing: 0.12em;
+  color: rgba(45, 16, 48, 0.82);
+  line-height: 1;
+  margin: 0;
+}
+
+.mini-simple-track-wrap {
+  overflow: hidden;
+  min-width: 0;
 }
 
 .mini-simple-track {
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.05;
-  color: #4b4b53;
-  margin-bottom: 4px;
+  font-size: 10px;
+  line-height: 1.15;
+  color: var(--screen-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
 }
 
 .mini-simple-meta {
-  font-size: 11px;
-  line-height: 1.2;
-  color: #7b7b83;
+  font-size: 8px;
+  line-height: 1.1;
+  color: rgba(45, 16, 48, 0.88);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-simple-eq {
+  display: flex;
+  align-items: end;
+  gap: 3px;
+  height: 12px;
+}
+
+.mini-simple-eq span {
+  display: block;
+  width: 4px;
+  background: rgba(45, 16, 48, 0.75);
+  animation: miniEqBounce 900ms ease-in-out infinite;
+  transform-origin: bottom;
+}
+
+.mini-simple-eq span:nth-child(1) { height: 25%; animation-delay: 0ms; }
+.mini-simple-eq span:nth-child(2) { height: 70%; animation-delay: 120ms; }
+.mini-simple-eq span:nth-child(3) { height: 38%; animation-delay: 240ms; }
+.mini-simple-eq span:nth-child(4) { height: 88%; animation-delay: 360ms; }
+.mini-simple-eq span:nth-child(5) { height: 30%; animation-delay: 480ms; }
+
+@keyframes miniEqBounce {
+  0%, 100% { transform: scaleY(0.45); }
+  50% { transform: scaleY(1); }
+}
+
+.mini-progress {
+  position: relative;
+  height: 8px;
+  border: 1px solid rgba(45, 16, 48, 0.36);
+  background: rgba(255, 255, 255, 0.16);
+  overflow: visible;
+  border-radius: 0;
+}
+
+.mini-progress-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0%;
+  background: rgba(45, 16, 48, 0.76);
+}
+
+.mini-progress-thumb {
+  position: absolute;
+  left: 0%;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(45, 16, 48, 0.95);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.22);
+}
+
+.mini-time-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 7px;
+  line-height: 1;
+  color: rgba(45, 16, 48, 0.9);
 }
 
 .mini-simple-controls {
@@ -569,6 +702,7 @@ body {
 }
 
 .mini-pod-btn {
+  position: relative;
   border: none;
   background: transparent;
   padding: 0;
@@ -583,8 +717,22 @@ body {
   filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.18));
 }
 
+.mini-pod-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ffffff 0%, #f1f1f5 58%, #e4e4ea 100%);
+  border: 2px solid #d7d6dc;
+  box-shadow:
+	inset 0 2px 3px rgba(255, 255, 255, 0.9),
+	inset 0 -2px 4px rgba(0, 0, 0, 0.06),
+	0 3px 6px rgba(0, 0, 0, 0.12);
+  z-index: 0;
+}
+
 .mini-pod-btn:active {
-  opacity: 0.7;
+  opacity: 0.92;
   filter: none;
 }
 
@@ -604,14 +752,18 @@ body {
   transform: scale(0.92);
 }
 
-.mini-pod-mute:active {
+.mini-pod-mute:active,
+.mini-pod-prev:active,
+.mini-pod-next:active {
   transform: scale(0.95);
 }
 
 .mini-pod-icon {
+  position: relative;
+  z-index: 1;
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 56%;
+  height: 56%;
   object-fit: contain;
   pointer-events: none;
   user-select: none;
@@ -621,13 +773,13 @@ body {
 }
 
 .mini-pod-icon-play {
-  width: 68%;
-  height: 68%;
+  width: 62%;
+  height: 62%;
 }
 
 .mini-pod-icon-mute {
-  width: 88%;
-  height: 88%;
+  width: 72%;
+  height: 72%;
 }
 
 .mini-simple-download {
@@ -667,6 +819,11 @@ body {
   font-weight: 700;
   color: #6d6d75;
 }
+
+
+/* ==================================================
+   06. HOME / HERO SCREEN
+================================================== */
 
 .screen-layout {
   width: 100%;
@@ -775,6 +932,11 @@ body {
   line-height: 1.55;
   color: #66666d;
 }
+
+
+/* ==================================================
+   07. OTHER SCREEN PANELS
+================================================== */
 
 .thoughts-grid,
 .contact-grid,
@@ -1004,6 +1166,11 @@ body {
   opacity: 0.8;
 }
 
+
+/* ==================================================
+   08. SHARED PLAYER DEVICE
+================================================== */
+
 @font-face {
   font-family: "FrutigerLight";
   src: url("https://github.com/amadmoney/amadilyas/raw/refs/heads/main/FONTS/frutiger-light-webfont.woff") format("woff");
@@ -1056,21 +1223,7 @@ body {
 }
 
 .player-device::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-	linear-gradient(
-	  110deg,
-	  rgba(255, 255, 255, 0) 28%,
-	  rgba(255, 255, 255, 0.22) 44%,
-	  rgba(255, 255, 255, 0.1) 51%,
-	  rgba(255, 255, 255, 0) 65%
-	);
-  transform: translateX(-120%);
-  animation: shellShine 6s ease-in-out infinite;
-  pointer-events: none;
-  z-index: 3;
+  display: none;
 }
 
 .art-frame {
@@ -1139,6 +1292,11 @@ body {
 	inset 0 1px 2px rgba(255, 255, 255, 0.65),
 	inset 0 -1px 3px rgba(0, 0, 0, 0.08);
 }
+
+
+/* ==================================================
+   09. HERO LCD SCREEN
+================================================== */
 
 .lcd-wrap {
   position: absolute;
@@ -1367,6 +1525,11 @@ body {
   50% { transform: scaleY(1); }
 }
 
+
+/* ==================================================
+   10. HERO CONTROL POD + SIDE WHEEL
+================================================== */
+
 .control-pod-wrap {
   position: absolute;
   right: 15.5%;
@@ -1561,6 +1724,11 @@ audio {
   display: none;
 }
 
+
+/* ==================================================
+   12. RESPONSIVE
+================================================== */
+
 @media (max-width: 980px) {
   :root {
 	--device-width: min(94vw, 920px);
@@ -1636,6 +1804,7 @@ audio {
 
   .news-row {
 	grid-template-columns: 1fr;
+	min-height: 325px;
   }
 
   .news-main {
@@ -1672,7 +1841,7 @@ audio {
   }
 
   .device-inner {
-	grid-template-rows: 1fr var(--tab-height) 174px;
+	grid-template-rows: 1fr var(--tab-height) 188px;
   }
 
   .screen-layout,
