@@ -1,41 +1,47 @@
 const tabs = document.querySelectorAll(".tab-btn");
 const wipe = document.getElementById("transitionWipe");
 const newsCopy = document.getElementById("newsCopy");
+const newsRow = document.querySelector(".news-row");
 
 const tabContent = {
-  archive: `
-	<div class="news-copy-entry">Archive selected. Real player shell swapped into the main display.</div>
-	<div class="news-copy-entry">Mini player module moved into the lower right rail with a cheeky little download button.</div>
-	<div class="news-copy-entry">Use this box for current status notes, updates, now-playing blurbs, or site logs.</div>
+  home: `
+	<div class="news-copy-entry">Home selected. Hero player is active in the main display.</div>
+	<div class="news-copy-entry">The mini player stays tucked away while the main player is on screen.</div>
+	<div class="news-copy-entry">Use this area for intro notes, current status, or now-playing blurbs.</div>
   `,
-  thoughts: `
-	<div class="news-copy-entry">Thoughts selected. Use this area for reviews, fragments, diary lines, and unfinished ideas.</div>
-	<div class="news-copy-entry">This lower rail can also become a live feed of recent writing or pinned notes.</div>
-	<div class="news-copy-entry">Could be nice to rotate these entries depending on the selected tab.</div>
+  amad: `
+	<div class="news-copy-entry">Amad selected. This is the more personal profile layer.</div>
+	<div class="news-copy-entry">Think bio, orbiting references, personal lore, and the operating system of the site.</div>
+	<div class="news-copy-entry">Mini player stays visible here.</div>
   `,
-  words: `
-	<div class="news-copy-entry">Words tab is currently a placeholder.</div>
-	<div class="news-copy-entry">Add a matching panel in the HTML if you want this tab to open real content.</div>
-	<div class="news-copy-entry">Right now the button still updates this lower text rail.</div>
+  work: `
+	<div class="news-copy-entry">Work selected. This can later split into projects, campaigns, and moving image.</div>
+	<div class="news-copy-entry">For now this acts as the main work landing area.</div>
+	<div class="news-copy-entry">Mini player slides in here once you leave the home screen.</div>
   `,
   ephemera: `
-	<div class="news-copy-entry">Ephemera tab is currently a placeholder.</div>
-	<div class="news-copy-entry">You can wire this to a future panel, project feed, or external page state.</div>
-	<div class="news-copy-entry">For now it only updates the lower signal box.</div>
+	<div class="news-copy-entry">Ephemera selected. Use this for references, scraps, links, and visual notes.</div>
+	<div class="news-copy-entry">A good place for temporary objects and internet finds.</div>
+	<div class="news-copy-entry">Mini player stays visible here.</div>
   `,
   contact: `
 	<div class="news-copy-entry">Contact selected. Keep this playful and still part of the device world.</div>
 	<div class="news-copy-entry">Good spot for email, socials, rep info, or downloadable deck links.</div>
-	<div class="news-copy-entry">This section already has the contact panel in the screen area.</div>
+	<div class="news-copy-entry">Mini player stays visible here.</div>
   `,
-  amad: `
-	<div class="news-copy-entry">Amad selected. This can become the personal operating-system layer.</div>
-	<div class="news-copy-entry">Think bio, orbiting references, timeline fragments, or personal lore.</div>
-	<div class="news-copy-entry">This section already has a live visual panel in the screen area.</div>
+  fun: `
+	<div class="news-copy-entry">Fun selected. This can hold experiments, oddities, side quests, and extras.</div>
+	<div class="news-copy-entry">Think bonus material, weird links, playful scraps, and non-essential lore.</div>
+	<div class="news-copy-entry">Mini player stays visible here too.</div>
   `
 };
 
-let current = "archive";
+let current = "home";
+
+function updateMiniPlayerVisibility(target) {
+  if (!newsRow) return;
+  newsRow.classList.toggle("mini-hidden", target === "home");
+}
 
 function switchPanel(target) {
   if (target === current) return;
@@ -64,6 +70,7 @@ function switchPanel(target) {
   }, 120);
 
   current = target;
+  updateMiniPlayerVisibility(target);
 }
 
 tabs.forEach(tab => {
@@ -80,6 +87,9 @@ tabs.forEach(tab => {
 
 	if (document.querySelector(`.screen-panel[data-panel="${target}"]`)) {
 	  switchPanel(target);
+	} else {
+	  current = target;
+	  updateMiniPlayerVisibility(target);
 	}
   });
 });
@@ -120,18 +130,15 @@ const miniPlayerMeta = document.getElementById("miniPlayerMeta");
 const lcdPet = document.getElementById("lcdPet");
 const lcdPetImg = document.getElementById("lcdPetImg");
 
-const HERO_PLAY_ICON =
-  "https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/play-solid-full.svg";
-const HERO_PAUSE_ICON =
-  "https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/pause-solid-full.svg";
+const PLAY_ICON =
+  "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a6a72'><path d='M8 5.14v13.72c0 .72.78 1.17 1.4.8l10.2-6.86a.93.93 0 0 0 0-1.6L9.4 4.34A.93.93 0 0 0 8 5.14z'/></svg>";
 
-const MINI_PLAY_ICON =
-  "https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/play-solid-full.svg";
-const MINI_PAUSE_ICON =
-  "https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/pause-solid-full.svg";
+const PAUSE_ICON =
+  "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a6a72'><rect x='6' y='5' width='4' height='14' rx='1'/><rect x='14' y='5' width='4' height='14' rx='1'/></svg>";
 
 const MUTE_ICON =
   "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a6a72'><path d='M14 3.23v17.54c0 .45-.54.67-.85.35L8.77 17H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.77l4.38-4.12c.31-.32.85-.1.85.35z'/><path d='M16.5 9.5 21 14m0-4.5L16.5 14' stroke='%236a6a72' stroke-width='2' stroke-linecap='round'/></svg>";
+
 const VOLUME_ICON =
   "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a6a72'><path d='M14 3.23v17.54c0 .45-.54.67-.85.35L8.77 17H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.77l4.38-4.12c.31-.32.85-.1.85.35z'/><path d='M17 9.5a4 4 0 0 1 0 5' stroke='%236a6a72' stroke-width='2' stroke-linecap='round' fill='none'/><path d='M19 7a7.5 7.5 0 0 1 0 10' stroke='%236a6a72' stroke-width='2' stroke-linecap='round' fill='none'/></svg>";
 
@@ -148,12 +155,16 @@ function formatTime(time) {
 }
 
 function updatePlayIcons() {
+  if (!audio) return;
+
+  const icon = audio.paused ? PLAY_ICON : PAUSE_ICON;
+
   if (playIcon) {
-	playIcon.src = audio && audio.paused ? HERO_PLAY_ICON : HERO_PAUSE_ICON;
+	playIcon.src = icon;
   }
 
   if (miniPlayIcon) {
-	miniPlayIcon.src = audio && audio.paused ? MINI_PLAY_ICON : MINI_PAUSE_ICON;
+	miniPlayIcon.src = icon;
   }
 }
 
@@ -446,6 +457,9 @@ audio?.addEventListener("error", () => {
 
 if (audio) {
   audio.volume = 0.7;
+  updatePlayIcons();
+  updateMuteIcons();
 }
 
+updateMiniPlayerVisibility(current);
 loadPlaylist();
