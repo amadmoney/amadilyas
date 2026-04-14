@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-	href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-	rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+    rel="stylesheet"
   />
 
   <!-- Main stylesheet -->
@@ -18,499 +18,509 @@
 </head>
 <body>
   <main class="archive-stage">
-	<section class="archive-device">
-	  <div class="utility-row">
-		<span>SOUND</span>
-		<span class="utility-speaker" aria-hidden="true"></span>
-		<span>ON / OFF</span>
-	  </div>
+    <section class="archive-device">
+      <div class="utility-row">
+        <span>SOUND</span>
+        <span class="utility-speaker" aria-hidden="true"></span>
+        <span>ON / OFF</span>
+      </div>
 
-	  <div class="device-inner">
-		<div class="screen-shell">
-		  <div class="screen">
-			<div class="transition-wipe" id="transitionWipe"></div>
+      <div class="device-inner">
+        <div class="screen-shell">
+          <div class="screen">
+            <div class="transition-wipe" id="transitionWipe"></div>
 
-			<!-- HOME PANEL -->
-			<section class="screen-panel home-panel active" data-panel="home">
-			  <div class="screen-layout">
-				<div class="screen-left">
-				  <div class="archive-player-slot">
-					<div class="hero-player archive-player-live">
-					  <div class="player-device">
-						<div class="art-frame">
-						  <div class="art-image" aria-hidden="true"></div>
-						  <div class="art-bubble-overlay" aria-hidden="true"></div>
-						</div>
+            <!-- HOME PANEL -->
+            <section class="screen-panel home-panel active" data-panel="home">
+              <div class="screen-layout">
+                <div class="screen-left">
+                  <div class="archive-player-slot">
+                    <div class="hero-player archive-player-live">
+                      <div class="player-device">
+                        <div class="art-frame">
+                          <div class="art-image" aria-hidden="true"></div>
+                          <div class="art-bubble-overlay" aria-hidden="true"></div>
+                        </div>
 
-						<div class="lcd-wrap">
-						  <div class="lcd">
-							<div class="lcd-content">
-							  <div class="lcd-world" aria-hidden="true"></div>
+                        <div class="lcd-wrap">
+                          <div class="lcd">
+                            <div class="lcd-content">
+                              <div class="lcd-world" aria-hidden="true"></div>
 
-							  <div class="lcd-pet-wrap" aria-hidden="true">
-								<div class="lcd-pet" id="lcdPet">
-								  <img
-									src="https://raw.githubusercontent.com/amadmoney/amadilyas/79338268cda6cd8c6879210a455b33b21f1c0ab6/images/MAMETCHI_SPRITE.svg"
-									id="lcdPetImg"
-									alt=""
-									aria-hidden="true"
-								  />
-								</div>
-								<div class="lcd-pet-shadow"></div>
-								<div class="lcd-pet-ground"></div>
-							  </div>
+                              <div class="lcd-pet-wrap" aria-hidden="true">
+                                <div class="lcd-pet" id="lcdPet">
+                                  <img
+                                    src="https://raw.githubusercontent.com/amadmoney/amadilyas/79338268cda6cd8c6879210a455b33b21f1c0ab6/images/MAMETCHI_SPRITE.svg"
+                                    id="lcdPetImg"
+                                    alt=""
+                                    aria-hidden="true"
+                                  />
+                                </div>
+                                <div class="lcd-pet-shadow"></div>
+                                <div class="lcd-pet-ground"></div>
+                              </div>
 
-							  <div class="lcd-ui">
-								<div class="lcd-top">
-								  <span>MP3</span>
-								  <span id="trackCount">1/3</span>
-								</div>
+                              <div class="lcd-ui">
+                                <div class="lcd-top">
+                                  <span>MP3</span>
+                                  <span id="trackCount">1/3</span>
+                                </div>
 
-								<div class="lcd-track">
-								  <span class="lcd-track-text" id="trackTitleText">archive signal</span>
-								</div>
+                                <div class="lcd-track">
+                                  <span class="lcd-track-text" id="trackTitleText">archive signal</span>
+                                </div>
 
-								<div class="lcd-artist" id="trackArtist">
-								  toy shell mix / placeholder
-								</div>
+                                <div class="lcd-artist" id="trackArtist">
+                                  toy shell mix / placeholder
+                                </div>
 
-								<div class="lcd-eq" aria-hidden="true">
-								  <span></span>
-								  <span></span>
-								  <span></span>
-								  <span></span>
-								  <span></span>
-								</div>
+                                <div class="lcd-eq" aria-hidden="true">
+                                  <span></span>
+                                  <span></span>
+                                  <span></span>
+                                  <span></span>
+                                  <span></span>
+                                </div>
 
-								<div class="lcd-bar" id="progressBar" aria-label="Playback progress">
-								  <div class="lcd-bar-fill" id="progressFill"></div>
-								  <div class="lcd-bar-thumb" id="progressThumb"></div>
-								</div>
+                                <div class="lcd-bar" id="progressBar" aria-label="Playback progress">
+                                  <div class="lcd-bar-fill" id="progressFill"></div>
+                                  <div class="lcd-bar-thumb" id="progressThumb"></div>
+                                </div>
 
-								<div class="lcd-time">
-								  <span id="currentTime">0:00</span>
-								  <span id="duration">0:00</span>
-								</div>
-							  </div>
-							</div>
-						  </div>
-						</div>
+                                <div class="lcd-time">
+                                  <span id="currentTime">0:00</span>
+                                  <span id="duration">0:00</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
 
-						<div class="control-pod-wrap" aria-label="Hero player controls">
-						  <div class="pod-lip"></div>
+                        <div class="control-pod-wrap" aria-label="Hero player controls">
+                          <div class="pod-lip"></div>
 
-						  <div class="pod-well pod-well-plus" aria-hidden="true"></div>
-						  <div class="pod-well pod-well-next" aria-hidden="true"></div>
-						  <div class="pod-well pod-well-play" aria-hidden="true"></div>
-						  <div class="pod-well pod-well-prev" aria-hidden="true"></div>
-						  <div class="pod-well pod-well-minus" aria-hidden="true"></div>
-						  <div class="pod-well pod-well-mute" aria-hidden="true"></div>
+                          <div class="pod-well pod-well-plus" aria-hidden="true"></div>
+                          <div class="pod-well pod-well-next" aria-hidden="true"></div>
+                          <div class="pod-well pod-well-play" aria-hidden="true"></div>
+                          <div class="pod-well pod-well-prev" aria-hidden="true"></div>
+                          <div class="pod-well pod-well-minus" aria-hidden="true"></div>
+                          <div class="pod-well pod-well-mute" aria-hidden="true"></div>
 
-						  <button class="pod-btn pod-plus" id="volUpBtn" type="button" aria-label="Volume up">
-							<img
-							  src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/plus-solid-full.svg"
-							  class="pod-icon"
-							  alt=""
-							  aria-hidden="true"
-							/>
-						  </button>
+                          <button class="pod-btn pod-plus" id="volUpBtn" type="button" aria-label="Volume up">
+                            <img
+                              src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/plus-solid-full.svg"
+                              class="pod-icon"
+                              alt=""
+                              aria-hidden="true"
+                            />
+                          </button>
 
-						  <button class="pod-btn pod-next" id="nextBtn" type="button" aria-label="Next track">
-							<img
-							  src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/forward-solid-full.svg"
-							  class="pod-icon"
-							  alt=""
-							  aria-hidden="true"
-							/>
-						  </button>
+                          <button class="pod-btn pod-next" id="nextBtn" type="button" aria-label="Next track">
+                            <img
+                              src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/forward-solid-full.svg"
+                              class="pod-icon"
+                              alt=""
+                              aria-hidden="true"
+                            />
+                          </button>
 
-						  <button class="pod-btn pod-play" id="playBtn" type="button" aria-label="Play or pause">
-							<img
-							  id="playIcon"
-							  src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a6a72'><path d='M8 5.14v13.72c0 .72.78 1.17 1.4.8l10.2-6.86a.93.93 0 0 0 0-1.6L9.4 4.34A.93.93 0 0 0 8 5.14z'/></svg>"
-							  class="pod-icon pod-icon-play"
-							  alt=""
-							  aria-hidden="true"
-							/>
-						  </button>
+                          <button class="pod-btn pod-play" id="playBtn" type="button" aria-label="Play or pause">
+                            <img
+                              id="playIcon"
+                              src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a6a72'><path d='M8 5.14v13.72c0 .72.78 1.17 1.4.8l10.2-6.86a.93.93 0 0 0 0-1.6L9.4 4.34A.93.93 0 0 0 8 5.14z'/></svg>"
+                              class="pod-icon pod-icon-play"
+                              alt=""
+                              aria-hidden="true"
+                            />
+                          </button>
 
-						  <button class="pod-btn pod-prev" id="prevBtn" type="button" aria-label="Previous track">
-							<img
-							  src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/forward-solid-full.svg"
-							  class="pod-icon pod-icon-flip"
-							  alt=""
-							  aria-hidden="true"
-							/>
-						  </button>
+                          <button class="pod-btn pod-prev" id="prevBtn" type="button" aria-label="Previous track">
+                            <img
+                              src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/forward-solid-full.svg"
+                              class="pod-icon pod-icon-flip"
+                              alt=""
+                              aria-hidden="true"
+                            />
+                          </button>
 
-						  <button class="pod-btn pod-minus" id="volDownBtn" type="button" aria-label="Volume down">
-							<img
-							  src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/minus-solid-full.svg"
-							  class="pod-icon"
-							  alt=""
-							  aria-hidden="true"
-							/>
-						  </button>
+                          <button class="pod-btn pod-minus" id="volDownBtn" type="button" aria-label="Volume down">
+                            <img
+                              src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/minus-solid-full.svg"
+                              class="pod-icon"
+                              alt=""
+                              aria-hidden="true"
+                            />
+                          </button>
 
-						  <button class="pod-btn pod-mute" id="muteBtn" type="button" aria-label="Mute">
-							<img
-							  id="muteIcon"
-							  src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a6a72'><path d='M14 3.23v17.54c0 .45-.54.67-.85.35L8.77 17H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.77l4.38-4.12c.31-.32.85-.1.85.35z'/><path d='M16.5 9.5 21 14m0-4.5L16.5 14' stroke='%236a6a72' stroke-width='2' stroke-linecap='round'/></svg>"
-							  class="pod-icon pod-icon-mute"
-							  alt=""
-							  aria-hidden="true"
-							/>
-						  </button>
-						</div>
+                          <button class="pod-btn pod-mute" id="muteBtn" type="button" aria-label="Mute">
+                            <img
+                              id="muteIcon"
+                              src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a6a72'><path d='M14 3.23v17.54c0 .45-.54.67-.85.35L8.77 17H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.77l4.38-4.12c.31-.32.85-.1.85.35z'/><path d='M16.5 9.5 21 14m0-4.5L16.5 14' stroke='%236a6a72' stroke-width='2' stroke-linecap='round'/></svg>"
+                              class="pod-icon pod-icon-mute"
+                              alt=""
+                              aria-hidden="true"
+                            />
+                          </button>
+                        </div>
 
-						<div class="side-wheel" aria-hidden="true"></div>
-						<audio id="audio" preload="metadata"></audio>
-					  </div>
-					</div>
-				  </div>
-				</div>
+                        <div class="side-wheel" aria-hidden="true"></div>
+                        <audio id="audio" preload="metadata"></audio>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-				<div class="screen-right">
-				  <div class="hero-copy">
-					<div class="hero-chip">
-					  <span class="dot"></span>
-					  <span>AMAD OS</span>
-					</div>
+                <div class="screen-right">
+                  <div class="hero-copy">
+                    <div class="hero-chip">
+                      <div class="hero-chip-image-placeholder">BANNER IMAGE HERE</div>
+                    </div>
 
-					<h1 class="hero-title">archive of amad</h1>
-					<p class="hero-subtitle">
-					  creative director and interdisciplinary artist blending imagination, oddity,
-					  and nostalgia into unexpected results
-					</p>
-					<div class="hero-rule"></div>
-					<p class="hero-desc">
-					  Now the real player object sits in the hero area, so this can become the
-					  central device that anchors the rest of the site.
-					</p>
-				  </div>
-				</div>
-			  </div>
+                    <h1 class="hero-title">archive of amad</h1>
+                    <p class="hero-subtitle">
+                      creative director and interdisciplinary artist blending imagination, oddity,
+                      and nostalgia into unexpected results
+                    </p>
+                    <div class="hero-rule"></div>
+                    <p class="hero-desc">
+                      Now the real player object sits in the hero area, so this can become the
+                      central device that anchors the rest of the site.
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-			  <div class="flash-note">display mode / home</div>
-			</section>
+              <div class="flash-note">display mode / home</div>
+            </section>
 
-			<!-- AMAD PANEL -->
-			<section class="screen-panel amad-panel" data-panel="amad">
-			  <div class="amad-grid">
-				<div class="amad-visual">
-				  <div class="amad-orbit">
-					<div class="amad-core"></div>
-					<div class="amad-node n1"></div>
-					<div class="amad-node n2"></div>
-					<div class="amad-node n3"></div>
-					<div class="amad-node n4"></div>
-				  </div>
-				</div>
+            <!-- AMAD PANEL -->
+            <section class="screen-panel amad-panel" data-panel="amad">
+              <div class="amad-grid">
+                <div class="amad-visual">
+                  <div class="amad-orbit">
+                    <div class="amad-core"></div>
+                    <div class="amad-node n1"></div>
+                    <div class="amad-node n2"></div>
+                    <div class="amad-node n3"></div>
+                    <div class="amad-node n4"></div>
+                  </div>
+                </div>
 
-				<div class="amad-copy">
-				  <h2>Amad</h2>
-				  <p>
-					This can become the more personal profile layer, more like your operating
-					system than a standard bio.
-				  </p>
-				</div>
-			  </div>
+                <div class="amad-copy">
+                  <h2>Amad</h2>
+                  <p>
+                    This can become the more personal profile layer, more like your operating
+                    system than a standard bio.
+                  </p>
+                </div>
+              </div>
 
-			  <div class="flash-note">display mode / amad</div>
-			</section>
+              <div class="flash-note">display mode / amad</div>
+            </section>
 
-			<!-- WORK PANEL -->
-			<section class="screen-panel work-panel" data-panel="work">
-			  <div class="thoughts-grid">
-				<div class="thoughts-main">
-				  <div>
-					<h2>Work</h2>
-					<p>
-					  A landing area for the archive of work, which can later split into
-					  campaigns, projects, moving image, and whatever else needs its own page.
-					</p>
-					<div class="thought-lines">
-					  <div class="thought-line long"></div>
-					  <div class="thought-line med"></div>
-					  <div class="thought-line long"></div>
-					  <div class="thought-line short"></div>
-					  <div class="thought-line med"></div>
-					</div>
-				  </div>
-				</div>
+            <!-- WORK PANEL -->
+            <section class="screen-panel work-panel" data-panel="work">
+              <div class="thoughts-grid">
+                <div class="thoughts-main">
+                  <div>
+                    <h2>Work</h2>
+                    <p>
+                      A landing area for the archive of work, which can later split into
+                      campaigns, projects, moving image, and whatever else needs its own page.
+                    </p>
+                    <div class="thought-lines">
+                      <div class="thought-line long"></div>
+                      <div class="thought-line med"></div>
+                      <div class="thought-line long"></div>
+                      <div class="thought-line short"></div>
+                      <div class="thought-line med"></div>
+                    </div>
+                  </div>
+                </div>
 
-				<div class="thoughts-side">
-				  <div class="thoughts-side-card">
-					<strong>PROJECTS</strong>
-					<span>A future section for campaigns, decks, treatments, and client work.</span>
-				  </div>
-				  <div class="thoughts-side-card">
-					<strong>MOTION</strong>
-					<span>A place for film, trailers, social worlds, and moving-image pieces.</span>
-				  </div>
-				  <div class="thoughts-side-card">
-					<strong>ARCHIVE</strong>
-					<span>A working shelf for past eras, references, and other saved material.</span>
-				  </div>
-				</div>
-			  </div>
+                <div class="thoughts-side">
+                  <div class="thoughts-side-card">
+                    <strong>PROJECTS</strong>
+                    <span>A future section for campaigns, decks, treatments, and client work.</span>
+                  </div>
+                  <div class="thoughts-side-card">
+                    <strong>MOTION</strong>
+                    <span>A place for film, trailers, social worlds, and moving-image pieces.</span>
+                  </div>
+                  <div class="thoughts-side-card">
+                    <strong>ARCHIVE</strong>
+                    <span>A working shelf for past eras, references, and other saved material.</span>
+                  </div>
+                </div>
+              </div>
 
-			  <div class="flash-note">display mode / work</div>
-			</section>
+              <div class="flash-note">display mode / work</div>
+            </section>
 
-			<!-- EPHEMERA PANEL -->
-			<section class="screen-panel ephemera-panel" data-panel="ephemera">
-			  <div class="contact-grid">
-				<div class="contact-card">
-				  <span class="contact-pill">Ephemera Signal</span>
-				  <h2 style="margin: 0; font-size: 34px;">Ephemera</h2>
-				  <p style="margin: 0; color: #66707b; line-height: 1.55;">
-					Temporary objects, references, internet scraps, visual notes, and in-progress fragments.
-				  </p>
-				</div>
+            <!-- EPHEMERA PANEL -->
+            <section class="screen-panel ephemera-panel" data-panel="ephemera">
+              <div class="contact-grid">
+                <div class="contact-card">
+                  <span class="contact-pill">Ephemera Signal</span>
+                  <h2 style="margin: 0; font-size: 34px;">Ephemera</h2>
+                  <p style="margin: 0; color: #66707b; line-height: 1.55;">
+                    Temporary objects, references, internet scraps, visual notes, and in-progress fragments.
+                  </p>
+                </div>
 
-				<div class="contact-copy">
-				  <h2>Ephemera</h2>
-				  <p>
-					This can become the catch-all page for references, links, images, scraps, and odd little finds.
-				  </p>
-				</div>
-			  </div>
+                <div class="contact-copy">
+                  <h2>Ephemera</h2>
+                  <p>
+                    This can become the catch-all page for references, links, images, scraps, and odd little finds.
+                  </p>
+                </div>
+              </div>
 
-			  <div class="flash-note">display mode / ephemera</div>
-			</section>
+              <div class="flash-note">display mode / ephemera</div>
+            </section>
 
-			<!-- CONTACT PANEL -->
-			<section class="screen-panel contact-panel" data-panel="contact">
-			  <div class="contact-grid">
-				<div class="contact-card">
-				  <span class="contact-pill">Contact Signal</span>
-				  <h2 style="margin: 0; font-size: 34px;">Say Hello</h2>
-				  <p style="margin: 0; color: #66707b; line-height: 1.55;">
-					For work, ideas, collaborations, or sending something weird and nice.
-				  </p>
-				  <a href="mailto:hi@amad.world">hi@amad.world</a>
-				  <a href="#">Instagram / placeholder</a>
-				  <a href="#">Are.na / placeholder</a>
-				  <a href="#">Letterboxd / placeholder</a>
-				</div>
+            <!-- CONTACT PANEL -->
+            <section class="screen-panel contact-panel" data-panel="contact">
+              <div class="contact-grid">
+                <div class="contact-card">
+                  <span class="contact-pill">Contact Signal</span>
+                  <h2 style="margin: 0; font-size: 34px;">Say Hello</h2>
+                  <p style="margin: 0; color: #66707b; line-height: 1.55;">
+                    For work, ideas, collaborations, or sending something weird and nice.
+                  </p>
+                  <a href="mailto:hi@amad.world">hi@amad.world</a>
+                  <a href="#">Instagram / placeholder</a>
+                  <a href="#">Are.na / placeholder</a>
+                  <a href="#">Letterboxd / placeholder</a>
+                </div>
 
-				<div class="contact-copy">
-				  <h2>Contact</h2>
-				  <p>
-					This could stay playful and feel like part of the toy object,
-					rather than becoming a plain contact page.
-				  </p>
-				</div>
-			  </div>
+                <div class="contact-copy">
+                  <h2>Contact</h2>
+                  <p>
+                    This could stay playful and feel like part of the toy object,
+                    rather than becoming a plain contact page.
+                  </p>
+                </div>
+              </div>
 
-			  <div class="flash-note">display mode / contact</div>
-			</section>
+              <div class="flash-note">display mode / contact</div>
+            </section>
 
-			<!-- FUN PANEL -->
-			<section class="screen-panel fun-panel" data-panel="fun">
-			  <div class="contact-grid">
-				<div class="contact-card">
-				  <span class="contact-pill">Fun Signal</span>
-				  <h2 style="margin: 0; font-size: 34px;">Fun</h2>
-				  <p style="margin: 0; color: #66707b; line-height: 1.55;">
-					Side quests, jokes, experiments, weird links, bonus material, and whatever else does not need to behave.
-				  </p>
-				</div>
+            <!-- FUN PANEL -->
+            <section class="screen-panel fun-panel" data-panel="fun">
+              <div class="contact-grid">
+                <div class="contact-card">
+                  <span class="contact-pill">Fun Signal</span>
+                  <h2 style="margin: 0; font-size: 34px;">Fun</h2>
+                  <p style="margin: 0; color: #66707b; line-height: 1.55;">
+                    Side quests, jokes, experiments, weird links, bonus material, and whatever else does not need to behave.
+                  </p>
+                </div>
 
-				<div class="contact-copy">
-				  <h2>Fun</h2>
-				  <p>
-					This can hold extras, oddities, games, scraps, references, and things that just feel good to keep around.
-				  </p>
-				</div>
-			  </div>
+                <div class="contact-copy">
+                  <h2>Fun</h2>
+                  <p>
+                    This can hold extras, oddities, games, scraps, references, and things that just feel good to keep around.
+                  </p>
+                </div>
+              </div>
 
-			  <div class="flash-note">display mode / fun</div>
-			</section>
-		  </div>
-		</div>
+              <div class="flash-note">display mode / fun</div>
+            </section>
+          </div>
+        </div>
 
-		<!-- TABS -->
-		<nav class="tab-row" aria-label="Archive tabs">
-		  <button class="tab-btn active" data-target="home" type="button">HOME</button>
-		  <button class="tab-btn" data-target="amad" type="button">AMAD</button>
-		  <button class="tab-btn" data-target="work" type="button">WORK</button>
-		  <button class="tab-btn" data-target="ephemera" type="button">EPHEMERA</button>
-		  <button class="tab-btn" data-target="contact" type="button">CONTACT</button>
-		  <button class="tab-btn" data-target="fun" type="button">FUN</button>
-		</nav>
+        <!-- TABS -->
+        <nav class="tab-row" aria-label="Archive tabs">
+          <button class="tab-btn active" data-target="home" type="button">HOME</button>
+          <button class="tab-btn" data-target="amad" type="button">AMAD</button>
+          <button class="tab-btn" data-target="work" type="button">WORK</button>
+          <button class="tab-btn" data-target="ephemera" type="button">EPHEMERA</button>
+          <button class="tab-btn" data-target="contact" type="button">CONTACT</button>
+          <button class="tab-btn" data-target="fun" type="button">FUN</button>
+        </nav>
 
-		<!-- LOWER RAIL -->
-		<div class="news-row">
-		  <div class="news-main">
-			<div class="news-label">
-			  <div>
-				<small>LATEST SIGNAL</small>
-				<strong>WHAT'S NEW</strong>
-			  </div>
-			  <div class="news-divider"></div>
-			</div>
+        <!-- LOWER RAIL -->
+        <div class="news-row">
+          <div class="news-main">
+            <div class="news-label">
+              <div>
+                <small>LATEST SIGNAL</small>
+                <strong>WHAT'S NEW</strong>
+              </div>
+              <div class="news-divider"></div>
+            </div>
 
-			<div class="news-scroll-box">
-			  <div class="news-copy" id="newsCopy">
-				<div class="news-copy-entry">
-				  Home selected. Hero player is active in the main display.
-				</div>
-				<div class="news-copy-entry">
-				  The mini player stays tucked away while the main player is on screen.
-				</div>
-				<div class="news-copy-entry">
-				  Use this area for intro notes, current status, or now-playing blurbs.
-				</div>
-			  </div>
-			</div>
-		  </div>
+            <div class="news-scroll-box">
+              <div class="news-copy" id="newsCopy">
+                <div class="news-copy-entry">
+                  Home selected. Hero player is active in the main display.
+                </div>
+                <div class="news-copy-entry">
+                  The mini player stays tucked away while the main player is on screen.
+                </div>
+                <div class="news-copy-entry">
+                  Use this area for intro notes, current status, or now-playing blurbs.
+                </div>
+              </div>
+            </div>
+          </div>
 
-		  <div class="news-side">
-			<div class="mini-simple-wrap">
-			  <div class="mini-placeholder" aria-hidden="true">
-				<img
-				  class="mini-placeholder-image"
-				  src="https://raw.githubusercontent.com/amadmoney/amadilyas/refs/heads/main/images/For%20information%20regarding%20this%20site%2C%20please%20contact%20me%40amadilyas.com%20For%20product%20and%20service%20enquiries%2C%20please%20contact%20the%20customer%20support%20centre.%20Please%20note%20that%20we%20may%20not%20be%20able%20to%20respond%20t.png"
-				  alt=""
-				/>
-			  </div>
+          <div class="news-side">
+            <div class="mini-simple-wrap">
+              <div class="mini-placeholder" aria-hidden="true">
+                <img
+                  class="mini-placeholder-image"
+                  src="https://raw.githubusercontent.com/amadmoney/amadilyas/refs/heads/main/images/For%20information%20regarding%20this%20site%2C%20please%20contact%20me%40amadilyas.com%20For%20product%20and%20service%20enquiries%2C%20please%20contact%20the%20customer%20support%20centre.%20Please%20note%20that%20we%20may%20not%20be%20able%20to%20respond%20t.png"
+                  alt=""
+                />
+              </div>
 
-			  <div class="mini-simple-player">
-				<div class="mini-simple-top">
-				  <span>MP3</span>
-				  <span id="miniTrackCount">1/3</span>
-				</div>
+              <div class="mini-simple-player">
+                <div class="mini-simple-top">
+                  <span>MP3</span>
+                  <span id="miniTrackCount">1/3</span>
+                </div>
 
-				<div class="mini-simple-body">
-				  <div class="mini-simple-screen">
-					<div class="mini-screen-ui">
-					  <div class="mini-simple-status" id="miniPlayerStatus">PAUSED</div>
+                <div class="mini-simple-body">
+                  <div class="mini-simple-screen">
+                    <div class="mini-pet-wrap" aria-hidden="true">
+                      <div class="mini-pet" id="miniPet">
+                        <img
+                          src="https://raw.githubusercontent.com/amadmoney/amadilyas/79338268cda6cd8c6879210a455b33b21f1c0ab6/images/MAMETCHI_SPRITE.svg"
+                          id="miniPetImg"
+                          alt=""
+                          aria-hidden="true"
+                        />
+                      </div>
+                    </div>
 
-					  <div class="mini-simple-track-wrap">
-						<div class="mini-simple-track" id="miniPlayerTrack">archive signal</div>
-					  </div>
+                    <div class="mini-screen-ui">
+                      <div class="mini-simple-status" id="miniPlayerStatus">PAUSED</div>
 
-					  <div class="mini-simple-meta" id="miniPlayerMeta">
-						toy shell mix / placeholder
-					  </div>
+                      <div class="mini-simple-track-wrap">
+                        <div class="mini-simple-track" id="miniPlayerTrack">archive signal</div>
+                      </div>
 
-					  <div class="mini-simple-eq" aria-hidden="true">
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-						<span></span>
-					  </div>
+                      <div class="mini-simple-meta" id="miniPlayerMeta">
+                        toy shell mix / placeholder
+                      </div>
 
-					  <div class="mini-progress" id="miniProgressBar" aria-label="Mini playback progress">
-						<div class="mini-progress-fill" id="miniProgressFill"></div>
-						<div class="mini-progress-thumb" id="miniProgressThumb"></div>
-					  </div>
+                      <div class="mini-simple-eq" aria-hidden="true">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
 
-					  <div class="mini-time-row">
-						<span id="miniCurrentTime">0:00</span>
-						<span id="miniDuration">0:00</span>
-					  </div>
-					</div>
-				  </div>
+                      <div class="mini-progress" id="miniProgressBar" aria-label="Mini playback progress">
+                        <div class="mini-progress-fill" id="miniProgressFill"></div>
+                        <div class="mini-progress-thumb" id="miniProgressThumb"></div>
+                      </div>
 
-				  <div class="mini-simple-controls">
-					<button
-					  class="mini-pod-btn mini-pod-prev"
-					  id="miniPrevBtn"
-					  type="button"
-					  aria-label="Previous track"
-					>
-					  <img
-						src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/forward-solid-full.svg"
-						class="mini-pod-icon pod-icon-flip"
-						alt=""
-						aria-hidden="true"
-					  />
-					</button>
+                      <div class="mini-time-row">
+                        <span id="miniCurrentTime">0:00</span>
+                        <span id="miniDuration">0:00</span>
+                      </div>
+                    </div>
+                  </div>
 
-					<button
-					  class="mini-pod-btn mini-pod-play"
-					  id="miniPlayBtn"
-					  type="button"
-					  aria-label="Play or pause"
-					>
-					  <img
-						id="miniPlayIcon"
-						src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a6a72'><path d='M8 5.14v13.72c0 .72.78 1.17 1.4.8l10.2-6.86a.93.93 0 0 0 0-1.6L9.4 4.34A.93.93 0 0 0 8 5.14z'/></svg>"
-						class="mini-pod-icon mini-pod-icon-play"
-						alt=""
-						aria-hidden="true"
-					  />
-					</button>
+                  <div class="mini-simple-controls">
+                    <button
+                      class="mini-pod-btn mini-pod-prev"
+                      id="miniPrevBtn"
+                      type="button"
+                      aria-label="Previous track"
+                    >
+                      <img
+                        src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/forward-solid-full.svg"
+                        class="mini-pod-icon pod-icon-flip"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    </button>
 
-					<button
-					  class="mini-pod-btn mini-pod-next"
-					  id="miniNextBtn"
-					  type="button"
-					  aria-label="Next track"
-					>
-					  <img
-						src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/forward-solid-full.svg"
-						class="mini-pod-icon"
-						alt=""
-						aria-hidden="true"
-					  />
-					</button>
+                    <button
+                      class="mini-pod-btn mini-pod-play"
+                      id="miniPlayBtn"
+                      type="button"
+                      aria-label="Play or pause"
+                    >
+                      <img
+                        id="miniPlayIcon"
+                        src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a6a72'><path d='M8 5.14v13.72c0 .72.78 1.17 1.4.8l10.2-6.86a.93.93 0 0 0 0-1.6L9.4 4.34A.93.93 0 0 0 8 5.14z'/></svg>"
+                        class="mini-pod-icon mini-pod-icon-play"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    </button>
 
-					<button
-					  class="mini-pod-btn mini-pod-mute"
-					  id="miniMuteBtn"
-					  type="button"
-					  aria-label="Mute"
-					>
-					  <img
-						id="miniMuteIcon"
-						src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a6a72'><path d='M14 3.23v17.54c0 .45-.54.67-.85.35L8.77 17H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3.77l4.38-4.12c.31-.32.85-.1.85.35z'/><path d='M16.5 9.5 21 14m0-4.5L16.5 14' stroke='%236a6a72' stroke-width='2' stroke-linecap='round'/></svg>"
-						class="mini-pod-icon mini-pod-icon-mute"
-						alt=""
-						aria-hidden="true"
-					  />
-					</button>
-				  </div>
-				</div>
-			  </div>
+                    <button
+                      class="mini-pod-btn mini-pod-next"
+                      id="miniNextBtn"
+                      type="button"
+                      aria-label="Next track"
+                    >
+                      <img
+                        src="https://raw.githubusercontent.com/amadmoney/amadilyas/8000217d27783ba6002b8d7cdeb27b1502a003e2/icons/forward-solid-full.svg"
+                        class="mini-pod-icon"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    </button>
 
-			  <a class="mini-simple-download" href="#" download>
-				<span class="mini-simple-download-copy">
-				  <span class="mini-simple-download-kicker">GRAB THE FILE</span>
-				  <span class="mini-simple-download-label">DOWNLOAD</span>
-				</span>
-			  </a>
-			</div>
-		  </div>
-		</div>
+                    <button
+                      class="mini-pod-btn mini-pod-mute"
+                      id="miniMuteBtn"
+                      type="button"
+                      aria-label="Mute"
+                    >
+                      <img
+                        id="miniMuteIcon"
+                        src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a6a72'><path d='M14 3.23v17.54c0 .45-.54.67-.85.35L8.77 17H5a2 2 a0 0 1-2-2V9a2 2 0 0 1 2-2h3.77l4.38-4.12c.31-.32.85-.1.85.35z'/><path d='M16.5 9.5 21 14m0-4.5L16.5 14' stroke='%236a6a72' stroke-width='2' stroke-linecap='round'/></svg>"
+                        class="mini-pod-icon mini-pod-icon-mute"
+                        alt=""
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </div>
+                </div>
+              </div>
 
-		<!-- BOTTOM PLACEHOLDER STRIP -->
-		<div class="archive-bottom-strip">
-		  <div class="archive-bottom-inner">
-			<div class="archive-bottom-box archive-bottom-flash">
-			  FLASH / BADGE
-			</div>
+              <a class="mini-simple-download" href="#" download>
+                <span class="mini-simple-download-copy">
+                  <span class="mini-simple-download-kicker">GRAB THE FILE</span>
+                  <span class="mini-simple-download-label">DOWNLOAD</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
 
-			<div class="archive-bottom-box archive-bottom-info">
-			  PLACEHOLDER TEXT / NOTICE / LINK AREA
-			</div>
+        <!-- BOTTOM PLACEHOLDER STRIP -->
+        <div class="archive-bottom-strip">
+          <div class="archive-bottom-inner">
+            <div class="archive-bottom-box archive-bottom-flash">
+              FLASH / BADGE
+            </div>
 
-			<div class="archive-bottom-box archive-bottom-logo">
-			  LOGO
-			</div>
+            <div class="archive-bottom-box archive-bottom-info">
+              PLACEHOLDER TEXT / NOTICE / LINK AREA
+            </div>
 
-			<div class="archive-bottom-box archive-bottom-contact">
-			  CONTACT / COPYRIGHT / EXTRA INFO
-			</div>
-		  </div>
-		</div>
+            <div class="archive-bottom-box archive-bottom-logo">
+              LOGO
+            </div>
 
-	  </div>
-	</section>
+            <div class="archive-bottom-box archive-bottom-contact">
+              CONTACT / COPYRIGHT / EXTRA INFO
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
   </main>
 
   <script src="app.js"></script>
