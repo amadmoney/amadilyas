@@ -126,9 +126,18 @@ const miniMuteIcon = document.getElementById("miniMuteIcon");
 const miniPlayerStatus = document.getElementById("miniPlayerStatus");
 const miniPlayerTrack = document.getElementById("miniPlayerTrack");
 const miniPlayerMeta = document.getElementById("miniPlayerMeta");
+const miniTrackCount = document.getElementById("miniTrackCount");
+
+const miniCurrentTimeEl = document.getElementById("miniCurrentTime");
+const miniDurationEl = document.getElementById("miniDuration");
+const miniProgressBar = document.getElementById("miniProgressBar");
+const miniProgressFill = document.getElementById("miniProgressFill");
+const miniProgressThumb = document.getElementById("miniProgressThumb");
 
 const lcdPet = document.getElementById("lcdPet");
 const lcdPetImg = document.getElementById("lcdPetImg");
+const miniPet = document.getElementById("miniPet");
+const miniPetImg = document.getElementById("miniPetImg");
 
 const PLAY_ICON =
   "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236a6a72'><path d='M8 5.14v13.72c0 .72.78 1.17 1.4.8l10.2-6.86a.93.93 0 0 0 0-1.6L9.4 4.34A.93.93 0 0 0 8 5.14z'/></svg>";
@@ -145,7 +154,8 @@ const VOLUME_ICON =
 let tracks = [];
 let currentTrackIndex = 0;
 let hasStarted = false;
-let isScrubbing = false;
+let isScrubbingMain = false;
+let isScrubbingMini = false;
 
 function formatTime(time) {
   if (!Number.isFinite(time)) return "0:00";
@@ -171,12 +181,14 @@ function updatePlayIcons() {
 function updateMuteIcons() {
   if (!audio) return;
 
+  const icon = audio.muted ? MUTE_ICON : VOLUME_ICON;
+
   if (muteIcon) {
-	muteIcon.src = audio.muted ? MUTE_ICON : VOLUME_ICON;
+	muteIcon.src = icon;
   }
 
   if (miniMuteIcon) {
-	miniMuteIcon.src = audio.muted ? MUTE_ICON : VOLUME_ICON;
+	miniMuteIcon.src = icon;
   }
 }
 
@@ -204,6 +216,11 @@ function updateProgress() {
   if (durationEl) durationEl.textContent = formatTime(duration);
   if (progressFill) progressFill.style.width = `${percent}%`;
   if (progressThumb) progressThumb.style.left = `${percent}%`;
+
+  if (miniCurrentTimeEl) miniCurrentTimeEl.textContent = formatTime(currentTime);
+  if (miniDurationEl) miniDurationEl.textContent = formatTime(duration);
+  if (miniProgressFill) miniProgressFill.style.width = `${percent}%`;
+  if (miniProgressThumb) miniProgressThumb.style.left = `${percent}%`;
 }
 
 function syncMiniPlayer() {
@@ -221,19 +238,33 @@ function syncMiniPlayer() {
 	miniPlayerMeta.textContent = trackArtist.textContent || "artist";
   }
 
+  if (miniTrackCount && trackCount) {
+	miniTrackCount.textContent = trackCount.textContent || "0/0";
+  }
+
   updatePlayIcons();
   updateMuteIcons();
 }
 
 function updatePetState() {
-  if (!lcdPet || !lcdPetImg || !audio) return;
+  if (lcdPet && lcdPetImg && audio) {
+	if (audio.paused) {
+	  lcdPet.style.animationPlayState = "paused";
+	  lcdPetImg.style.transform = "scale(1)";
+	} else {
+	  lcdPet.style.animationPlayState = "running";
+	  lcdPetImg.style.transform = "scale(1)";
+	}
+  }
 
-  if (audio.paused) {
-	lcdPet.style.animationPlayState = "paused";
-	lcdPetImg.style.transform = "scale(1)";
-  } else {
-	lcdPet.style.animationPlayState = "running";
-	lcdPetImg.style.transform = "scale(1)";
+  if (miniPet && miniPetImg && audio) {
+	if (audio.paused) {
+	  miniPet.style.animationPlayState = "paused";
+	  miniPetImg.style.transform = "scale(1)";
+	} else {
+	  miniPet.style.animationPlayState = "running";
+	  miniPetImg.style.transform = "scale(1)";
+	}
   }
 }
 
@@ -329,10 +360,11 @@ function toggleMute() {
   syncMiniPlayer();
 }
 
-function seekFromClientX(clientX) {
-  if (!progressBar || !audio || !audio.duration) return;
+function seekFromClientX(clientX, barType = "main") {
+  const targetBar = barType === "mini" ? miniProgressBar : progressBar;
+  if (!targetBar || !audio || !audio.duration) return;
 
-  const rect = progressBar.getBoundingClientRect();
+  const rect = targetBar.getBoundingClientRect();
   const percent = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
   audio.currentTime = percent * audio.duration;
   updateProgress();
@@ -381,6 +413,7 @@ async function loadPlaylist() {
 	if (miniPlayerStatus) miniPlayerStatus.textContent = "ERROR";
 	if (miniPlayerTrack) miniPlayerTrack.textContent = "playlist error";
 	if (miniPlayerMeta) miniPlayerMeta.textContent = "check playlist.json";
+	if (miniTrackCount) miniTrackCount.textContent = "0/0";
   }
 }
 
@@ -408,17 +441,28 @@ miniMuteBtn?.addEventListener("click", () => {
 });
 
 progressBar?.addEventListener("pointerdown", event => {
-  isScrubbing = true;
-  seekFromClientX(event.clientX);
+  isScrubbingMain = true;
+  seekFromClientX(event.clientX, "main");
+});
+
+miniProgressBar?.addEventListener("pointerdown", event => {
+  isScrubbingMini = true;
+  seekFromClientX(event.clientX, "mini");
 });
 
 window.addEventListener("pointermove", event => {
-  if (!isScrubbing) return;
-  seekFromClientX(event.clientX);
+  if (isScrubbingMain) {
+	seekFromClientX(event.clientX, "main");
+  }
+
+  if (isScrubbingMini) {
+	seekFromClientX(event.clientX, "mini");
+  }
 });
 
 window.addEventListener("pointerup", () => {
-  isScrubbing = false;
+  isScrubbingMain = false;
+  isScrubbingMini = false;
 });
 
 audio?.addEventListener("timeupdate", () => {
