@@ -66,12 +66,12 @@
                                   <span id="trackCount">1/3</span>
                                 </div>
 
-                                <div class="lcd-track">
-                                  <span class="lcd-track-text" id="trackTitleText">archive signal</span>
+                                <div class="lcd-track" id="trackTitleWrap">
+                                  <span class="lcd-track-text" id="trackTitleText" data-copy="archive signal">archive signal</span>
                                 </div>
 
                                 <div class="lcd-artist" id="trackArtist">
-                                  toy shell mix / placeholder
+                                  <span class="lcd-artist-text" id="trackArtistText" data-copy="toy shell mix / placeholder">toy shell mix / placeholder</span>
                                 </div>
 
                                 <div class="lcd-eq" aria-hidden="true">
@@ -398,12 +398,14 @@
                     <div class="mini-screen-ui">
                       <div class="mini-simple-status" id="miniPlayerStatus">PAUSED</div>
 
-                      <div class="mini-simple-track-wrap">
-                        <div class="mini-simple-track" id="miniPlayerTrack">archive signal</div>
+                      <div class="mini-simple-track-wrap" id="miniPlayerTrackWrap">
+                        <div class="mini-simple-track">
+                          <span class="mini-simple-track-text" id="miniPlayerTrack" data-copy="archive signal">archive signal</span>
+                        </div>
                       </div>
 
                       <div class="mini-simple-meta" id="miniPlayerMeta">
-                        toy shell mix / placeholder
+                        <span class="mini-simple-meta-text" id="miniPlayerMetaText" data-copy="toy shell mix / placeholder">toy shell mix / placeholder</span>
                       </div>
 
                       <div class="mini-simple-eq" aria-hidden="true">
@@ -500,35 +502,32 @@
 
         <!-- BOTTOM PLACEHOLDER STRIP -->
         <div class="archive-bottom-strip">
-  <div class="archive-bottom-inner">
-    <div class="archive-bottom-box archive-bottom-flash">
-      <img
-        src="YOUR-FIRST-IMAGE-URL-HERE"
-        alt=""
-        class="archive-bottom-box-image"
-      />
-    </div>
+          <div class="archive-bottom-inner">
+            <div class="archive-bottom-box archive-bottom-flash">
+              <img
+                src="YOUR-FIRST-IMAGE-URL-HERE"
+                alt=""
+                class="archive-bottom-box-image"
+              />
+            </div>
 
-    <div class="archive-bottom-box archive-bottom-info">
-      PLACEHOLDER TEXT / NOTICE / LINK AREA
-    </div>
+            <div class="archive-bottom-box archive-bottom-info">
+              PLACEHOLDER TEXT / NOTICE / LINK AREA
+            </div>
 
-    <div class="archive-bottom-box archive-bottom-logo">
-      <img
-        src="YOUR-THIRD-IMAGE-URL-HERE"
-        alt=""
-        class="archive-bottom-box-image"
-      />
-    </div>
+            <div class="archive-bottom-box archive-bottom-logo">
+              <img
+                src="YOUR-THIRD-IMAGE-URL-HERE"
+                alt=""
+                class="archive-bottom-box-image"
+              />
+            </div>
 
-    <div class="archive-bottom-box archive-bottom-contact">
-      CONTACT / COPYRIGHT / EXTRA INFO
-    </div>
-  </div>
-</div>
+            <div class="archive-bottom-box archive-bottom-contact">
+              CONTACT / COPYRIGHT / EXTRA INFO
+            </div>
           </div>
         </div>
-
       </div>
     </section>
   </main>
