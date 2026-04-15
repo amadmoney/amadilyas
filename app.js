@@ -5,34 +5,34 @@ const newsRow = document.querySelector(".news-row");
 
 const tabContent = {
   home: `
-	<div class="news-copy-entry">Home selected. Hero player is active in the main display.</div>
-	<div class="news-copy-entry">The mini player stays tucked away while the main player is on screen.</div>
-	<div class="news-copy-entry">Use this area for intro notes, current status, or now-playing blurbs.</div>
+  <div class="news-copy-entry">Home selected. Hero player is active in the main display.</div>
+  <div class="news-copy-entry">The mini player stays tucked away while the main player is on screen.</div>
+  <div class="news-copy-entry">Use this area for intro notes, current status, or now-playing blurbs.</div>
   `,
   amad: `
-	<div class="news-copy-entry">Amad selected. This is the more personal profile layer.</div>
-	<div class="news-copy-entry">Think bio, orbiting references, personal lore, and the operating system of the site.</div>
-	<div class="news-copy-entry">Mini player stays visible here.</div>
+  <div class="news-copy-entry">Amad selected. This is the more personal profile layer.</div>
+  <div class="news-copy-entry">Think bio, orbiting references, personal lore, and the operating system of the site.</div>
+  <div class="news-copy-entry">Mini player stays visible here.</div>
   `,
   work: `
-	<div class="news-copy-entry">Work selected. This can later split into projects, campaigns, and moving image.</div>
-	<div class="news-copy-entry">For now this acts as the main work landing area.</div>
-	<div class="news-copy-entry">Mini player slides in here once you leave the home screen.</div>
+  <div class="news-copy-entry">Work selected. This can later split into projects, campaigns, and moving image.</div>
+  <div class="news-copy-entry">For now this acts as the main work landing area.</div>
+  <div class="news-copy-entry">Mini player slides in here once you leave the home screen.</div>
   `,
   ephemera: `
-	<div class="news-copy-entry">Ephemera selected. Use this for references, scraps, links, and visual notes.</div>
-	<div class="news-copy-entry">A good place for temporary objects and internet finds.</div>
-	<div class="news-copy-entry">Mini player stays visible here.</div>
+  <div class="news-copy-entry">Ephemera selected. Use this for references, scraps, links, and visual notes.</div>
+  <div class="news-copy-entry">A good place for temporary objects and internet finds.</div>
+  <div class="news-copy-entry">Mini player stays visible here.</div>
   `,
   contact: `
-	<div class="news-copy-entry">Contact selected. Keep this playful and still part of the device world.</div>
-	<div class="news-copy-entry">Good spot for email, socials, rep info, or downloadable deck links.</div>
-	<div class="news-copy-entry">Mini player stays visible here.</div>
+  <div class="news-copy-entry">Contact selected. Keep this playful and still part of the device world.</div>
+  <div class="news-copy-entry">Good spot for email, socials, rep info, or downloadable deck links.</div>
+  <div class="news-copy-entry">Mini player stays visible here.</div>
   `,
   fun: `
-	<div class="news-copy-entry">Fun selected. This can hold experiments, oddities, side quests, and extras.</div>
-	<div class="news-copy-entry">Think bonus material, weird links, playful scraps, and non-essential lore.</div>
-	<div class="news-copy-entry">Mini player stays visible here too.</div>
+  <div class="news-copy-entry">Fun selected. This can hold experiments, oddities, side quests, and extras.</div>
+  <div class="news-copy-entry">Think bonus material, weird links, playful scraps, and non-essential lore.</div>
+  <div class="news-copy-entry">Mini player stays visible here too.</div>
   `
 };
 
@@ -59,14 +59,14 @@ function switchPanel(target) {
   currentPanel.classList.add(movingForward ? "exit-left" : "exit-right");
 
   if (wipe) {
-	wipe.classList.remove("is-running");
-	void wipe.offsetWidth;
-	wipe.classList.add("is-running");
+  wipe.classList.remove("is-running");
+  void wipe.offsetWidth;
+  wipe.classList.add("is-running");
   }
 
   setTimeout(() => {
-	currentPanel.classList.remove("active", "exit-left", "exit-right");
-	nextPanel.classList.add("active");
+  currentPanel.classList.remove("active", "exit-left", "exit-right");
+  nextPanel.classList.add("active");
   }, 120);
 
   current = target;
@@ -75,22 +75,22 @@ function switchPanel(target) {
 
 tabs.forEach(tab => {
   tab.addEventListener("click", () => {
-	const target = tab.dataset.target;
+  const target = tab.dataset.target;
 
-	tabs.forEach(btn => {
-	  btn.classList.toggle("active", btn.dataset.target === target);
-	});
+  tabs.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.target === target);
+  });
 
-	if (newsCopy && tabContent[target]) {
-	  newsCopy.innerHTML = tabContent[target];
-	}
+  if (newsCopy && tabContent[target]) {
+    newsCopy.innerHTML = tabContent[target];
+  }
 
-	if (document.querySelector(`.screen-panel[data-panel="${target}"]`)) {
-	  switchPanel(target);
-	} else {
-	  current = target;
-	  updateMiniPlayerVisibility(target);
-	}
+  if (document.querySelector(`.screen-panel[data-panel="${target}"]`)) {
+    switchPanel(target);
+  } else {
+    current = target;
+    updateMiniPlayerVisibility(target);
+  }
   });
 });
 
@@ -106,8 +106,10 @@ const volDownBtn = document.getElementById("volDownBtn");
 const playIcon = document.getElementById("playIcon");
 const muteIcon = document.getElementById("muteIcon");
 
+const trackTitleWrap = document.getElementById("trackTitleWrap");
 const trackTitleText = document.getElementById("trackTitleText");
 const trackArtist = document.getElementById("trackArtist");
+const trackArtistText = document.getElementById("trackArtistText");
 const trackCount = document.getElementById("trackCount");
 
 const currentTimeEl = document.getElementById("currentTime");
@@ -124,8 +126,10 @@ const miniMuteBtn = document.getElementById("miniMuteBtn");
 const miniPlayIcon = document.getElementById("miniPlayIcon");
 const miniMuteIcon = document.getElementById("miniMuteIcon");
 const miniPlayerStatus = document.getElementById("miniPlayerStatus");
+const miniPlayerTrackWrap = document.getElementById("miniPlayerTrackWrap");
 const miniPlayerTrack = document.getElementById("miniPlayerTrack");
 const miniPlayerMeta = document.getElementById("miniPlayerMeta");
+const miniPlayerMetaText = document.getElementById("miniPlayerMetaText");
 const miniTrackCount = document.getElementById("miniTrackCount");
 
 const miniCurrentTimeEl = document.getElementById("miniCurrentTime");
@@ -164,17 +168,38 @@ function formatTime(time) {
   return `${mins}:${String(secs).padStart(2, "0")}`;
 }
 
+function setMarqueeState(wrapper, textEl) {
+  if (!wrapper || !textEl) return;
+
+  const text = (textEl.textContent || "").trim();
+  textEl.dataset.copy = text;
+
+  wrapper.classList.remove("is-marquee");
+
+  requestAnimationFrame(() => {
+  const shouldScroll = textEl.scrollWidth > wrapper.clientWidth + 4;
+  wrapper.classList.toggle("is-marquee", shouldScroll);
+  });
+}
+
+function refreshPlayerMarquee() {
+  setMarqueeState(trackTitleWrap, trackTitleText);
+  setMarqueeState(trackArtist, trackArtistText);
+  setMarqueeState(miniPlayerTrackWrap, miniPlayerTrack);
+  setMarqueeState(miniPlayerMeta, miniPlayerMetaText);
+}
+
 function updatePlayIcons() {
   if (!audio) return;
 
   const icon = audio.paused ? PLAY_ICON : PAUSE_ICON;
 
   if (playIcon) {
-	playIcon.src = icon;
+  playIcon.src = icon;
   }
 
   if (miniPlayIcon) {
-	miniPlayIcon.src = icon;
+  miniPlayIcon.src = icon;
   }
 }
 
@@ -184,11 +209,11 @@ function updateMuteIcons() {
   const icon = audio.muted ? MUTE_ICON : VOLUME_ICON;
 
   if (muteIcon) {
-	muteIcon.src = icon;
+  muteIcon.src = icon;
   }
 
   if (miniMuteIcon) {
-	miniMuteIcon.src = icon;
+  miniMuteIcon.src = icon;
   }
 }
 
@@ -198,11 +223,20 @@ function updateTrackUI() {
   const track = tracks[currentTrackIndex];
   if (!track) return;
 
-  if (trackTitleText) trackTitleText.textContent = track.title;
-  if (trackArtist) trackArtist.textContent = track.artist;
+  if (trackTitleText) {
+  trackTitleText.textContent = track.title;
+  trackTitleText.dataset.copy = track.title;
+  }
+
+  if (trackArtistText) {
+  trackArtistText.textContent = track.artist;
+  trackArtistText.dataset.copy = track.artist;
+  }
+
   if (trackCount) trackCount.textContent = `${currentTrackIndex + 1}/${tracks.length}`;
 
   syncMiniPlayer();
+  refreshPlayerMarquee();
 }
 
 function updateProgress() {
@@ -227,44 +261,49 @@ function syncMiniPlayer() {
   if (!audio) return;
 
   if (miniPlayerStatus) {
-	miniPlayerStatus.textContent = audio.paused ? "PAUSED" : "PLAYING";
+  miniPlayerStatus.textContent = audio.paused ? "PAUSED" : "PLAYING";
   }
 
   if (miniPlayerTrack && trackTitleText) {
-	miniPlayerTrack.textContent = trackTitleText.textContent || "archive signal";
+  const title = trackTitleText.textContent || "archive signal";
+  miniPlayerTrack.textContent = title;
+  miniPlayerTrack.dataset.copy = title;
   }
 
-  if (miniPlayerMeta && trackArtist) {
-	miniPlayerMeta.textContent = trackArtist.textContent || "artist";
+  if (miniPlayerMetaText && trackArtistText) {
+  const artist = trackArtistText.textContent || "artist";
+  miniPlayerMetaText.textContent = artist;
+  miniPlayerMetaText.dataset.copy = artist;
   }
 
   if (miniTrackCount && trackCount) {
-	miniTrackCount.textContent = trackCount.textContent || "0/0";
+  miniTrackCount.textContent = trackCount.textContent || "0/0";
   }
 
   updatePlayIcons();
   updateMuteIcons();
+  refreshPlayerMarquee();
 }
 
 function updatePetState() {
   if (lcdPet && lcdPetImg && audio) {
-	if (audio.paused) {
-	  lcdPet.style.animationPlayState = "paused";
-	  lcdPetImg.style.transform = "scale(1)";
-	} else {
-	  lcdPet.style.animationPlayState = "running";
-	  lcdPetImg.style.transform = "scale(1)";
-	}
+  if (audio.paused) {
+    lcdPet.style.animationPlayState = "paused";
+    lcdPetImg.style.transform = "scale(1)";
+  } else {
+    lcdPet.style.animationPlayState = "running";
+    lcdPetImg.style.transform = "scale(1)";
+  }
   }
 
   if (miniPet && miniPetImg && audio) {
-	if (audio.paused) {
-	  miniPet.style.animationPlayState = "paused";
-	  miniPetImg.style.transform = "scale(1)";
-	} else {
-	  miniPet.style.animationPlayState = "running";
-	  miniPetImg.style.transform = "scale(1)";
-	}
+  if (audio.paused) {
+    miniPet.style.animationPlayState = "paused";
+    miniPetImg.style.transform = "scale(1)";
+  } else {
+    miniPet.style.animationPlayState = "running";
+    miniPetImg.style.transform = "scale(1)";
+  }
   }
 }
 
@@ -285,9 +324,9 @@ function loadTrack(index, shouldAutoplay = false) {
   updatePetState();
 
   if (shouldAutoplay) {
-	audio.play().catch(error => {
-	  console.error("Playback failed:", error);
-	});
+  audio.play().catch(error => {
+    console.error("Playback failed:", error);
+  });
   }
 }
 
@@ -295,18 +334,18 @@ function playCurrent() {
   if (!audio || !tracks.length) return;
 
   if (!hasStarted) {
-	currentTrackIndex = Math.floor(Math.random() * tracks.length);
-	hasStarted = true;
-	loadTrack(currentTrackIndex, true);
-	return;
+  currentTrackIndex = Math.floor(Math.random() * tracks.length);
+  hasStarted = true;
+  loadTrack(currentTrackIndex, true);
+  return;
   }
 
   if (audio.paused) {
-	audio.play().catch(error => {
-	  console.error("Playback failed:", error);
-	});
+  audio.play().catch(error => {
+    console.error("Playback failed:", error);
+  });
   } else {
-	audio.pause();
+  audio.pause();
   }
 }
 
@@ -314,9 +353,9 @@ function playNext() {
   if (!tracks.length) return;
 
   if (!hasStarted) {
-	hasStarted = true;
-	loadTrack(currentTrackIndex + 1, true);
-	return;
+  hasStarted = true;
+  loadTrack(currentTrackIndex + 1, true);
+  return;
   }
 
   loadTrack(currentTrackIndex + 1, true);
@@ -326,15 +365,15 @@ function playPrev() {
   if (!audio || !tracks.length) return;
 
   if (!hasStarted) {
-	hasStarted = true;
-	loadTrack(currentTrackIndex - 1, true);
-	return;
+  hasStarted = true;
+  loadTrack(currentTrackIndex - 1, true);
+  return;
   }
 
   if (audio.currentTime > 3) {
-	audio.currentTime = 0;
-	updateProgress();
-	return;
+  audio.currentTime = 0;
+  updateProgress();
+  return;
   }
 
   loadTrack(currentTrackIndex - 1, true);
@@ -346,7 +385,7 @@ function changeVolume(delta) {
   audio.volume = Math.max(0, Math.min(1, audio.volume + delta));
 
   if (audio.volume > 0 && audio.muted) {
-	audio.muted = false;
+  audio.muted = false;
   }
 
   updateMuteIcons();
@@ -372,48 +411,68 @@ function seekFromClientX(clientX, barType = "main") {
 
 async function loadPlaylist() {
   try {
-	const response = await fetch("./playlist.json", { cache: "no-store" });
+  const response = await fetch("./playlist.json", { cache: "no-store" });
 
-	if (!response.ok) {
-	  throw new Error(`HTTP ${response.status}`);
-	}
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`);
+  }
 
-	const data = await response.json();
+  const data = await response.json();
 
-	if (!Array.isArray(data) || data.length === 0) {
-	  throw new Error("Playlist is empty or invalid.");
-	}
+  if (!Array.isArray(data) || data.length === 0) {
+    throw new Error("Playlist is empty or invalid.");
+  }
 
-	const validTracks = data.filter(track =>
-	  track &&
-	  typeof track.title === "string" &&
-	  typeof track.artist === "string" &&
-	  typeof track.audio === "string" &&
-	  track.title.trim() !== "" &&
-	  track.artist.trim() !== "" &&
-	  track.audio.trim() !== ""
-	);
+  const validTracks = data.filter(track =>
+    track &&
+    typeof track.title === "string" &&
+    typeof track.artist === "string" &&
+    typeof track.audio === "string" &&
+    track.title.trim() !== "" &&
+    track.artist.trim() !== "" &&
+    track.audio.trim() !== ""
+  );
 
-	if (!validTracks.length) {
-	  throw new Error("No valid tracks found in playlist.json.");
-	}
+  if (!validTracks.length) {
+    throw new Error("No valid tracks found in playlist.json.");
+  }
 
-	tracks = validTracks;
-	currentTrackIndex = 0;
+  tracks = validTracks;
+  currentTrackIndex = 0;
 
-	loadTrack(currentTrackIndex, false);
-	syncMiniPlayer();
+  loadTrack(currentTrackIndex, false);
+  syncMiniPlayer();
+  refreshPlayerMarquee();
   } catch (error) {
-	console.error("Failed to load playlist:", error);
+  console.error("Failed to load playlist:", error);
 
-	if (trackTitleText) trackTitleText.textContent = "playlist error";
-	if (trackArtist) trackArtist.textContent = "check playlist.json";
-	if (trackCount) trackCount.textContent = "0/0";
+  if (trackTitleText) {
+    trackTitleText.textContent = "playlist error";
+    trackTitleText.dataset.copy = "playlist error";
+  }
 
-	if (miniPlayerStatus) miniPlayerStatus.textContent = "ERROR";
-	if (miniPlayerTrack) miniPlayerTrack.textContent = "playlist error";
-	if (miniPlayerMeta) miniPlayerMeta.textContent = "check playlist.json";
-	if (miniTrackCount) miniTrackCount.textContent = "0/0";
+  if (trackArtistText) {
+    trackArtistText.textContent = "check playlist.json";
+    trackArtistText.dataset.copy = "check playlist.json";
+  }
+
+  if (trackCount) trackCount.textContent = "0/0";
+
+  if (miniPlayerStatus) miniPlayerStatus.textContent = "ERROR";
+
+  if (miniPlayerTrack) {
+    miniPlayerTrack.textContent = "playlist error";
+    miniPlayerTrack.dataset.copy = "playlist error";
+  }
+
+  if (miniPlayerMetaText) {
+    miniPlayerMetaText.textContent = "check playlist.json";
+    miniPlayerMetaText.dataset.copy = "check playlist.json";
+  }
+
+  if (miniTrackCount) miniTrackCount.textContent = "0/0";
+
+  refreshPlayerMarquee();
   }
 }
 
@@ -452,17 +511,21 @@ miniProgressBar?.addEventListener("pointerdown", event => {
 
 window.addEventListener("pointermove", event => {
   if (isScrubbingMain) {
-	seekFromClientX(event.clientX, "main");
+  seekFromClientX(event.clientX, "main");
   }
 
   if (isScrubbingMini) {
-	seekFromClientX(event.clientX, "mini");
+  seekFromClientX(event.clientX, "mini");
   }
 });
 
 window.addEventListener("pointerup", () => {
   isScrubbingMain = false;
   isScrubbingMini = false;
+});
+
+window.addEventListener("resize", () => {
+  refreshPlayerMarquee();
 });
 
 audio?.addEventListener("timeupdate", () => {
@@ -472,18 +535,21 @@ audio?.addEventListener("timeupdate", () => {
 audio?.addEventListener("loadedmetadata", () => {
   updateProgress();
   syncMiniPlayer();
+  refreshPlayerMarquee();
 });
 
 audio?.addEventListener("play", () => {
   updatePlayIcons();
   syncMiniPlayer();
   updatePetState();
+  refreshPlayerMarquee();
 });
 
 audio?.addEventListener("pause", () => {
   updatePlayIcons();
   syncMiniPlayer();
   updatePetState();
+  refreshPlayerMarquee();
 });
 
 audio?.addEventListener("volumechange", () => {
@@ -507,3 +573,4 @@ if (audio) {
 
 updateMiniPlayerVisibility(current);
 loadPlaylist();
+refreshPlayerMarquee();
